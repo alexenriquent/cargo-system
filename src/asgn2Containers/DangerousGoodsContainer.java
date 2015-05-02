@@ -47,7 +47,6 @@ import asgn2Exceptions.InvalidContainerException;
  */
 public class DangerousGoodsContainer extends FreightContainer {
 	
-
 	/**
 	 * Constructs a dangerous goods container object with the given
 	 * container code, gross weight and dangerous goods category.  See the constructor
@@ -59,9 +58,9 @@ public class DangerousGoodsContainer extends FreightContainer {
 	 * @throws InvalidContainerException if the gross weight is invalid; or if the category label
 	 * is not in the range 1 to 9, inclusive
 	 */
-	public DangerousGoodsContainer(ContainerCode code, Integer grossWeight, Integer category)
+	public DangerousGoodsContainer(ContainerCode code, Integer grossWeight, Integer category) 
 	throws InvalidContainerException {
-		//Implementation Here
+		//Implementation here
 	}
 
 	/**

@@ -1,3 +1,6 @@
+/**
+ * @author Thanat Chokwijitkul n9234900 
+ */
 package asgn2Codes;
 
 import asgn2Exceptions.InvalidCodeException;
@@ -98,19 +101,19 @@ public class ContainerCode {
 	 * of six digits; or if the Check Digit is incorrect.
 	 */
 	public ContainerCode(String code) throws InvalidCodeException {
-		if (invalidLength()) {
+		if (invalidLength(code)) {
 			throw new InvalidCodeException("The container code is not eleven characters long.");
 		}
-		if (invalidOwnerCode()) {
+		if (invalidOwnerCode(code)) {
 			throw new InvalidCodeException("The Owner Code does not consist of three upper-case letters.");
 		}
-		if (invalidCategoryIdentifier()) {
+		if (invalidCategoryIdentifier(code)) {
 			throw new InvalidCodeException("The Category Identifier is not 'U'.");
 		}
-		if (invalidSerialNumber()) {
+		if (invalidSerialNumber(code)) {
 			throw new InvalidCodeException("The Serial Number does not consist of six digits.");
 		}
-		if (invalidCheckDigit()) {
+		if (invalidCheckDigit(code)) {
 			throw new InvalidCodeException("The Check Digit is incorrect.");
 		}
 		this.code = code;
@@ -144,8 +147,8 @@ public class ContainerCode {
 	 * @return <code>true</code> if the length of the container code is not eleven
 	 * character long, <code>false</code> otherwise.
 	 */
-	private boolean invalidLength() {
-		return this.code.length() != CODE_LENGTH;
+	private boolean invalidLength(String code) {
+		return code.length() != CODE_LENGTH;
 	}
 	
 	/**
@@ -155,9 +158,9 @@ public class ContainerCode {
 	 * @return <code>true</code> if the owner code does not consist of three
 	 * upper-case characters, <code>false</code> otherwise.
 	 */
-	private boolean invalidOwnerCode() {
-		return !this.code.substring(0, CATEGORY_IDENTIFIER_POSITION).equals
-			   (this.code.substring(0, CATEGORY_IDENTIFIER_POSITION).toUpperCase());
+	private boolean invalidOwnerCode(String code) {
+		return !code.substring(0, CATEGORY_IDENTIFIER_POSITION).equals
+			   (code.substring(0, CATEGORY_IDENTIFIER_POSITION).toUpperCase());
 	}
 	
 	/**
@@ -166,8 +169,8 @@ public class ContainerCode {
 	 * @return <code>true</code> if the Category Identifier is not 'U',
 	 * <code>false</code> otherwise.
 	 */
-	private boolean invalidCategoryIdentifier() {
-		return this.code.charAt(CATEGORY_IDENTIFIER_POSITION) != CATEGORY_IDENTIFIER;
+	private boolean invalidCategoryIdentifier(String code) {
+		return code.charAt(CATEGORY_IDENTIFIER_POSITION) != CATEGORY_IDENTIFIER;
 	}
 	
 	/**
@@ -176,9 +179,9 @@ public class ContainerCode {
 	 * @return <code>true</code> if the Serial Number does not consist of six digits,
 	 * <code>false</code> otherwise.
 	 */
-	private boolean invalidSerialNumber() {
-		for (int i = SERIAL_NUMBER_POSITION; i < this.code.length()-1; i++) {
-			if (!Character.isDigit(this.code.charAt(i))) {
+	private boolean invalidSerialNumber(String code) {
+		for (int i = SERIAL_NUMBER_POSITION; i < code.length()-1; i++) {
+			if (!Character.isDigit(code.charAt(i))) {
 				return true;
 			}
 		}
@@ -191,16 +194,16 @@ public class ContainerCode {
 	 * @return <code>true</code> if the Check Digit is incorrect,
 	 * <code>false</code> otherwise.
 	 */
-	private boolean invalidCheckDigit() {
+	private boolean invalidCheckDigit(String code) {
 		int ascii;
 		int sum = 0;
 		int lsd; // Least Significant Digit (LSD)
-		for (int i = 0; i < this.code.length() - 1; i++) {
-			if (Character.isDigit(this.code.charAt(i))) {
-				ascii = (int) this.code.charAt(i) - ASCII_INT_DIFF;
+		for (int i = 0; i < code.length() - 1; i++) {
+			if (Character.isDigit(code.charAt(i))) {
+				ascii = (int) code.charAt(i) - ASCII_INT_DIFF;
 				sum += ascii;
 			} else {
-				ascii = (int) this.code.charAt(i) - ASCII_CHAR_DIFF;
+				ascii = (int) code.charAt(i) - ASCII_CHAR_DIFF;
 				sum += ascii;
 			}
 		}
@@ -211,7 +214,7 @@ public class ContainerCode {
 			}
 			sum /= 10;
 		}
-		return this.code.charAt(this.code.length()-1) != (char) ('0' + lsd);
+		return code.charAt(code.length()-1) != (char) ('0' + lsd);
 	}
 
 }

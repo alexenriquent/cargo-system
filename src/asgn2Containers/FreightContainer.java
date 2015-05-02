@@ -15,6 +15,8 @@ import asgn2Exceptions.InvalidContainerException;
  */
 public abstract class FreightContainer {
 	
+	private ContainerCode code;
+	private Integer grossWeight;
 	
 	/**
 	 * Constructs a freight container object with the given
@@ -31,7 +33,11 @@ public abstract class FreightContainer {
 	 */
 	public FreightContainer(ContainerCode code, Integer grossWeight)
 	throws InvalidContainerException {
-		//Implementation Here
+		if (grossWeight < 4 || grossWeight > 30) {
+			throw new InvalidContainerException("The gross weight is not between 4 and 30");
+		}
+		this.code = code;
+		this.grossWeight = grossWeight;
 	}
 
 	/**
@@ -40,7 +46,7 @@ public abstract class FreightContainer {
 	 * @return the code
 	 */
 	public ContainerCode getCode() {
-		//Implementation Here
+		return this.code;
 	}
 
 	/**
@@ -49,7 +55,7 @@ public abstract class FreightContainer {
 	 * @return the gross weight (in tonnes)
 	 */
 	public Integer getGrossWeight() {
-		//Implementation Here
+		return this.grossWeight;
 	}
 
 
