@@ -28,9 +28,20 @@ public class GeneralGoodsContainer extends FreightContainer {
 	public GeneralGoodsContainer(ContainerCode code, Integer grossWeight)
 	throws InvalidContainerException {
 		super (code, grossWeight);
-		if (grossWeight < 4 || grossWeight > 30) {
+		if (invalidGrossWeight(grossWeight)) {
 			throw new InvalidContainerException("The gross weight is not between 4 and 30.");
 		}
+	}
+	
+	/**
+	 * Returns <code>true</code> if the gross weight is not between 4 and 30.
+	 * 
+	 * @param grossWeight the gross weight of the container
+	 * @return <code>true</code> if the gross weight is not between 4 and 30,
+	 * <code>false</code> otherwise.
+	 */
+	private boolean invalidGrossWeight(Integer grossWeight) {
+		return grossWeight < 4 || grossWeight > 30;
 	}
 
 }

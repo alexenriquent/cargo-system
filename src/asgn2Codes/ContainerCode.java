@@ -144,6 +144,7 @@ public class ContainerCode {
 	/**
 	 * Returns <code>true</code> if the container code is not eleven characters long.
 	 * 
+	 * @param code the container code as a string
 	 * @return <code>true</code> if the length of the container code is not eleven
 	 * character long, <code>false</code> otherwise.
 	 */
@@ -155,6 +156,7 @@ public class ContainerCode {
 	 * Returns <code>true</code> if the owner code does not consist of three
 	 * upper-case characters.
 	 * 
+	 * @param code the container code as a string
 	 * @return <code>true</code> if the owner code does not consist of three
 	 * upper-case characters, <code>false</code> otherwise.
 	 */
@@ -166,6 +168,7 @@ public class ContainerCode {
 	/**
 	 * Returns <code>true</code> if the Category Identifier is not 'U'.
 	 * 
+	 * @param code the container code as a string
 	 * @return <code>true</code> if the Category Identifier is not 'U',
 	 * <code>false</code> otherwise.
 	 */
@@ -176,6 +179,7 @@ public class ContainerCode {
 	/**
 	 * Returns <code>true</code> if the Serial Number does not consist of six digits.
 	 * 
+	 * @param code the container code as a string
 	 * @return <code>true</code> if the Serial Number does not consist of six digits,
 	 * <code>false</code> otherwise.
 	 */
@@ -189,8 +193,9 @@ public class ContainerCode {
 	}
 	
 	/**
-	 * Returns <code>true</code> if if the Check Digit is incorrect.
+	 * Returns <code>true</code> if the Check Digit is incorrect.
 	 * 
+	 * @param code the container code as a string
 	 * @return <code>true</code> if the Check Digit is incorrect,
 	 * <code>false</code> otherwise.
 	 */

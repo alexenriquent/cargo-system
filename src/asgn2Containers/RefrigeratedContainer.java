@@ -38,7 +38,7 @@ public class RefrigeratedContainer extends FreightContainer {
 	public RefrigeratedContainer(ContainerCode code, Integer grossWeight, Integer temperature)
 	throws InvalidContainerException {
 		super (code, grossWeight);
-		if (grossWeight < 4 || grossWeight > 30) {
+		if (invalidGrossWeight(grossWeight)) {
 			throw new InvalidContainerException("The gross weight is not between 4 and 30.");
 		}
 		this.temperature = temperature;
@@ -63,6 +63,17 @@ public class RefrigeratedContainer extends FreightContainer {
 	 */
 	public void setTemperature(Integer temperature) {
 		this.temperature = temperature;
+	}
+	
+	/**
+	 * Returns <code>true</code> if the gross weight is not between 4 and 30.
+	 * 
+	 * @param grossWeight the gross weight of the container
+	 * @return <code>true</code> if the gross weight is not between 4 and 30,
+	 * <code>false</code> otherwise.
+	 */
+	private boolean invalidGrossWeight(Integer grossWeight) {
+		return grossWeight < 4 || grossWeight > 30;
 	}
 
 }

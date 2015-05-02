@@ -66,10 +66,10 @@ public class DangerousGoodsContainer extends FreightContainer {
 	public DangerousGoodsContainer(ContainerCode code, Integer grossWeight, Integer category) 
 	throws InvalidContainerException {
 		super (code, grossWeight);
-		if (grossWeight < 4 || grossWeight > 30) {
+		if (invalidGrossWeight(grossWeight)) {
 			throw new InvalidContainerException("The gross weight is not between 4 and 30.");
 		}
-		if (category < 1 || category > 9) {
+		if (invalidCategory(category)) {
 			throw new InvalidContainerException("The category label is not in the range 1 to 9");
 		}
 		this.category = category;
@@ -82,5 +82,27 @@ public class DangerousGoodsContainer extends FreightContainer {
 	 */
 	public Integer getCategory() {
 		return category;
+	}
+	
+	/**
+	 * Returns <code>true</code> if the gross weight is not between 4 and 30.
+	 * 
+	 * @param grossWeight the gross weight of the container
+	 * @return <code>true</code> if the gross weight is not between 4 and 30,
+	 * <code>false</code> otherwise.
+	 */
+	private boolean invalidGrossWeight(Integer grossWeight) {
+		return grossWeight < 4 || grossWeight > 30;
+	}
+	
+	/**
+	 * Returns <code>true</code> if the category label is not in the range 1 to 9.
+	 * 
+	 * @param grossWeight the gross weight of the container
+	 * @return <code>true</code> if the category label is not in the range 1 to 9,
+	 * <code>false</code> otherwise.
+	 */
+	private boolean invalidCategory(Integer category) {
+		return category < 1 || category > 9;
 	}
 }
