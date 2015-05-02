@@ -1,3 +1,6 @@
+/**
+ * @author Thanat Chokwijitkul n9234900
+ */
 package asgn2Containers;
 
 import asgn2Codes.ContainerCode;
@@ -24,7 +27,10 @@ public class GeneralGoodsContainer extends FreightContainer {
 	 */
 	public GeneralGoodsContainer(ContainerCode code, Integer grossWeight)
 	throws InvalidContainerException {
-		//Implementation Here
+		super (code, grossWeight);
+		if (grossWeight < 4 || grossWeight > 30) {
+			throw new InvalidContainerException("The gross weight is not between 4 and 30.");
+		}
 	}
 
 }
