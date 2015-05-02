@@ -1,3 +1,6 @@
+/**
+ * @author Thanat Chokwijitkul n9234900
+ */
 package asgn2Containers;
 
 import asgn2Codes.ContainerCode;
@@ -16,6 +19,8 @@ import asgn2Exceptions.InvalidContainerException;
  */
 public class RefrigeratedContainer extends FreightContainer {
 
+	private Integer temperature;
+	
 	/**
 	 * Constructs a refrigerated goods container object with the given
 	 * container code, gross weight and desired temperature.  (In practice
@@ -32,7 +37,11 @@ public class RefrigeratedContainer extends FreightContainer {
 	 */
 	public RefrigeratedContainer(ContainerCode code, Integer grossWeight, Integer temperature)
 	throws InvalidContainerException {
-		//Implementation Here
+		super (code, grossWeight);
+		if (grossWeight < 4 || grossWeight > 30) {
+			throw new InvalidContainerException("The gross weight is not between 4 and 30.");
+		}
+		this.temperature = temperature;
 	}
 
 	/**
@@ -44,7 +53,7 @@ public class RefrigeratedContainer extends FreightContainer {
 	 * @return the temperature (in degrees Celsius)
 	 */
 	public Integer getTemperature() {
-		//Implementation Here
+		return this.temperature;
 	}
 
 	/**
@@ -53,7 +62,7 @@ public class RefrigeratedContainer extends FreightContainer {
 	 * @param temperature the new temperature (in degrees Celsius)
 	 */
 	public void setTemperature(Integer temperature) {
-		//Implementation Here
+		this.temperature = temperature;
 	}
 
 }
