@@ -1,3 +1,4 @@
+
 package asgn2Tests;
 
 /* Some valid container codes used in the tests below:
@@ -19,9 +20,6 @@ import asgn2Containers.GeneralGoodsContainer;
 import asgn2Containers.RefrigeratedContainer;
 import asgn2Exceptions.InvalidCodeException;
 import asgn2Exceptions.InvalidContainerException;
-
-
-
 public class ContainerTests {
 	
 	//Implementation Here - includes tests for ContainerCode and for the actual container classes. 
@@ -64,6 +62,27 @@ public class ContainerTests {
 	@Test (expected = InvalidContainerException.class)
 	public void ConstructorNullCategoryInput() throws InvalidContainerException{
 		DangerousGoodsContainer DGCTest = new DangerousGoodsContainer(CODE,GROSSWEIGHT,null);
+	}
+	
+	//=================================================================
+	//Test GetCategories Of DangerousGoodsContainer()
+	
+	@Test
+	public void getCategories(){
+		
+	}
+	
+	//=================================================================
+	//Test InvalidGossWeight Of DangerousGoodsContainer()
+	@Test
+	public void  invalidGrossWeight(){
+		
+	}
+	//=================================================================
+	//Test InvalidCategories Of DangerousGoodsContainer()
+	@Test
+	public void invalidCategories (){
+		
 	}
 	
 }
