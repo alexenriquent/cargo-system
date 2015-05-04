@@ -224,7 +224,7 @@ public class CargoManifest {
 	 * @throws ManifestException if there is no such stack on the ship
 	 */
 	public FreightContainer[] toArray(Integer stackNo) throws ManifestException {
-		if (stackNo < 0 || stackNo > this.manifest.size() - 1) {
+		if (stackNo < 0 || stackNo > this.numStacks - 1) {
 			throw new ManifestException("There is no such stack on the ship");
 		}
 		ArrayList<FreightContainer> specifiedStack = this.manifest.get(stackNo);

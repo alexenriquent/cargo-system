@@ -17,9 +17,7 @@ import asgn2Exceptions.InvalidContainerException;
  * @version 1.0
  */
 public abstract class FreightContainer {
-	
-	private static final int TARE_WEIGHT = 4;
-	
+		
 	protected ContainerCode code;
 	protected Integer grossWeight;
 	
@@ -42,7 +40,7 @@ public abstract class FreightContainer {
 			throw new InvalidContainerException("The gross weight is not between 4 and 30.");
 		}
 		this.code = code;
-		this.grossWeight = grossWeight + TARE_WEIGHT;
+		this.grossWeight = grossWeight;
 	}
 
 	/**

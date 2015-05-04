@@ -1,3 +1,6 @@
+/**
+ * @author Thanat Chokwijitkul n9234900
+ */
 package asgn2Tests;
 
 /* Some valid container codes used in the tests below:
@@ -24,10 +27,11 @@ import static org.junit.Assert.*;
 
 public class ManifestTests {
 
-	private static final int NUM_STACKS = 5;
+	private static final int NUM_STACKS = 3;
 	private static final int MAX_HEIGHT = 3;
 	private static final int MAX_WEIGHT = 100;
 	private static final Integer GROSS_WEIGHT = 10;
+	private static final Integer MAX_GROSS_WEIGHT = 30;
 	private static final Integer CATEGORY = 1;
 	private static final Integer TEMPERATURE = -10;
 	private static final int NEGATIVE_VALUE = -1;
@@ -37,6 +41,7 @@ public class ManifestTests {
 	private static final String CONTAINER_CODE_3 = "MSCU6639871";
 	private static final String CONTAINER_CODE_4 = "CSQU3054387";
 	private static final String CONTAINER_CODE_5 = "QUTU7200318";
+	private static final String CONTAINER_CODE_6 = "IBMU4882351";
 	
 	
 	private CargoManifest manifest;
@@ -127,6 +132,80 @@ public class ManifestTests {
 	@Test (expected = ManifestException.class)
 	public void cargoManifestWithNegativeValues() throws ManifestException {
 		CargoManifest manifaestWithNegValues = new CargoManifest(NEGATIVE_VALUE, NEGATIVE_VALUE, NEGATIVE_VALUE);
+	}
+	
+	/**
+	 * Test method for {@link asgn2Manifests.CargotManifest#loadContainer(FreightContainer)}.
+	 * Confirm that the method throws an exception if adding a new container that exceed 
+	 * maximum weight limit.
+	 * @throws ManifestException
+	 * @throws InvalidContainerException 
+	 * @throws InvalidCodeException 
+	 */
+	@Test (expected = ManifestException.class)
+	public void exceedMaxWeightLimit() 
+		   throws ManifestException, InvalidContainerException, InvalidCodeException {
+		ContainerCode code1 = new ContainerCode(CONTAINER_CODE_1);
+		ContainerCode code2 = new ContainerCode(CONTAINER_CODE_2);
+		ContainerCode code3 = new ContainerCode(CONTAINER_CODE_3);
+		ContainerCode code4 = new ContainerCode(CONTAINER_CODE_4);
+		FreightContainer generalGoodsContainer1 = new GeneralGoodsContainer(code1, MAX_GROSS_WEIGHT);
+		FreightContainer generalGoodsContainer2 = new GeneralGoodsContainer(code2, MAX_GROSS_WEIGHT);
+		FreightContainer generalGoodsContainer3 = new GeneralGoodsContainer(code3, MAX_GROSS_WEIGHT);
+		FreightContainer generalGoodsContainer4 = new GeneralGoodsContainer(code4, MAX_GROSS_WEIGHT);
+		manifest.loadContainer(generalGoodsContainer1);
+		manifest.loadContainer(generalGoodsContainer2);
+		manifest.loadContainer(generalGoodsContainer3);
+		manifest.loadContainer(generalGoodsContainer4);
+	}
+	
+	/**
+	 * Test method for {@link asgn2Manifests.CargotManifest#loadContainer(FreightContainer)}.
+	 * Confirm that the method throws an exception if adding a new container with the same code 
+	 * as one of the containers on board.
+	 * @throws ManifestException
+	 * @throws InvalidContainerException 
+	 * @throws InvalidCodeException 
+	 */
+	@Test (expected = ManifestException.class)
+	public void loadContainerWithTheSameCodeAsContainerOnBoard() 
+		   throws ManifestException, InvalidContainerException, InvalidCodeException {
+		ContainerCode code1 = new ContainerCode(CONTAINER_CODE_1);
+		FreightContainer generalGoodsContainer1 = new GeneralGoodsContainer(code1, GROSS_WEIGHT);
+		FreightContainer generalGoodsContainer2 = new GeneralGoodsContainer(code1, GROSS_WEIGHT);
+		manifest.loadContainer(generalGoodsContainer1);
+		manifest.loadContainer(generalGoodsContainer2);
+	}
+	
+	/**
+	 * Test method for {@link asgn2Manifests.CargotManifest#loadContainer(FreightContainer)}.
+	 * Confirm that the method throws an exception if there is no space available for 
+	 * a new container to be loaded.
+	 * @throws ManifestException
+	 * @throws InvalidContainerException 
+	 * @throws InvalidCodeException 
+	 */
+	@Test (expected = ManifestException.class)
+	public void noSpaceForANewContainer() 
+		   throws ManifestException, InvalidContainerException, InvalidCodeException {
+		ContainerCode code1 = new ContainerCode(CONTAINER_CODE_1);
+		ContainerCode code2 = new ContainerCode(CONTAINER_CODE_2);
+		ContainerCode code3 = new ContainerCode(CONTAINER_CODE_3);
+		ContainerCode code4 = new ContainerCode(CONTAINER_CODE_4);
+		ContainerCode code5 = new ContainerCode(CONTAINER_CODE_5);
+		ContainerCode code6 = new ContainerCode(CONTAINER_CODE_6);
+		FreightContainer generalGoodsContainer1 = new GeneralGoodsContainer(code1, GROSS_WEIGHT);
+		FreightContainer generalGoodsContainer2 = new GeneralGoodsContainer(code2, GROSS_WEIGHT);
+		FreightContainer generalGoodsContainer3 = new GeneralGoodsContainer(code3, GROSS_WEIGHT);
+		FreightContainer refrigeratedContainer1 = new RefrigeratedContainer(code4, GROSS_WEIGHT, TEMPERATURE);
+		FreightContainer dangerousGoodsContainer1 = new DangerousGoodsContainer(code5, GROSS_WEIGHT, CATEGORY);
+		FreightContainer generalGoodsContainer4 = new GeneralGoodsContainer(code6, GROSS_WEIGHT);
+		manifest.loadContainer(generalGoodsContainer1);
+		manifest.loadContainer(generalGoodsContainer2);
+		manifest.loadContainer(generalGoodsContainer3);
+		manifest.loadContainer(refrigeratedContainer1);
+		manifest.loadContainer(dangerousGoodsContainer1);
+		manifest.loadContainer(generalGoodsContainer4);
 	}
 	
 	/**
@@ -364,5 +443,72 @@ public class ManifestTests {
 		assertEquals(expectedStackRC, manifest.whichStack(code3));
 		assertEquals(expectedStackDGC, manifest.whichStack(code4));
 		assertEquals(expectedStackDGC, manifest.whichStack(code5));
+	}
+	
+	/**
+	 * Test method for {@link asgn2Manifests.CargotManifest#unloadContainer(ContainerCode)}.
+	 * Confirm that the method throws an exception if trying to unload a container
+	 * which is currently not on board.
+	 * @throws ManifestException
+	 * @throws InvalidContainerException 
+	 * @throws InvalidCodeException 
+	 */
+	@Test (expected = ManifestException.class)
+	public void containerIsNotOnboard() 
+		   throws ManifestException, InvalidContainerException, InvalidCodeException {
+		ContainerCode code1 = new ContainerCode(CONTAINER_CODE_1);
+		ContainerCode code2 = new ContainerCode(CONTAINER_CODE_2);
+		FreightContainer generalGoodsContainer1 = new GeneralGoodsContainer(code1, GROSS_WEIGHT);
+		manifest.loadContainer(generalGoodsContainer1);
+		manifest.unloadContainer(code2);
+	}
+	
+	/**
+	 * Test method for {@link asgn2Manifests.CargotManifest#unloadContainer(ContainerCode)}.
+	 * Confirm that the method throws an exception if trying to unload an unaccessible
+	 * container i.e. the specified container is not on the top of the stack.
+	 * @throws ManifestException
+	 * @throws InvalidContainerException 
+	 * @throws InvalidCodeException 
+	 */
+	@Test (expected = ManifestException.class)
+	public void unloadUnaccessibleContainer() 
+		   throws ManifestException, InvalidContainerException, InvalidCodeException {
+		ContainerCode code1 = new ContainerCode(CONTAINER_CODE_1);
+		ContainerCode code2 = new ContainerCode(CONTAINER_CODE_2);
+		ContainerCode code3 = new ContainerCode(CONTAINER_CODE_3);
+		FreightContainer generalGoodsContainer1 = new GeneralGoodsContainer(code1, GROSS_WEIGHT);
+		FreightContainer generalGoodsContainer2 = new GeneralGoodsContainer(code2, GROSS_WEIGHT);
+		FreightContainer generalGoodsContainer3 = new GeneralGoodsContainer(code3, GROSS_WEIGHT);
+		manifest.loadContainer(generalGoodsContainer1);
+		manifest.loadContainer(generalGoodsContainer2);
+		manifest.loadContainer(generalGoodsContainer3);
+		manifest.unloadContainer(code1);
+	}
+	
+	/**
+	 * Test method for {@link asgn2Manifests.CargotManifest#unloadContainer(ContainerCode)}.
+	 * Confirm that the method unloads the correct container specified b
+	 * @throws ManifestException
+	 * @throws InvalidContainerException 
+	 * @throws InvalidCodeException 
+	 */
+	@Test 
+	public void successfullyUnloadContainer()
+		   throws ManifestException, InvalidContainerException, InvalidCodeException {
+		ContainerCode code1 = new ContainerCode(CONTAINER_CODE_1);
+		ContainerCode code2 = new ContainerCode(CONTAINER_CODE_2);
+		ContainerCode code3 = new ContainerCode(CONTAINER_CODE_3);
+		FreightContainer generalGoodsContainer1 = new GeneralGoodsContainer(code1, GROSS_WEIGHT);
+		FreightContainer refrigeratedContainer1 = new RefrigeratedContainer(code2, GROSS_WEIGHT, TEMPERATURE);
+		FreightContainer dangerousGoodsContainer1 = new DangerousGoodsContainer(code3, GROSS_WEIGHT, CATEGORY);
+		manifest.loadContainer(generalGoodsContainer1);
+		manifest.loadContainer(refrigeratedContainer1);
+		manifest.loadContainer(dangerousGoodsContainer1);
+		Integer expectedStackDGC = 2;
+		assertEquals(expectedStackDGC, manifest.whichStack(code3));
+		manifest.unloadContainer(code3);
+		expectedStackDGC = null;
+		assertEquals(expectedStackDGC, manifest.whichStack(code3));
 	}
 }
