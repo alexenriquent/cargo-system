@@ -45,6 +45,12 @@ import asgn2Exceptions.ManifestException;
  */
 public class CargoManifest {
 
+	private Integer numStacks;
+	private Integer maxHeight;
+	private Integer maxWeight;
+	private Integer currentWeight;
+	private ArrayList<ArrayList<FreightContainer>> manifest;
+	
 	/**
 	 * Constructs a new cargo manifest in preparation for a voyage.
 	 * When a cargo manifest is constructed the specific cargo
@@ -64,7 +70,24 @@ public class CargoManifest {
 	 */
 	public CargoManifest(Integer numStacks, Integer maxHeight, Integer maxWeight)
 	throws ManifestException {
-		//Implementation Here
+		if (numStacks < 0) {
+			throw new ManifestException("The number of stacks cannot be negative.");
+		}
+		if (maxHeight < 0) {
+			throw new ManifestException("The maximum height of each stack cannot be negative.");
+		}
+		if (maxWeight < 0) {
+			throw new ManifestException("The maximum weight of containers cannot be negative.");
+		}
+		this.numStacks = numStacks;
+		this.maxHeight = maxHeight;
+		this.maxWeight = maxWeight;
+		this.currentWeight = 0;
+		this.manifest = new ArrayList<ArrayList<FreightContainer>>(numStacks);
+		for (int i = 0; i < numStacks; i++) {
+			ArrayList<FreightContainer> stack = new ArrayList<FreightContainer>(maxHeight);
+			this.manifest.add(stack);
+		}
 	}
 
 	/**
@@ -78,7 +101,31 @@ public class CargoManifest {
 	 * container
 	 */
 	public void loadContainer(FreightContainer newContainer) throws ManifestException {
-		//Implementation Here
+		boolean noSpace = false;
+		if (exceedMaxWeight(newContainer)) {
+			throw new ManifestException("Adding this container would exceed maximum weight limit.");
+		}
+		if (sameContainerCodeOnBoard(newContainer)) {
+			throw new ManifestException("A container with the same code is already on board");
+		}
+		for (int i = 0; i < this.manifest.size(); i++) {
+			if (this.manifest.get(i).isEmpty()) {
+				this.manifest.get(i).add(newContainer);
+				this.currentWeight += newContainer.getGrossWeight();
+				return;
+			} else if (!this.manifest.get(i).isEmpty() &&
+					    this.manifest.get(i).size() < this.maxHeight) {
+				if (newContainer.getClass().equals(this.manifest.get(i).get(0).getClass())) {
+					this.manifest.get(i).add(newContainer);
+					this.currentWeight += newContainer.getGrossWeight();
+					return;
+				}
+			}
+		}
+		noSpace = true;
+		if (noSpace) {
+			throw new ManifestException("No suitable space can be found for this container.");
+		}
 	}
 
 	/**
@@ -91,7 +138,27 @@ public class CargoManifest {
 	 * the ship at all)
 	 */
 	public void unloadContainer(ContainerCode containerId) throws ManifestException {
-		//Implementation Here
+		int stackIndex = 0;
+		int heightIndex = 0;
+		if (!containerIsOnBoard(containerId)) {
+			throw new ManifestException("The specified container is not on board");
+		}
+		for (int i = 0; i < this.manifest.size(); i++) {
+			if (!this.manifest.get(i).isEmpty()) {
+				for (int j = 0; j < this.manifest.get(i).size(); j++) {
+					if (this.manifest.get(i).get(j).getCode().equals(containerId)) {
+						stackIndex = i;
+						heightIndex = j;
+					}
+				}
+			}
+		}
+		if (this.manifest.get(stackIndex).get(heightIndex) == 
+			this.manifest.get(stackIndex).get(this.manifest.get(stackIndex).size() - 1)) {
+			this.manifest.get(stackIndex).remove(heightIndex);
+		} else {
+			throw new ManifestException("The container is not accessible.");
+		}
 	}
 
 	
@@ -106,7 +173,16 @@ public class CargoManifest {
 	 * if the container is not on board
 	 */
 	public Integer whichStack(ContainerCode queryContainer) {
-		//Implementation Here
+		for (int i = 0; i < this.manifest.size(); i++) {
+			if (!this.manifest.get(i).isEmpty()) {
+				for (int j = 0; j < this.manifest.get(i).size(); j++) {
+					if (this.manifest.get(i).get(j).getCode().equals(queryContainer)) {
+						return i;
+					}
+				}
+			}
+		}
+		return null;
 	}
 
 	
@@ -123,7 +199,16 @@ public class CargoManifest {
 	 * if the container is not on board
 	 */
 	public Integer howHigh(ContainerCode queryContainer) {
-		//Implementation Here
+		for (int i = 0; i < this.manifest.size(); i++) {
+			if (!this.manifest.get(i).isEmpty()) {
+				for (int j = 0; j < this.manifest.get(i).size(); j++) {
+					if (this.manifest.get(i).get(j).getCode().equals(queryContainer)) {
+						return j;
+					}
+				}
+			}
+		}
+		return null;
 	}
 
 
@@ -136,14 +221,24 @@ public class CargoManifest {
 	 * @throws ManifestException if there is no such stack on the ship
 	 */
 	public FreightContainer[] toArray(Integer stackNo) throws ManifestException {
-		//Implementation Here
+		if (stackNo < 0 || stackNo > this.manifest.size() - 1) {
+			throw new ManifestException("There is no such stack on the ship");
+		}
+		ArrayList<FreightContainer> specifiedStack = this.manifest.get(stackNo);
+		FreightContainer[] stackOfInterest = new FreightContainer[specifiedStack.size()];
+		if (specifiedStack.isEmpty()) {
+			return stackOfInterest;
+		}
+		for (int i = 0; i < specifiedStack.size(); i++) {
+			stackOfInterest[i] = specifiedStack.get(i);
+		}
+		return stackOfInterest;
 	}
 
 	
 	/* ***** toString methods added to support the GUI ***** */
 	
 	public String toString(ContainerCode toFind) {
-		//Some variables here are used and not declared. You can work it out 
 		String toReturn = "";
 		for (int i = 0; i < manifest.size(); ++i) {
 			ArrayList<FreightContainer> currentStack = manifest.get(i);
@@ -166,4 +261,59 @@ public class CargoManifest {
 	public String toString() {
 		return toString(null);
 	}
+	
+	/**
+	 * Returns <code>true</code> if adding this container would exceed maximum
+	 * weight limit.
+	 * 
+	 * @param newContainer the new freight container to be loaded
+	 * @return <code>true</code> if adding this container would exceed maximum 
+	 * weight limit, <code>false</code> otherwise.
+	 */
+	private boolean exceedMaxWeight(FreightContainer newContainer) {
+		return this.currentWeight + newContainer.getGrossWeight() > this.maxWeight;
+	}
+	
+	/**
+	 * Returns <code>true</code> if a container with the same code is already 
+	 * on board.
+	 * 
+	 * @param newContainer the new freight container to be loaded
+	 * @return <code>true</code> if a container with the same code is already 
+	 * on board, <code>false</code> otherwise.
+	 */
+	private boolean sameContainerCodeOnBoard(FreightContainer newContainer) {
+		for (int i = 0; i < this.manifest.size(); i++) {
+			if (!this.manifest.get(i).isEmpty()) {
+				for (int j = 0; j < this.manifest.get(i).size(); j++) {
+					if (this.manifest.get(i).get(j).getCode().equals(newContainer.getCode())) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
+	
+	/**
+	 * Returns <code>true</code> if a container with the specified code is 
+	 * on board.
+	 * 
+	 * @param containerId the code of the container
+	 * @return <code>true</code> if a container with the specified code is  
+	 * on board, <code>false</code> otherwise.
+	 */
+	private boolean containerIsOnBoard(ContainerCode containerId) {
+		for (int i = 0; i < this.manifest.size(); i++) {
+			if (!this.manifest.get(i).isEmpty()) {
+				for (int j = 0; j < this.manifest.get(i).size(); j++) {
+					if (this.manifest.get(i).get(j).getCode().equals(containerId)) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
+	
 }
