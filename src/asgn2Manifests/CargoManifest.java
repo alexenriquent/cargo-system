@@ -156,8 +156,7 @@ public class CargoManifest {
 				}
 			}
 		}
-		if (this.manifest.get(stackIndex).get(heightIndex) == 
-			this.manifest.get(stackIndex).get(this.manifest.get(stackIndex).size() - 1)) {
+		if (containerIsOnTopOfStack(stackIndex, heightIndex)) {
 			this.manifest.get(stackIndex).remove(heightIndex);
 		} else {
 			throw new ManifestException("The container is not accessible.");
@@ -224,7 +223,7 @@ public class CargoManifest {
 	 * @throws ManifestException if there is no such stack on the ship
 	 */
 	public FreightContainer[] toArray(Integer stackNo) throws ManifestException {
-		if (stackNo < 0 || stackNo > this.numStacks - 1) {
+		if (noSuchStack(stackNo)) {
 			throw new ManifestException("There is no such stack on the ship");
 		}
 		ArrayList<FreightContainer> specifiedStack = this.manifest.get(stackNo);
@@ -317,6 +316,31 @@ public class CargoManifest {
 			}
 		}
 		return false;
+	}
+	
+	/**
+	 * Returns <code>true</code> if the specified container is on the top 
+	 * of a stack.
+	 * 
+	 * @param stackIndex the stack that contains the specified container
+	 * @param heightIndex the height value of the specified container
+	 * @return <code>true</code> if the specified container is on the top 
+	 * of a stack, <code>false</code> otherwise.
+	 */
+	private boolean containerIsOnTopOfStack(int stackIndex, int heightIndex) {
+		return this.manifest.get(stackIndex).get(heightIndex) == 
+			   this.manifest.get(stackIndex).get(this.manifest.get(stackIndex).size() - 1);
+	}
+	
+	/**
+	 * Returns <code>true</code> if there is no such stack on the ship.
+	 * 
+	 * @param stackNo the specified stack number
+	 * @return <code>true</code> if there is no such stack on the ship, 
+	 * <code>false</code> otherwise.
+	 */
+	private boolean noSuchStack(Integer stackNo) {
+		return stackNo < 0 || stackNo > this.numStacks - 1;
 	}
 	
 }
