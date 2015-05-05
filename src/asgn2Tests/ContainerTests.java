@@ -31,14 +31,16 @@ public class ContainerTests {
 	
 	//Define Static
 	private static final ContainerCode CODE = null;
-	private static int GROSSWEIGHT = 5;
-	private static int CATEGORY = 5;
+	private static Integer GROSSWEIGHT = 5;
+	private static Integer CATEGORY = 5;
+	
 	
 	//Before
 	@Before
 	public void setUP() throws InvalidContainerException {
 		DGCTest = new DangerousGoodsContainer(CODE,GROSSWEIGHT,CATEGORY);
-		FCTest = new FreightContainer(CODE,GROSSWEIGHT);
+		//FCTest = new FreightContainer(CODE,GROSSWEIGHT);
+		GGCTest = new GeneralGoodsContainer(CODE,GROSSWEIGHT);
 	}
 	
 	//=================================================================
@@ -69,22 +71,40 @@ public class ContainerTests {
 	
 	/**
 	 * Test method for {@link asgn2Containers.DangerousGoodsContainer#DangerousGoodsContainer(ContainerCode, Integer, Integer)}
-	 * Test For InvalidGrossWeight
+	 * Test For InvalidGrossWeight LESS THEN 4
 	 * @throws InvalidContainerException
 	 */
 	@Test (expected = InvalidContainerException.class)
-	public void  DGCinvalidGrossWeight() throws InvalidContainerException {
+	public void  DGCinvalidGrossWeightLessThen4() throws InvalidContainerException {
 		DangerousGoodsContainer DGCTest = new DangerousGoodsContainer(CODE,2,CATEGORY);
 	}
-
+	
+	/**
+	 * Test method for {@link asgn2Containers.DangerousGoodsContainer#DangerousGoodsContainer(ContainerCode, Integer, Integer)}
+	 * Test For InvalidGrossWeight More Then 30
+	 * @throws InvalidContainerException
+	 */
+	@Test (expected = InvalidContainerException.class)
+	public void  DGCinvalidGrossWeightMoreThen30() throws InvalidContainerException {
+		DangerousGoodsContainer DGCTest = new DangerousGoodsContainer(CODE,31,CATEGORY);
+	}
+	/**
+	 * Test method for {@link asgn2Containers.DangerousGoodsContainer#DangerousGoodsContainer(ContainerCode, Integer, Integer)}
+	 * Test For Invalid Categories Less Then 1
+	 * @throws InvalidContainerException
+	 */
+	@Test (expected = InvalidContainerException.class)
+	public void DGCinvalidCategoriesLessthen1 () throws InvalidContainerException {
+		DangerousGoodsContainer DGCTest = new DangerousGoodsContainer(CODE,GROSSWEIGHT,0);
+	}
 
 	/**
 	 * Test method for {@link asgn2Containers.DangerousGoodsContainer#DangerousGoodsContainer(ContainerCode, Integer, Integer)}
-	 * Test For Invalid Categories
+	 * Test For Invalid Categories More Then 9
 	 * @throws InvalidContainerException
 	 */
 	@Test (expected = InvalidContainerException.class)
-	public void DGCinvalidCategories () throws InvalidContainerException {
+	public void DGCinvalidCategoriesMorethen9 () throws InvalidContainerException {
 		DangerousGoodsContainer DGCTest = new DangerousGoodsContainer(CODE,GROSSWEIGHT,10);
 	}
 	
@@ -95,4 +115,13 @@ public class ContainerTests {
 	public void FCConstructorDefaultInput() throws InvalidContainerException {
 		FreightContainer FCTest = new FreightContainer(CODE,GROSSWEIGHT);
 	}
+	
+	//=================================================================
+	//Test For Constructor GeneralGoodsContainer Class
+	
+	@Test
+	public void GGCConstructorDefaultInput() throws InvalidContainerException {
+		GeneralGoodsContainer GGCTest = new GeneralGoodsContainer(CODE,GROSSWEIGHT);
+	}
+	
 }
