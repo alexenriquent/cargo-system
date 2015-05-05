@@ -44,8 +44,8 @@ public class ManifestTests {
 	private static final String CONTAINER_CODE_5 = "QUTU7200318";
 	private static final String CONTAINER_CODE_6 = "IBMU4882351";
 	
-	
 	private CargoManifest manifest;
+	private CargoManifest invalidManifest; // This CargoManifest object is only used for the constructor tests.
 	
 	/**
 	 * Create a CargoManifest object before each test case 
@@ -64,7 +64,7 @@ public class ManifestTests {
 	 */
 	@Test (expected = ManifestException.class)
 	public void negativeNumStacks() throws ManifestException {
-		CargoManifest negNumStacks = new CargoManifest(NEGATIVE_VALUE, MAX_HEIGHT, MAX_WEIGHT);
+		invalidManifest = new CargoManifest(NEGATIVE_VALUE, MAX_HEIGHT, MAX_WEIGHT);
 	}
 	
 	/**
@@ -75,7 +75,7 @@ public class ManifestTests {
 	 */
 	@Test (expected = ManifestException.class)
 	public void negativeMaxHeight() throws ManifestException {
-		CargoManifest negMaxHeight = new CargoManifest(NUM_STACKS, NEGATIVE_VALUE, MAX_WEIGHT);
+		invalidManifest = new CargoManifest(NUM_STACKS, NEGATIVE_VALUE, MAX_WEIGHT);
 	}
 	
 	/**
@@ -86,7 +86,7 @@ public class ManifestTests {
 	 */
 	@Test (expected = ManifestException.class)
 	public void negativeMaxWeight() throws ManifestException {
-		CargoManifest negMaxWeights = new CargoManifest(NUM_STACKS, MAX_HEIGHT, NEGATIVE_VALUE);
+		invalidManifest = new CargoManifest(NUM_STACKS, MAX_HEIGHT, NEGATIVE_VALUE);
 	}
 	
 	/**
@@ -97,7 +97,7 @@ public class ManifestTests {
 	 */
 	@Test (expected = ManifestException.class)
 	public void negativeNumStacksAndMaxHeight() throws ManifestException {
-		CargoManifest negNumStacksAndMaxHeight = new CargoManifest(NEGATIVE_VALUE, NEGATIVE_VALUE, MAX_WEIGHT);
+		invalidManifest = new CargoManifest(NEGATIVE_VALUE, NEGATIVE_VALUE, MAX_WEIGHT);
 	}
 	
 	/**
@@ -108,7 +108,7 @@ public class ManifestTests {
 	 */
 	@Test (expected = ManifestException.class)
 	public void negativeNumStacksAndMaxWeight() throws ManifestException {
-		CargoManifest negNumStacksAndMaxWeightt = new CargoManifest(NEGATIVE_VALUE, MAX_HEIGHT, NEGATIVE_VALUE);
+		invalidManifest = new CargoManifest(NEGATIVE_VALUE, MAX_HEIGHT, NEGATIVE_VALUE);
 	}
 	
 	/**
@@ -120,7 +120,7 @@ public class ManifestTests {
 	 */
 	@Test (expected = ManifestException.class)
 	public void negativeMaxHeightAndMaxWeight() throws ManifestException {
-		CargoManifest negMaxHeightAndMaxWeight = new CargoManifest(NUM_STACKS, NEGATIVE_VALUE, NEGATIVE_VALUE);
+		invalidManifest = new CargoManifest(NUM_STACKS, NEGATIVE_VALUE, NEGATIVE_VALUE);
 	}
 	
 	/**
@@ -132,7 +132,7 @@ public class ManifestTests {
 	 */
 	@Test (expected = ManifestException.class)
 	public void cargoManifestWithNegativeValues() throws ManifestException {
-		CargoManifest manifaestWithNegValues = new CargoManifest(NEGATIVE_VALUE, NEGATIVE_VALUE, NEGATIVE_VALUE);
+		invalidManifest = new CargoManifest(NEGATIVE_VALUE, NEGATIVE_VALUE, NEGATIVE_VALUE);
 	}
 	
 	/**
