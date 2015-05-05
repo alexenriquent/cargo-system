@@ -12,8 +12,6 @@ package asgn2Tests;
  * IBMU4882351
  */
 
-import java.util.jar.Manifest;
-
 import org.junit.Before;
 import org.junit.Test;
 
