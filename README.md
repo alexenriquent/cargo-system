@@ -1,4 +1,4 @@
-## Managing Cargo on a Container Ship ##
+## Cargo System ##
 
 Intermodal freight containers are used to transport manufactured goods all around the world. In this assignment your team will play the role of a small software company which has been commissioned by a major shipping firm to develop a program to help them manage the mixed cargo carried on the decks of their container ships.
 
