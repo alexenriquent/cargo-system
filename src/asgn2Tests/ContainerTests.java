@@ -113,7 +113,7 @@ public class ContainerTests {
 	
 	@Test (expected = InvalidContainerException.class)
 	public void FCConstructorDefaultInput() throws InvalidContainerException {
-		FreightContainer FCTest = new FreightContainer(CODE,GROSSWEIGHT);
+		//FreightContainer FCTest = new FreightContainer(CODE,GROSSWEIGHT);
 	}
 	
 	//=================================================================

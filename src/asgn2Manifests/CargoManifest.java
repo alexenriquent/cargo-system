@@ -105,11 +105,14 @@ public class CargoManifest {
 	 */
 	public void loadContainer(FreightContainer newContainer) throws ManifestException {
 		boolean noSpace = false;
+		if (containerIsNull(newContainer)) {
+			throw new ManifestException("A container cannot be null.");
+		}
 		if (exceedMaxWeight(newContainer)) {
 			throw new ManifestException("Adding this container would exceed maximum weight limit.");
 		}
 		if (sameContainerCodeOnBoard(newContainer)) {
-			throw new ManifestException("A container with the same code is already on board");
+			throw new ManifestException("A container with the same code is already on board.");
 		}
 		for (int i = 0; i < this.manifest.size(); i++) {
 			if (this.manifest.get(i).isEmpty()) {
@@ -143,11 +146,11 @@ public class CargoManifest {
 	public void unloadContainer(ContainerCode containerId) throws ManifestException {
 		int stackIndex = 0;
 		int heightIndex = 0;
-		if (!containerIsOnBoard(containerId)) {
-			throw new ManifestException("The specified container is not on board");
+		if (containerIsNotOnBoard(containerId)) {
+			throw new ManifestException("The specified container is not on board.");
 		}
 		for (int i = 0; i < this.manifest.size(); i++) {
-			if (!this.manifest.get(i).isEmpty()) {
+			if (notEmpty(i)) {
 				for (int j = 0; j < this.manifest.get(i).size(); j++) {
 					if (this.manifest.get(i).get(j).getCode().equals(containerId)) {
 						stackIndex = i;
@@ -175,11 +178,13 @@ public class CargoManifest {
 	 * if the container is not on board
 	 */
 	public Integer whichStack(ContainerCode queryContainer) {
-		for (int i = 0; i < this.manifest.size(); i++) {
-			if (!this.manifest.get(i).isEmpty()) {
-				for (int j = 0; j < this.manifest.get(i).size(); j++) {
-					if (this.manifest.get(i).get(j).getCode().equals(queryContainer)) {
-						return i;
+		if (codeIsNotNull(queryContainer)) {
+			for (int i = 0; i < this.manifest.size(); i++) {
+				if (notEmpty(i)) {
+					for (int j = 0; j < this.manifest.get(i).size(); j++) {
+						if (this.manifest.get(i).get(j).getCode().equals(queryContainer)) {
+							return i;
+						}
 					}
 				}
 			}
@@ -201,11 +206,13 @@ public class CargoManifest {
 	 * if the container is not on board
 	 */
 	public Integer howHigh(ContainerCode queryContainer) {
-		for (int i = 0; i < this.manifest.size(); i++) {
-			if (!this.manifest.get(i).isEmpty()) {
-				for (int j = 0; j < this.manifest.get(i).size(); j++) {
-					if (this.manifest.get(i).get(j).getCode().equals(queryContainer)) {
-						return j;
+		if (codeIsNotNull(queryContainer)) {
+			for (int i = 0; i < this.manifest.size(); i++) {
+				if (notEmpty(i)) {
+					for (int j = 0; j < this.manifest.get(i).size(); j++) {
+						if (this.manifest.get(i).get(j).getCode().equals(queryContainer)) {
+							return j;
+						}
 					}
 				}
 			}
@@ -286,7 +293,7 @@ public class CargoManifest {
 	 */
 	private boolean sameContainerCodeOnBoard(FreightContainer newContainer) {
 		for (int i = 0; i < this.manifest.size(); i++) {
-			if (!this.manifest.get(i).isEmpty()) {
+			if (notEmpty(i)) {
 				for (int j = 0; j < this.manifest.get(i).size(); j++) {
 					if (this.manifest.get(i).get(j).getCode().equals(newContainer.getCode())) {
 						return true;
@@ -305,17 +312,19 @@ public class CargoManifest {
 	 * @return <code>true</code> if a container with the specified code is  
 	 * on board, <code>false</code> otherwise.
 	 */
-	private boolean containerIsOnBoard(ContainerCode containerId) {
-		for (int i = 0; i < this.manifest.size(); i++) {
-			if (!this.manifest.get(i).isEmpty()) {
-				for (int j = 0; j < this.manifest.get(i).size(); j++) {
-					if (this.manifest.get(i).get(j).getCode().equals(containerId)) {
-						return true;
+	private boolean containerIsNotOnBoard(ContainerCode containerId) {
+		if (codeIsNotNull(containerId)) {
+			for (int i = 0; i < this.manifest.size(); i++) {
+				if (notEmpty(i)) {
+					for (int j = 0; j < this.manifest.get(i).size(); j++) {
+						if (this.manifest.get(i).get(j).getCode().equals(containerId)) {
+							return false;
+						}
 					}
 				}
 			}
 		}
-		return false;
+		return true;
 	}
 	
 	/**
@@ -343,4 +352,37 @@ public class CargoManifest {
 		return stackNo < 0 || stackNo > this.numStacks - 1;
 	}
 	
+	/**
+	 * Returns <code>true</code> if the current stack is not empty.
+	 * 
+	 * @param currentStack the specified stack number
+	 * @return <code>true</code> if the current stack is not empty, 
+	 * <code>false</code> otherwise.
+	 */
+	private boolean notEmpty(int currentStack) {
+		return !this.manifest.get(currentStack).isEmpty();
+	}
+	
+	/**
+	 * Returns <code>true</code> if the specified container object is null.
+	 * 
+	 * @param container the specified container object
+	 * @return <code>true</code> if the specified container object is null,
+	 * <code>false</code> otherwise.
+	 */
+	private boolean containerIsNull(FreightContainer container) {
+		return container == null;
+	}
+	
+	/**
+	 * Returns <code>true</code> if the specified container code
+	 * is not null.
+	 * 
+	 * @param code the specified container code
+	 * @return <code>true</code> if the specified container code
+	 * is not null, <code>false</code> otherwise.
+	 */
+	private boolean codeIsNotNull(ContainerCode code) {
+		return code != null;
+	}
 }

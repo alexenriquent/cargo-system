@@ -137,6 +137,18 @@ public class ManifestTests {
 	
 	/**
 	 * Test method for {@link asgn2Manifests.CargotManifest#loadContainer(FreightContainer)}.
+	 * Confirm that the method throws an exception if trying to load a null container.
+	 * @throws ManifestException
+	 * @throws InvalidContainerException 
+	 */
+	@Test (expected = ManifestException.class)
+	public void nullContainer() throws ManifestException, InvalidContainerException {
+		FreightContainer generalGoodsContainer1 = null;
+		manifest.loadContainer(generalGoodsContainer1);
+	}
+	
+	/**
+	 * Test method for {@link asgn2Manifests.CargotManifest#loadContainer(FreightContainer)}.
 	 * Confirm that the method throws an exception if adding a new container that exceed 
 	 * maximum weight limit.
 	 * @throws ManifestException
@@ -449,6 +461,20 @@ public class ManifestTests {
 	/**
 	 * Test method for {@link asgn2Manifests.CargotManifest#unloadContainer(ContainerCode)}.
 	 * Confirm that the method throws an exception if trying to unload a container
+	 * given a null container code.
+	 * @throws ManifestException
+	 * @throws InvalidContainerException 
+	 * @throws InvalidCodeException 
+	 */
+	@Test (expected = ManifestException.class) 
+	public void uncloadContainerGivenNullContainerCode() throws ManifestException, InvalidCodeException {
+		ContainerCode code1 = null;
+		manifest.unloadContainer(code1);
+	}
+	
+	/**
+	 * Test method for {@link asgn2Manifests.CargotManifest#unloadContainer(ContainerCode)}.
+	 * Confirm that the method throws an exception if trying to unload a container
 	 * which is currently not on board.
 	 * @throws ManifestException
 	 * @throws InvalidContainerException 
@@ -515,6 +541,19 @@ public class ManifestTests {
 	
 	/**
 	 * Test method for {@link asgn2Manifests.CargotManifest#whichStack(ContainerCode)}.
+	 * Confirm that the method returns null if given a null container query.
+	 * @throws ManifestException
+	 * @throws InvalidCodeException 
+	 */
+	@Test 
+	public void findWhichStackWithNullQueryContainer() throws ManifestException, InvalidCodeException {
+		ContainerCode code1 = null;
+		Integer expectedStack = null;
+		assertEquals(expectedStack, manifest.whichStack(code1));
+	}
+	
+	/**
+	 * Test method for {@link asgn2Manifests.CargotManifest#whichStack(ContainerCode)}.
 	 * Confirm that the method returns null if the manifest is empty.
 	 * @throws ManifestException
 	 * @throws InvalidCodeException 
@@ -548,6 +587,19 @@ public class ManifestTests {
 		manifest.loadContainer(refrigeratedContainer2);
 		Integer expectedStack = 1;
 		assertEquals(expectedStack, manifest.whichStack(code3));
+	}
+	
+	/**
+	 * Test method for {@link asgn2Manifests.CargotManifest#howHigh(ContainerCode)}.
+	 * Confirm that the method returns null if given a null container query.
+	 * @throws ManifestException
+	 * @throws InvalidCodeException 
+	 */
+	@Test 
+	public void findHowHeightWithNullQueryContainer() throws ManifestException, InvalidCodeException {
+		ContainerCode code1 = null;
+		Integer expectedHeight = null;
+		assertEquals(expectedHeight, manifest.howHigh(code1));
 	}
 	
 	/**
