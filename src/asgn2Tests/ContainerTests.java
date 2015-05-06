@@ -40,7 +40,7 @@ public class ContainerTests {
 	@Before
 	public void setUP() throws InvalidContainerException {
 		DGCTest = new DangerousGoodsContainer(CODE,GROSSWEIGHT,CATEGORY);
-		//FCTest = new FreightContainer(CODE,GROSSWEIGHT);
+		FCTest = new FreightContainer(CODE,GROSSWEIGHT);
 		GGCTest = new GeneralGoodsContainer(CODE,GROSSWEIGHT);
 		RCTest = new RefrigeratedContainer(CODE,GROSSWEIGHT,TEMPERATURE);
 	}
@@ -113,11 +113,57 @@ public class ContainerTests {
 	//=================================================================
 	//Test For Constructor FreightContainer Class
 	
-	@Test (expected = InvalidContainerException.class)
+	/**
+	 * Test method for {@link asgn2Containers.FreightContainer#FreightContainer(ContainerCode, Integer)}
+	 * Test For Constructor Default Input
+	 * @throws InvalidContainerException
+	 */
+	@Test 
 	public void FCConstructorDefaultInput() throws InvalidContainerException {
-		//FreightContainer FCTest = new FreightContainer(CODE,GROSSWEIGHT);
+		FreightContainer FCTest = new FreightContainer(CODE,GROSSWEIGHT);
 	}
 	
+	/**
+	 * Test method for {@link asgn2Containers.FreightContainer#FreightContainer(ContainerCode, Integer)}
+	 * Test For Constructor Less Then 4
+	 * @throws InvalidContainerException
+	 */
+	@Test (expected = InvalidContainerException.class)
+	public void FCConstructorInvalidGrossWeightLessThen4() throws InvalidContainerException {
+		FreightContainer FCTest = new FreightContainer(CODE,3);
+	}
+	
+	/**
+	 * Test method for {@link asgn2Containers.FreightContainer#FreightContainer(ContainerCode, Integer)}
+	 * Test For Constructor More Then 30
+	 * @throws InvalidContainerException
+	 */
+	@Test (expected = InvalidContainerException.class)
+	public void FCConstructorInvalidGrossWeightLessMoreThen30() throws InvalidContainerException {
+		FreightContainer FCTest = new FreightContainer(CODE,31);
+	}
+	
+	/**
+	 * Test method for {@link asgn2Containers.FreightContainer#FreightContainer(ContainerCode, Integer)}
+	 * Test For GetCode
+	 * @throws InvalidContainerException
+	 */
+	@Test 
+	public void FCgetCode() throws InvalidContainerException {
+		FreightContainer FCTest = new FreightContainer(CODE,GROSSWEIGHT);
+		assertEquals(FCTest.getCode(),CODE);
+	}
+	
+	/**
+	 * Test method for {@link asgn2Containers.FreightContainer#FreightContainer(ContainerCode, Integer)}
+	 * Test For GetCode
+	 * @throws InvalidContainerException
+	 */
+	@Test 
+	public void FCgetGrossWeight() throws InvalidContainerException {
+		FreightContainer FCTest = new FreightContainer(CODE,GROSSWEIGHT);
+		assertEquals(FCTest.getGrossWeight(),GROSSWEIGHT);
+	}
 	//=================================================================
 	//Test For Constructor GeneralGoodsContainer Class
 	
