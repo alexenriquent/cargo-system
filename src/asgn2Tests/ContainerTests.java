@@ -33,6 +33,7 @@ public class ContainerTests {
 	private static final ContainerCode CODE = null;
 	private static Integer GROSSWEIGHT = 5;
 	private static Integer CATEGORY = 5;
+	private static Integer TEMPERATURE = 5;
 	
 	
 	//Before
@@ -41,6 +42,7 @@ public class ContainerTests {
 		DGCTest = new DangerousGoodsContainer(CODE,GROSSWEIGHT,CATEGORY);
 		//FCTest = new FreightContainer(CODE,GROSSWEIGHT);
 		GGCTest = new GeneralGoodsContainer(CODE,GROSSWEIGHT);
+		RCTest = new RefrigeratedContainer(CODE,GROSSWEIGHT,TEMPERATURE);
 	}
 	
 	//=================================================================
@@ -119,9 +121,89 @@ public class ContainerTests {
 	//=================================================================
 	//Test For Constructor GeneralGoodsContainer Class
 	
+	/**
+	 * Test method for {@link asgn2Containers.GeneralGoodsContainer#GeneralGoodsContainer(ContainerCode, Integer)}
+	 * Test For Constructor Default Input
+	 * @throws InvalidContainerException
+	 */
 	@Test
 	public void GGCConstructorDefaultInput() throws InvalidContainerException {
 		GeneralGoodsContainer GGCTest = new GeneralGoodsContainer(CODE,GROSSWEIGHT);
 	}
 	
+	/**
+	 * Test method for {@link asgn2Containers.GeneralGoodsContainer#GeneralGoodsContainer(ContainerCode, Integer)}
+	 * Test For Invalid GrossWeight If Less Then 4
+	 * @throws InvalidContainerException
+	 */
+	@Test (expected = InvalidContainerException.class)
+	public void GGCInvalidGrossWeightLessThen4() throws InvalidContainerException {
+		GeneralGoodsContainer GGCTest = new GeneralGoodsContainer(CODE,3);
+	}
+	
+	/**
+	 * Test method for {@link asgn2Containers.GeneralGoodsContainer#GeneralGoodsContainer(ContainerCode, Integer)}
+	 * Test For Invalid GrossWeight If More Then 30
+	 * @throws InvalidContainerException
+	 */
+	@Test (expected = InvalidContainerException.class)
+	public void GGCInvalidGrossWeightMoreThen30() throws InvalidContainerException {
+		GeneralGoodsContainer GGCTest = new GeneralGoodsContainer(CODE,31);
+	}
+	
+	//=================================================================
+	//Test For Constructor ReFrigeratedContainer Class
+	
+	/**
+	 * Test method for {@link asgn2Containers.RefrigeratedContainer#RefrigeratedContainer(ContainerCode, Integer, Integer)}
+	 * Test For Constructor Default Input
+	 * @throws InvalidContainerException
+	 */
+	@Test
+	public void RCConstructorDefaultInput() throws InvalidContainerException {
+		RefrigeratedContainer RCTest = new RefrigeratedContainer(CODE,GROSSWEIGHT,TEMPERATURE);
+	}
+	
+	/**
+	 * Test method for {@link asgn2Containers.RefrigeratedContainer#RefrigeratedContainer(ContainerCode, Integer, Integer)}
+	 * Test For InvalidGrossWeight Less Then 4
+	 * @throws InvalidContainerException
+	 */
+	@Test (expected = InvalidContainerException.class)
+	public void RCConstructorInvalidGrossWeightLessThen4() throws InvalidContainerException {
+		RefrigeratedContainer RCTest = new RefrigeratedContainer(CODE,3,TEMPERATURE);
+	}
+	
+	/**
+	 * Test method for {@link asgn2Containers.RefrigeratedContainer#RefrigeratedContainer(ContainerCode, Integer, Integer)}
+	 * Test For InvalidGrossWeight Less Then 4
+	 * @throws InvalidContainerException
+	 */
+	@Test (expected = InvalidContainerException.class)
+	public void RCConstructorInvalidGrossWeightMoreThen30() throws InvalidContainerException {
+		RefrigeratedContainer RCTest = new RefrigeratedContainer(CODE,31,TEMPERATURE);
+	}
+	
+	/**
+	 * Test method for {@link asgn2Containers.RefrigeratedContainer#RefrigeratedContainer(ContainerCode, Integer, Integer)}
+	 * Test For getTemperature
+	 * @throws InvalidContainerException
+	 */
+	@Test
+	public void RCGetTemperature() throws InvalidContainerException {
+		RefrigeratedContainer RCTest = new RefrigeratedContainer(CODE,GROSSWEIGHT,TEMPERATURE);
+		assertEquals(RCTest.getTemperature(),TEMPERATURE);
+	}
+	
+	/**
+	 * Test method for {@link asgn2Containers.RefrigeratedContainer#RefrigeratedContainer(ContainerCode, Integer, Integer)}
+	 * Test For Set Temperature and getTemperature
+	 * @throws InvalidContainerException
+	 */
+	@Test
+	public void RCSetTemperature() throws InvalidContainerException {
+		Integer temperature = 7;
+		RCTest.setTemperature(temperature);;
+		assertTrue(RCTest.getTemperature()==temperature);
+		}
 }
