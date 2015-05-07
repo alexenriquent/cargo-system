@@ -148,7 +148,7 @@ public class ContainerTests {
 	 */
 	@Test
 	public void DGCConstructorDefaultInput() throws InvalidContainerException{
-		DangerousGoodsContainer DGCTest = new DangerousGoodsContainer(CODE,GROSSWEIGHT,CATEGORY);
+		DGCTest = new DangerousGoodsContainer(CODE,GROSSWEIGHT,CATEGORY);
 	}
 
 	
@@ -159,7 +159,7 @@ public class ContainerTests {
 	 */
 	@Test
 	public void DGCgetCategories() throws InvalidContainerException {
-		DangerousGoodsContainer DGCTest = new DangerousGoodsContainer(CODE,GROSSWEIGHT,CATEGORY);
+		DGCTest = new DangerousGoodsContainer(CODE,GROSSWEIGHT,CATEGORY);
 		assertEquals(DGCTest.getCategory(),CATEGORY);
 	}
 	
@@ -171,7 +171,7 @@ public class ContainerTests {
 	 */
 	@Test (expected = InvalidContainerException.class)
 	public void  DGCinvalidGrossWeightLessThen4() throws InvalidContainerException {
-		DangerousGoodsContainer DGCTest = new DangerousGoodsContainer(CODE,2,CATEGORY);
+		DGCTest = new DangerousGoodsContainer(CODE,2,CATEGORY);
 	}
 	
 	/**
@@ -181,7 +181,7 @@ public class ContainerTests {
 	 */
 	@Test (expected = InvalidContainerException.class)
 	public void  DGCinvalidGrossWeightMoreThen30() throws InvalidContainerException {
-		DangerousGoodsContainer DGCTest = new DangerousGoodsContainer(CODE,31,CATEGORY);
+		DGCTest = new DangerousGoodsContainer(CODE,31,CATEGORY);
 	}
 	/**
 	 * Test method for {@link asgn2Containers.DangerousGoodsContainer#DangerousGoodsContainer(ContainerCode, Integer, Integer)}
@@ -190,7 +190,7 @@ public class ContainerTests {
 	 */
 	@Test (expected = InvalidContainerException.class)
 	public void DGCinvalidCategoriesLessthen1 () throws InvalidContainerException {
-		DangerousGoodsContainer DGCTest = new DangerousGoodsContainer(CODE,GROSSWEIGHT,0);
+		DGCTest = new DangerousGoodsContainer(CODE,GROSSWEIGHT,0);
 	}
 
 	/**
@@ -200,7 +200,7 @@ public class ContainerTests {
 	 */
 	@Test (expected = InvalidContainerException.class)
 	public void DGCinvalidCategoriesMorethen9 () throws InvalidContainerException {
-		DangerousGoodsContainer DGCTest = new DangerousGoodsContainer(CODE,GROSSWEIGHT,10);
+		DGCTest = new DangerousGoodsContainer(CODE,GROSSWEIGHT,10);
 	}
 	
 	//=================================================================
@@ -237,7 +237,7 @@ public class ContainerTests {
 	 */
 	@Test
 	public void GGCConstructorDefaultInput() throws InvalidContainerException {
-		GeneralGoodsContainer GGCTest = new GeneralGoodsContainer(CODE,GROSSWEIGHT);
+		GGCTest = new GeneralGoodsContainer(CODE,GROSSWEIGHT);
 	}
 	
 	/**
@@ -247,7 +247,7 @@ public class ContainerTests {
 	 */
 	@Test (expected = InvalidContainerException.class)
 	public void GGCInvalidGrossWeightLessThen4() throws InvalidContainerException {
-		GeneralGoodsContainer GGCTest = new GeneralGoodsContainer(CODE,3);
+		GGCTest = new GeneralGoodsContainer(CODE,3);
 	}
 	
 	/**
@@ -257,7 +257,7 @@ public class ContainerTests {
 	 */
 	@Test (expected = InvalidContainerException.class)
 	public void GGCInvalidGrossWeightMoreThen30() throws InvalidContainerException {
-		GeneralGoodsContainer GGCTest = new GeneralGoodsContainer(CODE,31);
+		GGCTest = new GeneralGoodsContainer(CODE,31);
 	}
 	
 	//=================================================================
@@ -270,7 +270,7 @@ public class ContainerTests {
 	 */
 	@Test
 	public void RCConstructorDefaultInput() throws InvalidContainerException {
-		RefrigeratedContainer RCTest = new RefrigeratedContainer(CODE,GROSSWEIGHT,TEMPERATURE);
+		RCTest = new RefrigeratedContainer(CODE,GROSSWEIGHT,TEMPERATURE);
 	}
 	
 	/**
@@ -280,7 +280,7 @@ public class ContainerTests {
 	 */
 	@Test (expected = InvalidContainerException.class)
 	public void RCConstructorInvalidGrossWeightLessThen4() throws InvalidContainerException {
-		RefrigeratedContainer RCTest = new RefrigeratedContainer(CODE,3,TEMPERATURE);
+		RCTest = new RefrigeratedContainer(CODE,3,TEMPERATURE);
 	}
 	
 	/**
@@ -290,7 +290,7 @@ public class ContainerTests {
 	 */
 	@Test (expected = InvalidContainerException.class)
 	public void RCConstructorInvalidGrossWeightMoreThen30() throws InvalidContainerException {
-		RefrigeratedContainer RCTest = new RefrigeratedContainer(CODE,31,TEMPERATURE);
+		RCTest = new RefrigeratedContainer(CODE,31,TEMPERATURE);
 	}
 	
 	/**
