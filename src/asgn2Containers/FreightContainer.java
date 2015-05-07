@@ -16,7 +16,7 @@ import asgn2Exceptions.InvalidContainerException;
  * @author CAB302
  * @version 1.0
  */
-public class FreightContainer {
+public abstract class FreightContainer {
 		
 	protected ContainerCode code;
 	protected Integer grossWeight;

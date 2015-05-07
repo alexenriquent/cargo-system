@@ -43,10 +43,10 @@ public class ContainerTests {
 	@Before
 	public void setUP() throws InvalidContainerException, InvalidCodeException {
 		CCTest = new ContainerCode(C_CODE);
-		DGCTest = new DangerousGoodsContainer(CODE,GROSSWEIGHT,CATEGORY);
-		FCTest = new FreightContainer(CODE,GROSSWEIGHT);
-		GGCTest = new GeneralGoodsContainer(CODE,GROSSWEIGHT);
-		RCTest = new RefrigeratedContainer(CODE,GROSSWEIGHT,TEMPERATURE);
+		FreightContainer DGCTest = new DangerousGoodsContainer(CODE,GROSSWEIGHT,CATEGORY);
+		//FreightContainer FCTest = new FreightContainer(CODE,GROSSWEIGHT);
+		FreightContainer GGCTest = new GeneralGoodsContainer(CODE,GROSSWEIGHT);
+		FreightContainer RCTest = new RefrigeratedContainer(CODE,GROSSWEIGHT,TEMPERATURE);
 	}
 	
 	//=================================================================
