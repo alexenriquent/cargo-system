@@ -44,7 +44,6 @@ public class ContainerTests {
 	public void setUP() throws InvalidContainerException, InvalidCodeException {
 		CCTest = new ContainerCode(C_CODE);
 		FreightContainer DGCTest = new DangerousGoodsContainer(CODE,GROSSWEIGHT,CATEGORY);
-		//FreightContainer FCTest = new FreightContainer(CODE,GROSSWEIGHT);
 		FreightContainer GGCTest = new GeneralGoodsContainer(CODE,GROSSWEIGHT);
 		FreightContainer RCTest = new RefrigeratedContainer(CODE,GROSSWEIGHT,TEMPERATURE);
 	}
@@ -206,37 +205,7 @@ public class ContainerTests {
 	
 	//=================================================================
 	//Test For Constructor FreightContainer Class
-	
-	/**
-	 * Test method for {@link asgn2Containers.FreightContainer#FreightContainer(ContainerCode, Integer)}
-	 * Test For Constructor Default Input
-	 * @throws InvalidContainerException
-	 */
-	@Test 
-	public void FCConstructorDefaultInput() throws InvalidContainerException {
-		FreightContainer FCTest = new FreightContainer(CODE,GROSSWEIGHT);
-	}
-	
-	/**
-	 * Test method for {@link asgn2Containers.FreightContainer#FreightContainer(ContainerCode, Integer)}
-	 * Test For Constructor Less Then 4
-	 * @throws InvalidContainerException
-	 */
-	@Test (expected = InvalidContainerException.class)
-	public void FCConstructorInvalidGrossWeightLessThen4() throws InvalidContainerException {
-		FreightContainer FCTest = new FreightContainer(CODE,3);
-	}
-	
-	/**
-	 * Test method for {@link asgn2Containers.FreightContainer#FreightContainer(ContainerCode, Integer)}
-	 * Test For Constructor More Then 30
-	 * @throws InvalidContainerException
-	 */
-	@Test (expected = InvalidContainerException.class)
-	public void FCConstructorInvalidGrossWeightMoreThen30() throws InvalidContainerException {
-		FreightContainer FCTest = new FreightContainer(CODE,31);
-	}
-	
+		
 	/**
 	 * Test method for {@link asgn2Containers.FreightContainer#getCode()}
 	 * Test For GetCode
@@ -244,8 +213,8 @@ public class ContainerTests {
 	 */
 	@Test 
 	public void FCgetCode() throws InvalidContainerException {
-		FreightContainer FCTest = new FreightContainer(CODE,GROSSWEIGHT);
-		assertEquals(FCTest.getCode(),CODE);
+		FreightContainer GGCTest = new GeneralGoodsContainer(CODE,GROSSWEIGHT);
+		assertEquals(GGCTest.getCode(),CODE);
 	}
 	
 	/**
@@ -255,8 +224,8 @@ public class ContainerTests {
 	 */
 	@Test 
 	public void FCgetGrossWeight() throws InvalidContainerException {
-		FreightContainer FCTest = new FreightContainer(CODE,GROSSWEIGHT);
-		assertEquals(FCTest.getGrossWeight(),GROSSWEIGHT);
+		FreightContainer GGCTest = new GeneralGoodsContainer(CODE,GROSSWEIGHT);
+		assertEquals(GGCTest.getGrossWeight(),GROSSWEIGHT);
 	}
 	//=================================================================
 	//Test For Constructor GeneralGoodsContainer Class
@@ -342,9 +311,10 @@ public class ContainerTests {
 	 */
 	@Test
 	public void RCSetTemperature() throws InvalidContainerException {
+		RefrigeratedContainer RCTest = new RefrigeratedContainer(CODE,GROSSWEIGHT,TEMPERATURE);
 		Integer temperature = 7;
-		RCTest.setTemperature(temperature);;
-		assertTrue(RCTest.getTemperature()==temperature);
+		RCTest.setTemperature(temperature);
+		assertTrue(RCTest.getTemperature() == temperature);
 		}
 	
 	//=================================================================
