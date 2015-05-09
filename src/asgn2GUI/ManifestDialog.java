@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 
 import asgn2Exceptions.CargoException;
 import asgn2Manifests.CargoManifest;
@@ -18,7 +19,7 @@ import asgn2Manifests.CargoManifest;
  * @author CAB302
  */
 public class ManifestDialog extends AbstractDialog {
-
+	
     private static final int HEIGHT = 150;
     private static final int WIDTH = 250;
 
@@ -26,7 +27,7 @@ public class ManifestDialog extends AbstractDialog {
     private JTextField txtMaxHeight;
     private JTextField txtMaxWeight;
 
-    private CargoManifest manifest;
+    private static CargoManifest manifest;
 
     /**
      * Constructs a modal dialog box that gathers information required for creating a cargo
@@ -53,8 +54,14 @@ public class ManifestDialog extends AbstractDialog {
 
         JPanel toReturn = new JPanel();
         toReturn.setLayout(new GridBagLayout());
+        GridBagConstraints constraints = new GridBagConstraints(); 
+        
+        constraints.fill = GridBagConstraints.NONE;
+	    constraints.anchor = GridBagConstraints.CENTER;
+	    constraints.weightx = 100;
+	    constraints.weighty = 100;
 
-       //Implementation here
+       return toReturn;
     }
 
     /*
@@ -69,8 +76,7 @@ public class ManifestDialog extends AbstractDialog {
 
     @Override
     protected boolean dialogDone() {
-        //Implementation here 
-    	//Parameters and building a new manifest, all the while handling exceptions 
+    	//Parameters and building a new manifest, all the while handling exceptions
     }
 
     /**
