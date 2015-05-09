@@ -3,6 +3,7 @@ package asgn2GUI;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -11,6 +12,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
 import asgn2Exceptions.CargoException;
+import asgn2Exceptions.ManifestException;
 import asgn2Manifests.CargoManifest;
 
 /**
@@ -60,6 +62,22 @@ public class ManifestDialog extends AbstractDialog {
 	    constraints.anchor = GridBagConstraints.CENTER;
 	    constraints.weightx = 100;
 	    constraints.weighty = 100;
+	    
+	    constraints.gridx = 1;
+	    constraints.gridy = 0;
+	    constraints.gridwidth = 2;
+        constraints.gridheight = 1;
+	    toReturn.add(txtNumStacks, constraints);
+	    constraints.gridx = 1;
+	    constraints.gridy = 1;
+	    constraints.gridwidth = 2;
+        constraints.gridheight = 1;
+	    toReturn.add(txtMaxHeight, constraints);
+	    constraints.gridx = 1;
+	    constraints.gridy = 2;
+	    constraints.gridwidth = 2;
+        constraints.gridheight = 1;
+	    toReturn.add(txtMaxWeight, constraints);
 
        return toReturn;
     }
@@ -76,7 +94,33 @@ public class ManifestDialog extends AbstractDialog {
 
     @Override
     protected boolean dialogDone() {
-    	//Parameters and building a new manifest, all the while handling exceptions
+    	Integer numStacks = 0;
+    	Integer maxHeight = 0;
+    	Integer maxWeight = 0;
+    	boolean dialogDone = false;
+    	try {
+    		numStacks  = Integer.parseInt(txtNumStacks.getText());
+    	} catch (NumberFormatException e) {
+    		// Error
+    	}
+    	try {
+    		maxHeight  = Integer.parseInt(txtMaxHeight.getText());
+    	} catch (NumberFormatException e) {
+    		// Error
+    	}
+    	try {
+    		maxWeight  = Integer.parseInt(txtMaxWeight.getText());
+    	} catch (NumberFormatException e) {
+    		// Error
+    	}
+    	try {
+			manifest = new CargoManifest(numStacks, maxHeight, maxWeight);
+			dialogDone = true;
+		} catch (ManifestException e) {
+			// Error
+			dialogDone = false;
+		}
+    	return dialogDone;
     }
 
     /**
@@ -86,6 +130,9 @@ public class ManifestDialog extends AbstractDialog {
      * @return a <code>CargoManifest</code> instance with valid values.
      */
     public static CargoManifest showDialog(JFrame parent) {
-        //Implementation again 
+    	JDialog.setDefaultLookAndFeelDecorated(true);
+    	JDialog dlgManifest = new ManifestDialog(parent);
+    	dlgManifest.setVisible(true);
+    	return manifest;
     }
 }

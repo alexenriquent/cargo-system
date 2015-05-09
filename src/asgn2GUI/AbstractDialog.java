@@ -46,15 +46,14 @@ public abstract class AbstractDialog extends JDialog implements ActionListener {
         JPanel pnlContent = createContentPanel();
         
         setSize(width, height);
-	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    setLayout(new BorderLayout());
+	    setLayout(new BorderLayout());	   
 	    
 	    this.getContentPane().add(pnlDialogControls, BorderLayout.SOUTH);
 	    this.getContentPane().add(pnlContent, BorderLayout.NORTH);
 	    this.setVisible(true);
     }
 
-    /**
+    /** 
      * This abstract method is called by the AbstractDialog constructor to
      * build the JPanel that will be put in the centre of the dialog box.
      * Override and implement to create the contents of your dialog box.
