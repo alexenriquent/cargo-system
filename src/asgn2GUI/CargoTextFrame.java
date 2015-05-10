@@ -21,6 +21,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import asgn2Codes.ContainerCode;
+import asgn2Containers.FreightContainer;
 import asgn2Exceptions.ManifestException;
 import asgn2Manifests.CargoManifest;
 
@@ -202,12 +203,12 @@ public class CargoTextFrame extends JFrame {
     private void setNewManifest() {
     	cargo = ManifestDialog.showDialog(this);
     	if (cargo != null) {
-    		JOptionPane.showMessageDialog(null, cargo.toString());
+    		//JOptionPane.showMessageDialog(null, cargo.toString());
     		setCanvas(cargo);
             add(pnlDisplay, BorderLayout.CENTER);
             enableButtons();
     	} else {
-    		JOptionPane.showMessageDialog(null, "Cargo is null");
+    		//JOptionPane.showMessageDialog(null, "Cargo is null");
     	}
     }
 
@@ -224,7 +225,7 @@ public class CargoTextFrame extends JFrame {
     private void doLoad() {
     	//implementation here 
         //Don't forget to redraw
-    	ContainerCode code = ContainerCodeDialog.showDialog(this);
+    	FreightContainer container = LoadContainerDialog.showDialog(this);
     }
 
     /**
