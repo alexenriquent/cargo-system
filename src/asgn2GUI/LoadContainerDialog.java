@@ -45,7 +45,7 @@ public class LoadContainerDialog extends AbstractDialog implements ActionListene
     private JComboBox<String> cbType;
     private static String comboBoxItems[] = new String[] { "Dangerous Goods", "General Goods", "Refrigerated Goods" };
 
-    private static FreightContainer container;
+    private FreightContainer container;
 
     /**
      * Constructs a modal dialog box that gathers information required for loading a container.
@@ -251,8 +251,21 @@ public class LoadContainerDialog extends AbstractDialog implements ActionListene
      */
     public static FreightContainer showDialog(JFrame parent) {
        JDialog.setDefaultLookAndFeelDecorated(true);
-       new LoadContainerDialog(parent);
-       return container;
+       LoadContainerDialog dlgLoadContainer = new LoadContainerDialog(parent);
+       return dlgLoadContainer.getContainer();
+    }
+    
+    /**
+     * Simple getter for the <code>container</code> field, called in
+     * the <code>showDialog<code> method.
+     * 
+     * The <code>showDialog<code> method is a static method, therefore
+     * it cannot make a reference to a non-static field. 
+     * 
+     * @return container the specific type of container with a valid code
+     */
+    public FreightContainer getContainer() {
+    	return container;
     }
 
 }

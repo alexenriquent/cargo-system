@@ -35,7 +35,7 @@ public class ContainerCodeDialog extends AbstractDialog {
     private JTextField txtCode;
     private JLabel lblErrorInfo;
 
-    private static ContainerCode code;
+    private ContainerCode code;
 
     /**
      * Constructs a modal dialog box that requests a container code.
@@ -125,7 +125,20 @@ public class ContainerCodeDialog extends AbstractDialog {
      */
     public static ContainerCode showDialog(JFrame parent) {
     	JDialog.setDefaultLookAndFeelDecorated(true);
-    	new ContainerCodeDialog(parent);
+    	ContainerCodeDialog dlgContainerCode = new ContainerCodeDialog(parent);
+    	return dlgContainerCode.getCode();
+    }
+    
+    /**
+     * Simple getter for the <code>code</code> field, called in
+     * the <code>showDialog<code> method.
+     * 
+     * The <code>showDialog<code> method is a static method, therefore
+     * it cannot make a reference to a non-static field. 
+     * 
+     * @return code the container code
+     */
+    public ContainerCode getCode() {
     	return code;
     }
 }

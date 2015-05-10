@@ -30,7 +30,7 @@ public class ManifestDialog extends AbstractDialog {
     private JTextField txtMaxHeight;
     private JTextField txtMaxWeight;
 
-    private static CargoManifest manifest;
+    private CargoManifest manifest;
 
     /**
      * Constructs a modal dialog box that gathers information required for creating a cargo
@@ -125,7 +125,21 @@ public class ManifestDialog extends AbstractDialog {
      */
     public static CargoManifest showDialog(JFrame parent) {
     	JDialog.setDefaultLookAndFeelDecorated(true);
-    	new ManifestDialog(parent);
+    	ManifestDialog dlgManifest = new ManifestDialog(parent);
+    	return dlgManifest.getManifest();
+    }
+    
+    /**
+     * Simple getter for the <code>manifest</code> field, called in
+     * the <code>showDialog<code> method.
+     * 
+     * The <code>showDialog<code> method is a static method, therefore
+     * it cannot make a reference to a non-static field. 
+     * 
+     * @return manifest the manifest with specified a number of stacks,
+     * maximum height and maximum weight
+     */
+    public CargoManifest getManifest() {
     	return manifest;
     }
 }
