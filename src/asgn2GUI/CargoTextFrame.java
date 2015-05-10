@@ -16,6 +16,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
@@ -199,8 +200,13 @@ public class CargoTextFrame extends JFrame {
      */
     private void setNewManifest() {
     	cargo = ManifestDialog.showDialog(this);
-    	setCanvas(cargo);
-        add(pnlDisplay, BorderLayout.CENTER);
+    	if (cargo != null) {
+    		JOptionPane.showMessageDialog(null, cargo.toString());
+    		setCanvas(cargo);
+            add(pnlDisplay, BorderLayout.CENTER);
+    	} else {
+    		JOptionPane.showMessageDialog(null, "Cargo is null");
+    	}
     }
 
     /**

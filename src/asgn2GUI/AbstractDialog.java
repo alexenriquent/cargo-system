@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 /**
  * Provides base class for dialog boxes used for data entry.
@@ -38,9 +39,6 @@ public abstract class AbstractDialog extends JDialog implements ActionListener {
      */
     protected AbstractDialog(Frame parent, String title, int width, int height) {
         super(parent, title, true);
-        
-        btnOK = createButton("OK");
-        btnCancel = createButton("Cancel");
 
         JPanel pnlDialogControls = createDialogControls();
         JPanel pnlContent = createContentPanel();
@@ -68,19 +66,21 @@ public abstract class AbstractDialog extends JDialog implements ActionListener {
      */
     private JPanel createDialogControls() {
     	JPanel pnlDialogControls = new JPanel();
+    	btnOK = createButton("OK");
+        btnCancel = createButton("Cancel");
     	GridBagLayout layout = new GridBagLayout();
     	GridBagConstraints constraints = new GridBagConstraints(); 
     	
     	btnOK.setLayout(layout);
     	btnCancel.setLayout(layout);
     	constraints.fill = GridBagConstraints.NONE;
-	    constraints.anchor = GridBagConstraints.CENTER;
-	    constraints.weightx = 100;
-	    constraints.weighty = 100;
+	    constraints.anchor = GridBagConstraints.EAST;
+	    constraints.weightx = 1.0;
+	    constraints.weighty = 1.0;
 	    
 	    addToPanel(pnlDialogControls, btnOK, constraints, 0, 0, 2, 1);
-	    addToPanel(pnlDialogControls, btnOK, constraints, 2, 0, 2, 1);
-    	
+	    addToPanel(pnlDialogControls, btnCancel, constraints, 1, 0, 2, 1);
+	    
     	return pnlDialogControls;
     }
 

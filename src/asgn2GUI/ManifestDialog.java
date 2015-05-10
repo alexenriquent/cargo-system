@@ -41,7 +41,8 @@ public class ManifestDialog extends AbstractDialog {
         super(parent, "Create Manifest", WIDTH, HEIGHT);
         setName("New Manifest");
         setResizable(false);
-        manifest = null;
+        //manifest = null;
+        
     }
 
     /**
@@ -53,31 +54,26 @@ public class ManifestDialog extends AbstractDialog {
         txtNumStacks = createTextField(8, "Number of Stacks");
         txtMaxHeight = createTextField(8, "Maximum Height");
         txtMaxWeight = createTextField(8, "Maximum Weight");
+        
+        JLabel lblNumStacks = new JLabel(txtNumStacks.getName() + ":  ");
+    	JLabel lblMaxHeight = new JLabel(txtMaxHeight.getName() + ":  ");
+    	JLabel lblMaxWeight = new JLabel(txtMaxWeight.getName() + ":  ");
 
         JPanel toReturn = new JPanel();
         toReturn.setLayout(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints(); 
         
-        constraints.fill = GridBagConstraints.NONE;
-	    constraints.anchor = GridBagConstraints.CENTER;
-	    constraints.weightx = 100;
-	    constraints.weighty = 100;
-	    
-	    constraints.gridx = 1;
-	    constraints.gridy = 0;
-	    constraints.gridwidth = 2;
-        constraints.gridheight = 1;
-	    toReturn.add(txtNumStacks, constraints);
-	    constraints.gridx = 1;
-	    constraints.gridy = 1;
-	    constraints.gridwidth = 2;
-        constraints.gridheight = 1;
-	    toReturn.add(txtMaxHeight, constraints);
-	    constraints.gridx = 1;
-	    constraints.gridy = 2;
-	    constraints.gridwidth = 2;
-        constraints.gridheight = 1;
-	    toReturn.add(txtMaxWeight, constraints);
+	    constraints.weightx = 0.5;
+	    constraints.weighty = 0.5;
+	    constraints.anchor = GridBagConstraints.LINE_END;
+	    addToPanel(toReturn, lblNumStacks, constraints, 0, 0, 1, 1);
+	    addToPanel(toReturn, lblMaxHeight, constraints, 0, 1, 1, 1);
+	    addToPanel(toReturn, lblMaxWeight, constraints, 0, 2, 1, 1);
+
+	    constraints.anchor = GridBagConstraints.LINE_START;
+	    addToPanel(toReturn, txtNumStacks, constraints, 1, 0, 1, 1);
+	    addToPanel(toReturn, txtMaxHeight, constraints, 1, 1, 1, 1);
+	    addToPanel(toReturn, txtMaxWeight, constraints, 1, 2, 1, 1);
 
        return toReturn;
     }
@@ -100,24 +96,18 @@ public class ManifestDialog extends AbstractDialog {
     	boolean dialogDone = false;
     	try {
     		numStacks  = Integer.parseInt(txtNumStacks.getText());
-    	} catch (NumberFormatException e) {
-    		// Error
-    	}
-    	try {
     		maxHeight  = Integer.parseInt(txtMaxHeight.getText());
-    	} catch (NumberFormatException e) {
-    		// Error
-    	}
-    	try {
     		maxWeight  = Integer.parseInt(txtMaxWeight.getText());
     	} catch (NumberFormatException e) {
-    		// Error
+    		JOptionPane.showMessageDialog(null, "Please ensure that each input is an integer.");
+    		dialogDone = false;
+    		return dialogDone;
     	}
     	try {
 			manifest = new CargoManifest(numStacks, maxHeight, maxWeight);
 			dialogDone = true;
 		} catch (ManifestException e) {
-			// Error
+			JOptionPane.showMessageDialog(null, "Manifest cannot be created.");
 			dialogDone = false;
 		}
     	return dialogDone;
@@ -131,8 +121,7 @@ public class ManifestDialog extends AbstractDialog {
      */
     public static CargoManifest showDialog(JFrame parent) {
     	JDialog.setDefaultLookAndFeelDecorated(true);
-    	JDialog dlgManifest = new ManifestDialog(parent);
-    	dlgManifest.setVisible(true);
+    	new ManifestDialog(parent);
     	return manifest;
     }
 }
