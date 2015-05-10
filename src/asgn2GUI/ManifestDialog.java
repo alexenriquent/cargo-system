@@ -105,17 +105,16 @@ public class ManifestDialog extends AbstractDialog {
     		maxWeight  = Integer.parseInt(txtMaxWeight.getText());
     	} catch (NumberFormatException e) {
     		JOptionPane.showMessageDialog(null, "Please ensure that each input is an integer.");
-    		dialogDone = false;
     		return dialogDone;
     	}
     	try {
 			manifest = new CargoManifest(numStacks, maxHeight, maxWeight);
 			dialogDone = true;
+			return dialogDone;
 		} catch (ManifestException e) {
-			JOptionPane.showMessageDialog(null, "Manifest cannot be created.");
-			dialogDone = false;
+			JOptionPane.showMessageDialog(null, e.getMessage());
+			return dialogDone;
 		}
-    	return dialogDone;
     }
 
     /**

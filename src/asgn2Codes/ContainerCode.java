@@ -161,6 +161,11 @@ public class ContainerCode {
 	 * upper-case characters, <code>false</code> otherwise.
 	 */
 	private boolean invalidOwnerCode(String code) {
+		for (int i = 0; i < CATEGORY_IDENTIFIER_POSITION; i++) {
+			if (Character.isDigit(code.charAt(i))) {
+				return true;
+			}
+		}
 		return !code.substring(0, CATEGORY_IDENTIFIER_POSITION).equals
 			   (code.substring(0, CATEGORY_IDENTIFIER_POSITION).toUpperCase());
 	}

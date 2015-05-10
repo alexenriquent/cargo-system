@@ -22,6 +22,8 @@ import asgn2Containers.FreightContainer;
 import asgn2Containers.GeneralGoodsContainer;
 import asgn2Containers.RefrigeratedContainer;
 import asgn2Exceptions.CargoException;
+import asgn2Exceptions.InvalidCodeException;
+import asgn2Exceptions.InvalidContainerException;
 
 /**
  * Creates a dialog box allowing the user to enter information required for loading a container.
@@ -54,7 +56,6 @@ public class LoadContainerDialog extends AbstractDialog implements ActionListene
         super(parent, "Container Information", WIDTH, HEIGHT);
         setResizable(false);
         setName("Container Information");
-
     }
 
     /**
@@ -72,10 +73,10 @@ public class LoadContainerDialog extends AbstractDialog implements ActionListene
 
         JPanel pnlContent = new JPanel();
         pnlContent.setLayout(new GridBagLayout());
-        constraints.insets = new Insets(7,2,2,2);
+        constraints.insets = new Insets(10,2,2,2);
         addToPanel(pnlContent, createCommonControls(), constraints, 0, 0, 2, 1);
         constraints.weighty = 10;
-        constraints.insets = new Insets(-2,2,2,2);
+        constraints.insets = new Insets(0,2,2,2);
         addToPanel(pnlContent, pnlCards, constraints, 1, 1, 2, 1);
 
         return pnlContent;
@@ -102,7 +103,7 @@ public class LoadContainerDialog extends AbstractDialog implements ActionListene
         txtWeight = createTextField(5, "Container Weight");
         txtCode = createTextField(11, "Container Code");
         
-        constraints.insets = new Insets(0,0,2,0);
+        constraints.insets = new Insets(2,0,2,0);
         addToPanel(pnlCommonControls, new JLabel("Container Type: "), constraints, 0, 0, 2, 1);
         addToPanel(pnlCommonControls, new JLabel("Container Code: "), constraints, 0, 2, 2, 1);
         addToPanel(pnlCommonControls, new JLabel("Container Weight: "), constraints, 0, 4, 2, 1);
@@ -177,10 +178,68 @@ public class LoadContainerDialog extends AbstractDialog implements ActionListene
      */
     @Override
     protected boolean dialogDone() {
-        //Implementation here - create the container and set parameters, 
-    	//But handle the exceptions properly 
     	boolean dialogDone = false;
+    	String type = cbType.getSelectedItem().toString();
+    	String containerCode = txtCode.getText();
+    	ContainerCode code = null;
+    	Integer weight = 0;
+    	Integer category = 0;
+    	Integer temperature = 0;
     	
+    	try {
+    		code = new ContainerCode(containerCode);
+    	} catch (InvalidCodeException e) {
+    		JOptionPane.showMessageDialog(null, e.getMessage());
+    		return dialogDone;
+    	}
+    	
+    	try {
+    		weight = Integer.parseInt(txtWeight.getText());
+    	} catch (NumberFormatException e) {
+    		JOptionPane.showMessageDialog(null, "The maximum weight must be an integer.");
+    		return dialogDone;
+    	}
+    	
+    	if (type.equals(comboBoxItems[0])) {
+    		try {
+    			try {
+    				category = Integer.parseInt(txtDangerousGoodsType.getText());
+    			} catch (NumberFormatException e) {
+    				JOptionPane.showMessageDialog(null, "The category must be an integer.");
+    				return dialogDone;
+    			}
+    			container = new DangerousGoodsContainer(code, weight, category);
+    			dialogDone = true;
+    			return dialogDone;
+    		} catch (InvalidContainerException e) {
+    			JOptionPane.showMessageDialog(null, e.getMessage());
+    			return dialogDone;
+    		}
+    	} else if (type.equals(comboBoxItems[1])) {
+    		try {
+    			container = new GeneralGoodsContainer(code, weight);
+    			dialogDone = true;
+    			return dialogDone;
+    		} catch (InvalidContainerException e) {
+    			JOptionPane.showMessageDialog(null, e.getMessage());
+    			return dialogDone;
+    		}
+    	} else if (type.equals(comboBoxItems[2])) {
+    		try {
+    			try {
+    				temperature = Integer.parseInt(txtTemperature.getText());
+    			} catch (NumberFormatException e) {
+    				JOptionPane.showMessageDialog(null, "The temperature must be an integer.");
+    				return dialogDone;
+    			}
+    			container = new RefrigeratedContainer(code, weight, temperature);
+    			dialogDone = true;
+    			return dialogDone;
+    		} catch (InvalidContainerException e) {
+    			JOptionPane.showMessageDialog(null, e.getMessage());
+    			return dialogDone;
+    		}
+    	}
     	return dialogDone;
     }
 

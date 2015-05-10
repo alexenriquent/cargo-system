@@ -22,6 +22,8 @@ import javax.swing.SwingUtilities;
 
 import asgn2Codes.ContainerCode;
 import asgn2Containers.FreightContainer;
+import asgn2Containers.GeneralGoodsContainer;
+import asgn2Exceptions.InvalidCodeException;
 import asgn2Exceptions.ManifestException;
 import asgn2Manifests.CargoManifest;
 
@@ -72,9 +74,11 @@ public class CargoTextFrame extends JFrame {
         if (cargo == null) {
             disableButtons();
         } else {
+        	pnlDisplay = new JPanel(new BorderLayout());
             canvas = new CargoTextArea(cargo);
-            pnlDisplay = new JPanel();
-            pnlDisplay.add(canvas);
+            pnlDisplay.add(canvas, BorderLayout.CENTER);
+    		add(pnlDisplay, BorderLayout.CENTER);
+    		enableButtons();
         }
         redraw();
     }
@@ -86,7 +90,6 @@ public class CargoTextFrame extends JFrame {
     	btnLoad.setEnabled(true);
     	btnUnload.setEnabled(true);
     	btnFind.setEnabled(true);
-    	//btnNewManifest.setEnabled(true);
     }
 
     /**
@@ -96,7 +99,6 @@ public class CargoTextFrame extends JFrame {
     	btnLoad.setEnabled(false);
     	btnUnload.setEnabled(false);
     	btnFind.setEnabled(false);
-    	//btnNewManifest.setEnabled(false);
     }
 
     /**
@@ -160,11 +162,10 @@ public class CargoTextFrame extends JFrame {
             } 
         });
 
-      //implementation here
         setLayout(new BorderLayout());
         pnlControls = createControlPanel();
         add(pnlControls, BorderLayout.SOUTH);
-        
+          
         repaint();
     }
 
@@ -175,7 +176,7 @@ public class CargoTextFrame extends JFrame {
      */
     private JPanel createControlPanel() {
     	JPanel pnlButtons = new JPanel();
-	    pnlButtons.setLayout(new FlowLayout());    
+	    pnlButtons.setLayout(new FlowLayout());
 	    pnlButtons.add(btnNewManifest);
 	    pnlButtons.add(btnLoad);
 	    pnlButtons.add(btnUnload);
@@ -203,12 +204,7 @@ public class CargoTextFrame extends JFrame {
     private void setNewManifest() {
     	cargo = ManifestDialog.showDialog(this);
     	if (cargo != null) {
-    		//JOptionPane.showMessageDialog(null, cargo.toString());
     		setCanvas(cargo);
-            add(pnlDisplay, BorderLayout.CENTER);
-            enableButtons();
-    	} else {
-    		//JOptionPane.showMessageDialog(null, "Cargo is null");
     	}
     }
 
@@ -223,17 +219,30 @@ public class CargoTextFrame extends JFrame {
      * Initiates the Load Container dialog.
      */
     private void doLoad() {
-    	//implementation here 
-        //Don't forget to redraw
     	FreightContainer container = LoadContainerDialog.showDialog(this);
+    	if (container != null) {
+    		try {
+    			cargo.loadContainer(container);
+    		} catch (ManifestException e) {
+    			JOptionPane.showMessageDialog(null, e.getMessage());
+    		}
+        	redraw();
+    	}
     }
 
     /**
      * Initiates the Unload Container dialog.
      */
     private void doUnload() {
-    	//implementation here 
-        //Don't forget to redraw
+    	ContainerCode code = ContainerCodeDialog.showDialog(this);
+    	if (code != null) {
+    		try {
+    			cargo.unloadContainer(code);
+    		} catch (ManifestException e) {
+    			JOptionPane.showMessageDialog(null, e.getMessage());
+    		}
+        	redraw();
+    	}
     }
 
     /**
@@ -249,6 +258,6 @@ public class CargoTextFrame extends JFrame {
      *
      */
     private void redraw() {
-    	//implementation here 
+    	canvas.updateDisplay();
     }
 }
