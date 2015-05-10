@@ -20,6 +20,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import asgn2Codes.ContainerCode;
 import asgn2Exceptions.ManifestException;
 import asgn2Manifests.CargoManifest;
 
@@ -84,7 +85,7 @@ public class CargoTextFrame extends JFrame {
     	btnLoad.setEnabled(true);
     	btnUnload.setEnabled(true);
     	btnFind.setEnabled(true);
-    	btnNewManifest.setEnabled(true);
+    	//btnNewManifest.setEnabled(true);
     }
 
     /**
@@ -204,6 +205,7 @@ public class CargoTextFrame extends JFrame {
     		JOptionPane.showMessageDialog(null, cargo.toString());
     		setCanvas(cargo);
             add(pnlDisplay, BorderLayout.CENTER);
+            enableButtons();
     	} else {
     		JOptionPane.showMessageDialog(null, "Cargo is null");
     	}
@@ -222,7 +224,7 @@ public class CargoTextFrame extends JFrame {
     private void doLoad() {
     	//implementation here 
         //Don't forget to redraw
-
+    	ContainerCode code = ContainerCodeDialog.showDialog(this);
     }
 
     /**

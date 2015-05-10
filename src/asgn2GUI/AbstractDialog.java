@@ -6,6 +6,7 @@ import java.awt.FlowLayout;
 import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -75,9 +76,8 @@ public abstract class AbstractDialog extends JDialog implements ActionListener {
     	btnCancel.setLayout(layout);
     	constraints.fill = GridBagConstraints.NONE;
 	    constraints.anchor = GridBagConstraints.EAST;
-	    constraints.weightx = 1.0;
-	    constraints.weighty = 1.0;
-	    
+	    constraints.weightx = 0.5;
+	    constraints.weighty = 0.5;
 	    addToPanel(pnlDialogControls, btnOK, constraints, 0, 0, 2, 1);
 	    addToPanel(pnlDialogControls, btnCancel, constraints, 1, 0, 2, 1);
 	    
