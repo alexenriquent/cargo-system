@@ -15,24 +15,21 @@ import org.junit.Test;
 
 import asgn2Codes.ContainerCode;
 import asgn2Containers.DangerousGoodsContainer;
-import asgn2Containers.FreightContainer;
+//import asgn2Containers.FreightContainer;
 import asgn2Containers.GeneralGoodsContainer;
 import asgn2Containers.RefrigeratedContainer;
 import asgn2Exceptions.InvalidCodeException;
 import asgn2Exceptions.InvalidContainerException;
+
 public class ContainerTests {
 	
-	private asgn2Codes.ContainerCode CCTest;
-	private asgn2Containers.DangerousGoodsContainer DGCTest;
-//	private asgn2Containers.FreightContainer FCTest;
-	private asgn2Containers.GeneralGoodsContainer GGCTest;
-	private asgn2Containers.RefrigeratedContainer RCTest;
-	
-	
-	
+	private ContainerCode CCTest;
+	private DangerousGoodsContainer DGCTest;
+	private GeneralGoodsContainer GGCTest;
+	private RefrigeratedContainer RCTest;
+
 	//Define Static
 	private static final String C_CODE = "INKU2633836";
-
 	private static final Integer GROSSWEIGHT = 5;
 	private static final Integer CATEGORY = 5;
 	private static final Integer TEMPERATURE = 5;
@@ -53,13 +50,11 @@ public class ContainerTests {
 	 */
 	@Before
 	public void setUp() throws InvalidContainerException, InvalidCodeException {
-		ContainerCode code1 = new ContainerCode(CONTAINER_CODE_1);
-	
-		
-		CCTest = new ContainerCode(C_CODE);
-		FreightContainer DGCTest = new DangerousGoodsContainer(code1,GROSSWEIGHT,CATEGORY);
-		FreightContainer GGCTest = new GeneralGoodsContainer(code1,GROSSWEIGHT);
-		FreightContainer RCTest = new RefrigeratedContainer(code1,GROSSWEIGHT,TEMPERATURE);
+//		ContainerCode code1 = new ContainerCode(CONTAINER_CODE_1);
+//		ContainerCode CCTest = new ContainerCode(C_CODE);
+//		FreightContainer DGCTest = new DangerousGoodsContainer(code1,GROSSWEIGHT,CATEGORY);
+//		FreightContainer GGCTest = new GeneralGoodsContainer(code1,GROSSWEIGHT);
+//		FreightContainer RCTest = new RefrigeratedContainer(code1,GROSSWEIGHT,TEMPERATURE);
 	}
 	
 	//=================================================================
@@ -72,17 +67,28 @@ public class ContainerTests {
 	 */
 	@Test 
 	public void CCConstructorDefaultInput() throws InvalidCodeException {
-		CCTest = new ContainerCode(C_CODE);
+		 CCTest = new ContainerCode(C_CODE);
 	}
 	
 	/**
 	 * Test method For {@link asgn2Codes.ContainerCode#ContainerCode(String)}
-	 * Test Invalid Code Length If NOT 11 Character
+	 * Test Invalid Code Length If More then 11 Character
 	 * @throws InvalidCodeException
 	 */
 	@Test (expected = InvalidCodeException.class)
 	public void CCInvalidCodeLength() throws InvalidCodeException {
 		CCTest = new ContainerCode("INKU26338376");
+		
+	}
+	
+	/**
+	 * Test method For {@link asgn2Codes.ContainerCode#ContainerCode(String)}
+	 * Test Invalid Code Length If Less then 11 Character
+	 * @throws InvalidCodeException
+	 */
+	@Test (expected = InvalidCodeException.class)
+	public void CCInvalidCodeLengthLessThen11() throws InvalidCodeException {
+		CCTest = new ContainerCode("INKU263376");
 		
 	}
 	
@@ -107,6 +113,17 @@ public class ContainerTests {
 		CCTest = new ContainerCode("INKX2633836");
 		
 	}
+	
+	/**
+	 * Test method For {@link asgn2Codes.ContainerCode#ContainerCode(String)}
+	 * Test Invalid Category Identifier is Not Upper Case 'U'
+	 * @throws InvalidCodeException
+	 */
+	@Test (expected = InvalidCodeException.class)
+	public void CCInvalidCategoryIdentifiersmallercase() throws InvalidCodeException {
+		CCTest = new ContainerCode("INKu2633836");
+		
+	}
 
 	/**
 	 * Test method For {@link asgn2Codes.ContainerCode#ContainerCode(String)}
@@ -116,6 +133,17 @@ public class ContainerTests {
 	@Test (expected = InvalidCodeException.class)
 	public void CCInvalidSerialNumber() throws InvalidCodeException {
 		CCTest = new ContainerCode("INKU26338A6");
+		
+	}
+	
+	/**
+	 * Test method For {@link asgn2Codes.ContainerCode#ContainerCode(String)}
+	 * Test Serial Number Does not consist of six digit and a Case In Between
+	 * @throws InvalidCodeException
+	 */
+	@Test (expected = InvalidCodeException.class)
+	public void CCInvalidSerialNumberAndaCaseinBetween() throws InvalidCodeException {
+		CCTest = new ContainerCode("INKU26338A67A");
 		
 	}
 	
@@ -148,6 +176,7 @@ public class ContainerTests {
 	 */
 	@Test 
 	public void CCequals() throws InvalidCodeException {
+		CCTest = new ContainerCode(C_CODE);
 		CCTest.equals(C_CODE);
 		assertTrue(CCTest.equals(C_CODE));
 	}
