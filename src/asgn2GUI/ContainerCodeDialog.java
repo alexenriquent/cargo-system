@@ -127,19 +127,6 @@ public class ContainerCodeDialog extends AbstractDialog {
     public static ContainerCode showDialog(JFrame parent) {
     	JDialog.setDefaultLookAndFeelDecorated(true);
     	ContainerCodeDialog dlgContainerCode = new ContainerCodeDialog(parent);
-    	return dlgContainerCode.getCode();
-    }
-    
-    /**
-     * Simple getter for the <code>code</code> field, called in
-     * the <code>showDialog<code> method.
-     * 
-     * The <code>showDialog<code> method is a static method, therefore
-     * it cannot make a reference to a non-static field. 
-     * 
-     * @return code the container code
-     */
-    public ContainerCode getCode() {
-    	return code;
+    	return dlgContainerCode.code;
     }
 }

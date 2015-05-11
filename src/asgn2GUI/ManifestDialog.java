@@ -43,7 +43,6 @@ public class ManifestDialog extends AbstractDialog {
         setName("New Manifest");
         setResizable(false);
         //manifest = null;
-        
     }
 
     /**
@@ -128,20 +127,8 @@ public class ManifestDialog extends AbstractDialog {
     public static CargoManifest showDialog(JFrame parent) {
     	JDialog.setDefaultLookAndFeelDecorated(true);
     	ManifestDialog dlgManifest = new ManifestDialog(parent);
-    	return dlgManifest.getManifest();
+    	dlgManifest.setVisible(true);
+    	return dlgManifest.manifest;
     }
     
-    /**
-     * Simple getter for the <code>manifest</code> field, called in
-     * the <code>showDialog<code> method.
-     * 
-     * The <code>showDialog<code> method is a static method, therefore
-     * it cannot make a reference to a non-static field. 
-     * 
-     * @return manifest the manifest with specified a number of stacks,
-     * maximum height and maximum weight
-     */
-    public CargoManifest getManifest() {
-    	return manifest;
-    }
 }

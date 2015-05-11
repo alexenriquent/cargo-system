@@ -258,20 +258,7 @@ public class LoadContainerDialog extends AbstractDialog implements ActionListene
     public static FreightContainer showDialog(JFrame parent) {
        JDialog.setDefaultLookAndFeelDecorated(true);
        LoadContainerDialog dlgLoadContainer = new LoadContainerDialog(parent);
-       return dlgLoadContainer.getContainer();
-    }
-    
-    /**
-     * Simple getter for the <code>container</code> field, called in
-     * the <code>showDialog<code> method.
-     * 
-     * The <code>showDialog<code> method is a static method, therefore
-     * it cannot make a reference to a non-static field. 
-     * 
-     * @return container the specific type of container with a valid code
-     */
-    public FreightContainer getContainer() {
-    	return container;
+       return dlgLoadContainer.container;
     }
 
 }
