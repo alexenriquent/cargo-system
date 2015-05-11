@@ -3,11 +3,13 @@ package asgn2GUI;
 import java.awt.CardLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -20,6 +22,8 @@ import asgn2Containers.FreightContainer;
 import asgn2Containers.GeneralGoodsContainer;
 import asgn2Containers.RefrigeratedContainer;
 import asgn2Exceptions.CargoException;
+import asgn2Exceptions.InvalidCodeException;
+import asgn2Exceptions.InvalidContainerException;
 
 /**
  * Creates a dialog box allowing the user to enter information required for loading a container.
@@ -52,7 +56,6 @@ public class LoadContainerDialog extends AbstractDialog implements ActionListene
         super(parent, "Container Information", WIDTH, HEIGHT);
         setResizable(false);
         setName("Container Information");
-
     }
 
     /**
@@ -60,13 +63,9 @@ public class LoadContainerDialog extends AbstractDialog implements ActionListene
      */
     @Override
     protected JPanel createContentPanel() {
-    	//Left intact as a basis but feel free to modify 
         createCards();
-
-        // add components to grid
         GridBagConstraints constraints = new GridBagConstraints();
 
-        // Defaults
         constraints.fill = GridBagConstraints.BOTH;
         constraints.anchor = GridBagConstraints.CENTER;
         constraints.weightx = 100;
@@ -74,22 +73,21 @@ public class LoadContainerDialog extends AbstractDialog implements ActionListene
 
         JPanel pnlContent = new JPanel();
         pnlContent.setLayout(new GridBagLayout());
+        constraints.insets = new Insets(10,2,2,2);
         addToPanel(pnlContent, createCommonControls(), constraints, 0, 0, 2, 1);
         constraints.weighty = 10;
-        addToPanel(pnlContent, pnlCards, constraints, 0, 1, 2, 1);
+        constraints.insets = new Insets(0,2,2,2);
+        addToPanel(pnlContent, pnlCards, constraints, 1, 1, 2, 1);
 
         return pnlContent;
     }
 
     private JPanel createCommonControls() {
-    	//Left intact as a basis but feel free to modify - except for the 
         JPanel pnlCommonControls = new JPanel();
         pnlCommonControls.setLayout(new GridBagLayout());
 
-        // add compents to grid
         GridBagConstraints constraints = new GridBagConstraints();
 
-        // Defaults
         constraints.fill = GridBagConstraints.NONE;
         constraints.anchor = GridBagConstraints.EAST;
         constraints.weightx = 100;
@@ -100,14 +98,15 @@ public class LoadContainerDialog extends AbstractDialog implements ActionListene
         cbType.setEditable(false);
         cbType.addItemListener(this);
         cbType.setName("Container Type");
-      //Don't modify - END 
+        //Don't modify - END 
 
         txtWeight = createTextField(5, "Container Weight");
         txtCode = createTextField(11, "Container Code");
-
-        addToPanel(pnlCommonControls, new JLabel("Container Type:"), constraints, 0, 0, 2, 1);
-        addToPanel(pnlCommonControls, new JLabel("Container Code:"), constraints, 0, 2, 2, 1);
-        addToPanel(pnlCommonControls, new JLabel("Container Weight:"), constraints, 0, 4, 2, 1);
+        
+        constraints.insets = new Insets(2,0,2,0);
+        addToPanel(pnlCommonControls, new JLabel("Container Type: "), constraints, 0, 0, 2, 1);
+        addToPanel(pnlCommonControls, new JLabel("Container Code: "), constraints, 0, 2, 2, 1);
+        addToPanel(pnlCommonControls, new JLabel("Container Weight: "), constraints, 0, 4, 2, 1);
         constraints.anchor = GridBagConstraints.WEST;
         addToPanel(pnlCommonControls, cbType, constraints, 3, 0, 2, 1);
         addToPanel(pnlCommonControls, txtCode, constraints, 3, 2, 2, 1);
@@ -129,21 +128,40 @@ public class LoadContainerDialog extends AbstractDialog implements ActionListene
     private void createCards() {
         GridBagConstraints constraints = new GridBagConstraints();
 
-        // Defaults
         constraints.fill = GridBagConstraints.NONE;
-        constraints.anchor = GridBagConstraints.EAST;
-        constraints.weightx = 45;
+        constraints.weightx = 100;
         constraints.weighty = 100;
 
         JPanel cardDangerousGoods = new JPanel();
         cardDangerousGoods.setLayout(new GridBagLayout());
         txtDangerousGoodsType = createTextField(5, "Goods Category");
+        JLabel lblDangerousGoodsType = new JLabel(txtDangerousGoodsType.getName() + ": ");
+        
+        constraints.anchor = GridBagConstraints.LINE_END;
+        constraints.insets = new Insets(0,-70,0,0);
+        addToPanel(cardDangerousGoods, lblDangerousGoodsType, constraints, 0, 0, 2, 1);
+        constraints.anchor = GridBagConstraints.LINE_START;
+        constraints.insets = new Insets(0,0,0,0);
+        addToPanel(cardDangerousGoods, txtDangerousGoodsType, constraints, 3, 0, 2, 1);
 
         JPanel cardRefrigeratedGoods = new JPanel();
         cardRefrigeratedGoods.setLayout(new GridBagLayout());
         txtTemperature = createTextField(5, "Temperature");
-
-        //Finish here 
+        JLabel lblTemperature = new JLabel(txtTemperature.getName() + ": ");
+        
+        constraints.anchor = GridBagConstraints.LINE_END;
+        constraints.insets = new Insets(0,-55,0,0);
+        addToPanel(cardRefrigeratedGoods, lblTemperature, constraints, 0, 0, 2, 1);
+        constraints.anchor = GridBagConstraints.LINE_START;
+        constraints.insets = new Insets(0,0,0,0);
+        addToPanel(cardRefrigeratedGoods, txtTemperature, constraints, 3, 0, 2, 1);
+        
+        JPanel cardGeneralGoods = new JPanel();
+        
+        pnlCards = new JPanel(new CardLayout());
+        pnlCards.add(cardDangerousGoods, comboBoxItems[0]);
+        pnlCards.add(cardGeneralGoods, comboBoxItems[1]);
+        pnlCards.add(cardRefrigeratedGoods, comboBoxItems[2]);
     }
 
     /**
@@ -152,7 +170,7 @@ public class LoadContainerDialog extends AbstractDialog implements ActionListene
     @Override
     public void itemStateChanged(ItemEvent event) {
         CardLayout cl = (CardLayout) pnlCards.getLayout();
-        //Finish here - show cards and set text fields
+        cl.show(pnlCards, (String) event.getItem());
     }
 
     /**
@@ -160,8 +178,75 @@ public class LoadContainerDialog extends AbstractDialog implements ActionListene
      */
     @Override
     protected boolean dialogDone() {
-        //Implementation here - create the container and set parameters, 
-    	//But handle the exceptions properly 
+    	boolean dialogDone = false;
+    	String type = cbType.getSelectedItem().toString();
+    	String containerCode = txtCode.getText();
+    	ContainerCode code = null;
+    	Integer weight = 0;
+    	Integer category = 0;
+    	Integer temperature = 0;
+    	
+    	try {
+    		code = new ContainerCode(containerCode);
+    	} catch (InvalidCodeException e) {
+    		JOptionPane.showMessageDialog(null, e.getMessage());
+    		return dialogDone;
+    	}
+    	
+    	try {
+    		weight = Integer.parseInt(txtWeight.getText());
+    	} catch (NumberFormatException e) {
+    		JOptionPane.showMessageDialog(null, "The maximum weight must be an integer.",
+    									  "Error", JOptionPane.ERROR_MESSAGE);
+    		return dialogDone;
+    	}
+    	
+    	if (type.equals(comboBoxItems[0])) {
+    		try {
+    			try {
+    				category = Integer.parseInt(txtDangerousGoodsType.getText());
+    			} catch (NumberFormatException e) {
+    				JOptionPane.showMessageDialog(null, "The category must be an integer.",
+    											  "Error", JOptionPane.ERROR_MESSAGE);
+    				return dialogDone;
+    			}
+    			container = new DangerousGoodsContainer(code, weight, category);
+    			dialogDone = true;
+    			return dialogDone;
+    		} catch (InvalidContainerException e) {
+    			JOptionPane.showMessageDialog(null, e.getMessage(), 
+    										  "Error", JOptionPane.ERROR_MESSAGE);
+    			return dialogDone;
+    		}
+    	} else if (type.equals(comboBoxItems[1])) {
+    		try {
+    			container = new GeneralGoodsContainer(code, weight);
+    			dialogDone = true;
+    			return dialogDone;
+    		} catch (InvalidContainerException e) {
+    			JOptionPane.showMessageDialog(null, e.getMessage(),
+    										  "Error", JOptionPane.ERROR_MESSAGE);
+    			return dialogDone;
+    		}
+    	} else if (type.equals(comboBoxItems[2])) {
+    		try {
+    			try {
+    				temperature = Integer.parseInt(txtTemperature.getText());
+    			} catch (NumberFormatException e) {
+    				JOptionPane.showMessageDialog(null, "The temperature must be an integer.",
+    											  "Error", JOptionPane.ERROR_MESSAGE);
+    				return dialogDone;
+    			}
+    			container = new RefrigeratedContainer(code, weight, temperature);
+    			dialogDone = true;
+    			return dialogDone;
+    		} catch (InvalidContainerException e) {
+    			JOptionPane.showMessageDialog(null, e.getMessage(),
+    										  "Error", JOptionPane.ERROR_MESSAGE);
+    			return dialogDone;
+    		}
+    	}
+    	return dialogDone;
     }
 
     /**
@@ -171,7 +256,9 @@ public class LoadContainerDialog extends AbstractDialog implements ActionListene
      * @return a <code>FreightContainer</code> instance with valid values.
      */
     public static FreightContainer showDialog(JFrame parent) {
-       //Implementation here. 
+       JDialog.setDefaultLookAndFeelDecorated(true);
+       LoadContainerDialog dlgLoadContainer = new LoadContainerDialog(parent);
+       return dlgLoadContainer.container;
     }
 
 }

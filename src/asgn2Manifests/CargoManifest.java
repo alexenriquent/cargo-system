@@ -160,6 +160,7 @@ public class CargoManifest {
 			}
 		}
 		if (containerIsOnTopOfStack(stackIndex, heightIndex)) {
+			this.currentWeight -= this.manifest.get(stackIndex).get(heightIndex).getGrossWeight();
 			this.manifest.get(stackIndex).remove(heightIndex);
 		} else {
 			throw new ManifestException("The container is not accessible.");

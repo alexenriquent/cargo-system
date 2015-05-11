@@ -6,6 +6,10 @@ import java.awt.GridBagLayout;
 // import java.awt.event.ActionEvent;
 // import java.awt.event.ActionListener;
 
+
+import java.awt.Insets;
+
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -16,6 +20,7 @@ import javax.swing.event.DocumentListener;
 
 import asgn2Codes.ContainerCode;
 import asgn2Exceptions.CargoException;
+import asgn2Exceptions.InvalidCodeException;
 
 /**
  * Creates a dialog box allowing the user to enter a ContainerCode.
@@ -56,7 +61,7 @@ public class ContainerCodeDialog extends AbstractDialog {
 
         // Defaults
         constraints.fill = GridBagConstraints.NONE;
-        constraints.anchor = GridBagConstraints.EAST;
+        constraints.anchor = GridBagConstraints.CENTER;
         constraints.weightx = 100;
         constraints.weighty = 100;
 
@@ -87,15 +92,30 @@ public class ContainerCodeDialog extends AbstractDialog {
             	//implementation here 
             }
         });
-
-      //implementation here 
+        
+        JLabel lblCode = new JLabel(txtCode.getName() + ": ");
+        constraints.anchor = GridBagConstraints.LINE_END;
+        constraints.insets = new Insets(20,2,20,2);
+        addToPanel(toReturn, lblCode, constraints, 0, 0, 1, 1);
+        constraints.anchor = GridBagConstraints.LINE_START;
+        addToPanel(toReturn, txtCode, constraints, 1, 0, 1, 1);
 
         return toReturn;
     }
 
     @Override
     protected boolean dialogDone() {
-    	//implementation here 
+    	boolean dialogDone = false;
+    	String containerCode = txtCode.getText();
+    	try {
+    		code = new ContainerCode(containerCode);
+    		dialogDone = true;
+    		return dialogDone;
+    	} catch (InvalidCodeException e) {
+    		JOptionPane.showMessageDialog(null, e.getMessage(),
+    				    				  "Error", JOptionPane.ERROR_MESSAGE);
+    		return dialogDone;
+    	}
     }
 
     /**
@@ -105,6 +125,8 @@ public class ContainerCodeDialog extends AbstractDialog {
      * @return a <code>ContainerCode</code> instance with valid values.
      */
     public static ContainerCode showDialog(JFrame parent) {
-    	//implementation here
+    	JDialog.setDefaultLookAndFeelDecorated(true);
+    	ContainerCodeDialog dlgContainerCode = new ContainerCodeDialog(parent);
+    	return dlgContainerCode.code;
     }
 }

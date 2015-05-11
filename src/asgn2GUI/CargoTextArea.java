@@ -26,7 +26,7 @@ public class CargoTextArea extends JTextArea {
     /**
      * Constructor initialises the JTextArea.
      *
-     * @param cargo he <code>CargoManifest</code> on which the text area is based 
+     * @param cargo the <code>CargoManifest</code> on which the text area is based 
      * 
      */
     public CargoTextArea(CargoManifest cargo) {
@@ -43,7 +43,8 @@ public class CargoTextArea extends JTextArea {
      * @param code ContainerCode to highlight.
      */
     public void setToFind(ContainerCode code) {
-        //implementation here - don't forget to update the display
+        toFind = code;
+    	updateDisplay();
     }
 
     /**
@@ -51,6 +52,10 @@ public class CargoTextArea extends JTextArea {
      *
      */
     public void updateDisplay() {
-    	//implementation here
+    	if (toFind == null) {
+    		this.setText(cargo.toString());
+    	} else {
+    		this.setText(cargo.toString(toFind));
+    	}
     }
 }

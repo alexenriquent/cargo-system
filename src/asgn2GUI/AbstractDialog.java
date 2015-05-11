@@ -5,12 +5,16 @@ import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.Frame;
 import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 /**
  * Provides base class for dialog boxes used for data entry.
@@ -32,18 +36,23 @@ public abstract class AbstractDialog extends JDialog implements ActionListener {
      * @param parent The parent frame the dialog box is to be attached to
      * @param title The title of the dialog box
      * @param width The dialog box width
-     * @param height The dialog box hieght
+     * @param height The dialog box height
      */
     protected AbstractDialog(Frame parent, String title, int width, int height) {
         super(parent, title, true);
 
         JPanel pnlDialogControls = createDialogControls();
         JPanel pnlContent = createContentPanel();
-
-        //Stuff goes here 
+        
+        setSize(width, height);
+	    setLayout(new BorderLayout());	   
+	    
+	    this.getContentPane().add(pnlDialogControls, BorderLayout.SOUTH);
+	    this.getContentPane().add(pnlContent, BorderLayout.NORTH);
+	    this.setVisible(true);
     }
 
-    /**
+    /** 
      * This abstract method is called by the AbstractDialog constructor to
      * build the JPanel that will be put in the centre of the dialog box.
      * Override and implement to create the contents of your dialog box.
@@ -57,7 +66,22 @@ public abstract class AbstractDialog extends JDialog implements ActionListener {
      * @return JPanel with OK and Cancel buttons.
      */
     private JPanel createDialogControls() {
-    	//implementation here    
+    	JPanel pnlDialogControls = new JPanel();
+    	btnOK = createButton("OK");
+        btnCancel = createButton("Cancel");
+    	GridBagLayout layout = new GridBagLayout();
+    	GridBagConstraints constraints = new GridBagConstraints(); 
+    	
+    	btnOK.setLayout(layout);
+    	btnCancel.setLayout(layout);
+    	constraints.fill = GridBagConstraints.NONE;
+	    constraints.anchor = GridBagConstraints.EAST;
+	    constraints.weightx = 0.5;
+	    constraints.weighty = 0.5;
+	    addToPanel(pnlDialogControls, btnOK, constraints, 0, 0, 2, 1);
+	    addToPanel(pnlDialogControls, btnCancel, constraints, 1, 0, 2, 1);
+	    
+    	return pnlDialogControls;
     }
 
     /**
@@ -137,13 +161,13 @@ public abstract class AbstractDialog extends JDialog implements ActionListener {
      * Disables the OK button
      */
     protected void disableSubmit() {
-    	//implementation here    
+    	btnOK.setEnabled(false);
     }
 
     /**
      * Enables the OK button
      */
     protected void enableSubmit() {
-    	//implementation here    
+    	btnOK.setEnabled(true);    
     }
 }

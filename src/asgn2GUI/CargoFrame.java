@@ -104,15 +104,15 @@ public class CargoFrame extends JFrame {
                 SwingUtilities.invokeLater(doRun);
             }
         });
-        btnUnload = createButton("Unload", new ActionListener() {
-        	//implementation here    
-        });
-        btnFind = createButton("Find", new ActionListener() {
-        	//implementation here    
-        });
-        btnNewManifest = createButton("New Manifest", new ActionListener() {
-        	//implementation here    
-        });
+//        btnUnload = createButton("Unload", new ActionListener() {
+//        	//implementation here    
+//        });
+//        btnFind = createButton("Find", new ActionListener() {
+//        	//implementation here    
+//        });
+//        btnNewManifest = createButton("New Manifest", new ActionListener() {
+//        	//implementation here    
+//        });
 
       //implementation here    
         repaint();
@@ -123,9 +123,9 @@ public class CargoFrame extends JFrame {
      *
      * @return User control panel.
      */
-    private JPanel createControlPanel() {
-    	//implementation here    
-    }
+//    private JPanel createControlPanel() {
+//    	//implementation here    
+//    }
 
     /**
      * Factory method to create a JButton and add its ActionListener.
