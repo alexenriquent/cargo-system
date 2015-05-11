@@ -74,14 +74,18 @@ public class CargoFrame extends JFrame {
      * Enables buttons for user interaction.
      */
     private void enableButtons() {
-    	//implementation here    
+    	btnLoad.setEnabled(true);
+    	btnUnload.setEnabled(true);
+    	btnFind.setEnabled(true);   
     }
 
     /**
      * Disables buttons from user interaction.
      */
     private void disableButtons() {
-    	//implementation here    
+    	btnLoad.setEnabled(false);
+    	btnUnload.setEnabled(false);
+    	btnFind.setEnabled(false);  
     }
 
     /**
