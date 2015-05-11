@@ -224,7 +224,8 @@ public class CargoTextFrame extends JFrame {
     		try {
     			cargo.loadContainer(container);
     		} catch (ManifestException e) {
-    			JOptionPane.showMessageDialog(null, e.getMessage());
+    			JOptionPane.showMessageDialog(null, e.getMessage(),
+    										  "Error", JOptionPane.ERROR_MESSAGE);
     		}
         	redraw();
     	}
@@ -239,7 +240,8 @@ public class CargoTextFrame extends JFrame {
     		try {
     			cargo.unloadContainer(code);
     		} catch (ManifestException e) {
-    			JOptionPane.showMessageDialog(null, e.getMessage());
+    			JOptionPane.showMessageDialog(null, e.getMessage(),
+    										  "Error", JOptionPane.ERROR_MESSAGE);
     		}
         	redraw();
     	}

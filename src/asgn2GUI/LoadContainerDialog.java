@@ -196,7 +196,8 @@ public class LoadContainerDialog extends AbstractDialog implements ActionListene
     	try {
     		weight = Integer.parseInt(txtWeight.getText());
     	} catch (NumberFormatException e) {
-    		JOptionPane.showMessageDialog(null, "The maximum weight must be an integer.");
+    		JOptionPane.showMessageDialog(null, "The maximum weight must be an integer.",
+    									  "Error", JOptionPane.ERROR_MESSAGE);
     		return dialogDone;
     	}
     	
@@ -205,14 +206,16 @@ public class LoadContainerDialog extends AbstractDialog implements ActionListene
     			try {
     				category = Integer.parseInt(txtDangerousGoodsType.getText());
     			} catch (NumberFormatException e) {
-    				JOptionPane.showMessageDialog(null, "The category must be an integer.");
+    				JOptionPane.showMessageDialog(null, "The category must be an integer.",
+    											  "Error", JOptionPane.ERROR_MESSAGE);
     				return dialogDone;
     			}
     			container = new DangerousGoodsContainer(code, weight, category);
     			dialogDone = true;
     			return dialogDone;
     		} catch (InvalidContainerException e) {
-    			JOptionPane.showMessageDialog(null, e.getMessage());
+    			JOptionPane.showMessageDialog(null, e.getMessage(), 
+    										  "Error", JOptionPane.ERROR_MESSAGE);
     			return dialogDone;
     		}
     	} else if (type.equals(comboBoxItems[1])) {
@@ -221,7 +224,8 @@ public class LoadContainerDialog extends AbstractDialog implements ActionListene
     			dialogDone = true;
     			return dialogDone;
     		} catch (InvalidContainerException e) {
-    			JOptionPane.showMessageDialog(null, e.getMessage());
+    			JOptionPane.showMessageDialog(null, e.getMessage(),
+    										  "Error", JOptionPane.ERROR_MESSAGE);
     			return dialogDone;
     		}
     	} else if (type.equals(comboBoxItems[2])) {
@@ -229,14 +233,16 @@ public class LoadContainerDialog extends AbstractDialog implements ActionListene
     			try {
     				temperature = Integer.parseInt(txtTemperature.getText());
     			} catch (NumberFormatException e) {
-    				JOptionPane.showMessageDialog(null, "The temperature must be an integer.");
+    				JOptionPane.showMessageDialog(null, "The temperature must be an integer.",
+    											  "Error", JOptionPane.ERROR_MESSAGE);
     				return dialogDone;
     			}
     			container = new RefrigeratedContainer(code, weight, temperature);
     			dialogDone = true;
     			return dialogDone;
     		} catch (InvalidContainerException e) {
-    			JOptionPane.showMessageDialog(null, e.getMessage());
+    			JOptionPane.showMessageDialog(null, e.getMessage(),
+    										  "Error", JOptionPane.ERROR_MESSAGE);
     			return dialogDone;
     		}
     	}

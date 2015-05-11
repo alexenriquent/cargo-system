@@ -112,7 +112,8 @@ public class ContainerCodeDialog extends AbstractDialog {
     		dialogDone = true;
     		return dialogDone;
     	} catch (InvalidCodeException e) {
-    		JOptionPane.showMessageDialog(null, e.getMessage());
+    		JOptionPane.showMessageDialog(null, e.getMessage(),
+    				    				  "Error", JOptionPane.ERROR_MESSAGE);
     		return dialogDone;
     	}
     }
