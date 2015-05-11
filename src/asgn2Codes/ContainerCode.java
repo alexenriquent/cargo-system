@@ -217,13 +217,7 @@ public class ContainerCode {
 				sum += ascii;
 			}
 		}
-		lsd = sum;
-		while (sum > 0) {
-			if (lsd > sum % 10) {
-				lsd = sum % 10;
-			}
-			sum /= 10;
-		}
+		lsd = sum % 10;
 		return code.charAt(code.length()-1) != (char) ('0' + lsd);
 	}
 

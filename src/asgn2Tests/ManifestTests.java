@@ -7,7 +7,7 @@ package asgn2Tests;
  * INKU2633836
  * KOCU8090115
  * MSCU6639871
- * CSQU3054387
+ * CSQU3054389
  * QUTU7200318
  * IBMU4882351
  */
@@ -40,7 +40,7 @@ public class ManifestTests {
 	private static final String CONTAINER_CODE_1 = "INKU2633836";
 	private static final String CONTAINER_CODE_2 = "KOCU8090115";
 	private static final String CONTAINER_CODE_3 = "MSCU6639871";
-	private static final String CONTAINER_CODE_4 = "CSQU3054387";
+	private static final String CONTAINER_CODE_4 = "CSQU3054389";
 	private static final String CONTAINER_CODE_5 = "QUTU7200318";
 	private static final String CONTAINER_CODE_6 = "IBMU4882351";
 	
