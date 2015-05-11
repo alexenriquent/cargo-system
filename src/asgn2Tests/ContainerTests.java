@@ -171,6 +171,31 @@ public class ContainerTests {
 		assertTrue(CCTest.equals(C_CODE));
 	}
 	
+	
+	/**
+	 * Test method For {@link asgn2Codes.ContainerCode#equals(Object)}
+	 * Test Two ContainerCode Are Not Equal
+	 * @throws InvalidCodeException
+	 */
+	@Test
+	public void ContainerCodeEqualsFalse() throws InvalidCodeException {
+		ContainerCode CCTest = new ContainerCode(CONTAINER_CODE_1);
+		ContainerCode CCTest2 = new ContainerCode(CONTAINER_CODE_2);
+		assertFalse(CCTest.equals(CCTest2));
+	}
+	
+	/**
+	 * Test method For {@link asgn2Codes.ContainerCode#equals(Object)}
+	 * Test Two ContainerCode Are Equal
+	 * @throws InvalidCodeException
+	 */
+	@Test
+	public void ContainerCodeEqualsTrue() throws InvalidCodeException {
+		ContainerCode CCTest = new ContainerCode(CONTAINER_CODE_1);
+		ContainerCode CCTest2 = new ContainerCode(CONTAINER_CODE_1);
+		assertTrue(CCTest.equals(CCTest2));
+	}
+	
 	//=================================================================
 	//Test For Constructor DangerousGoodsContainer Class
 	
