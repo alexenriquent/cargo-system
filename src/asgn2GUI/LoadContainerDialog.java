@@ -189,7 +189,8 @@ public class LoadContainerDialog extends AbstractDialog implements ActionListene
     	try {
     		code = new ContainerCode(containerCode);
     	} catch (InvalidCodeException e) {
-    		JOptionPane.showMessageDialog(null, e.getMessage());
+    		JOptionPane.showMessageDialog(null, e.getMessage(),
+    									  "Error", JOptionPane.ERROR_MESSAGE);
     		return dialogDone;
     	}
     	
@@ -258,6 +259,7 @@ public class LoadContainerDialog extends AbstractDialog implements ActionListene
     public static FreightContainer showDialog(JFrame parent) {
        JDialog.setDefaultLookAndFeelDecorated(true);
        LoadContainerDialog dlgLoadContainer = new LoadContainerDialog(parent);
+       dlgLoadContainer.setVisible(true);
        return dlgLoadContainer.container;
     }
 

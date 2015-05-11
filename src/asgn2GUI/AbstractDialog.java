@@ -49,7 +49,6 @@ public abstract class AbstractDialog extends JDialog implements ActionListener {
 	    
 	    this.getContentPane().add(pnlDialogControls, BorderLayout.SOUTH);
 	    this.getContentPane().add(pnlContent, BorderLayout.NORTH);
-	    this.setVisible(true);
     }
 
     /** 

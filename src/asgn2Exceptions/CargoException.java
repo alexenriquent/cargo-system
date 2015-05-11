@@ -19,6 +19,6 @@ public abstract class CargoException extends Exception {
 	 * @param message an informative message describing the problem encountered
 	 */
 	public CargoException(String message) {
-		super ("Cargo Exception: " + message);
+		super ("CargoException: " + message);
 	}
 }

@@ -154,7 +154,6 @@ public class CargoTextFrame extends JFrame {
                 Runnable doRun = new Runnable() {
                     @Override
                     public void run() {
-                        CargoTextFrame.this.resetCanvas();
                         CargoTextFrame.this.setNewManifest();
                     }
                 };
@@ -212,7 +211,7 @@ public class CargoTextFrame extends JFrame {
      * Turns off container highlighting when an action other than Find is initiated.
      */
     private void resetCanvas() {
-    	//implementation here 
+    	canvas.setToFind(null);
     }
 
     /**
@@ -251,7 +250,10 @@ public class CargoTextFrame extends JFrame {
      * Initiates the Find Container dialog.
      */
     private void doFind() {
-    	//implementation here 
+    	ContainerCode code = ContainerCodeDialog.showDialog(this);
+    	if (code != null) {
+    		canvas.setToFind(code);
+    	}
     }
 
     /**

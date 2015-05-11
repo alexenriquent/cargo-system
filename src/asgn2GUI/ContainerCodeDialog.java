@@ -127,6 +127,7 @@ public class ContainerCodeDialog extends AbstractDialog {
     public static ContainerCode showDialog(JFrame parent) {
     	JDialog.setDefaultLookAndFeelDecorated(true);
     	ContainerCodeDialog dlgContainerCode = new ContainerCodeDialog(parent);
+    	dlgContainerCode.setVisible(true);
     	return dlgContainerCode.code;
     }
 }
