@@ -1,6 +1,3 @@
-/**
- * @author Thanat Chokwijitkul n9234900
- */
 package asgn2Tests;
 
 /* Some valid container codes used in the tests below:
@@ -26,6 +23,12 @@ import asgn2Exceptions.ManifestException;
 import asgn2Manifests.CargoManifest;
 import static org.junit.Assert.*;
 
+/**
+ * Defines unit tests for various use cases of the CargoManifest class.
+ * 
+ * @author Thanat Chokwijitkul n9234900
+ *
+ */
 public class ManifestTests {
 
 	private static final Integer NUM_STACKS = 3;

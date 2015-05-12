@@ -1,6 +1,3 @@
-/**
- * @author Thanat Chokwijitkul n9234900 
- */
 package asgn2Codes;
 
 import asgn2Exceptions.InvalidCodeException;
@@ -78,6 +75,7 @@ import asgn2Exceptions.InvalidCodeException;
  * <code>MSCU6639871</code> is valid.
  * 
  * @author CAB302 
+ * @author Thanat Chokwijitkul n9234900
  * @version 1.0
  */ 
 public class ContainerCode {

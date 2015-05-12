@@ -1,6 +1,3 @@
-/**
- * @author Month Yean KOH n9070095 
- */
 package asgn2Manifests;
 
 import java.util.ArrayList;
@@ -44,6 +41,7 @@ import asgn2Exceptions.ManifestException;
  * a stack.
  *  
  * @author CAB302
+ * @author Month Yean KOH n9070095
  * @version 1.0
  */
 public class CargoManifest {
