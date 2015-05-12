@@ -1,6 +1,7 @@
 package asgn2GUI;
 
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -64,8 +65,11 @@ public class CargoFrame extends JFrame {
         if (cargo == null) {
             disableButtons();
         } else {
+        	pnlDisplay = new JPanel(new BorderLayout());
             canvas = new CargoCanvas(cargo);
-          //implementation here    
+            pnlDisplay.add(canvas, BorderLayout.CENTER);
+    		add(pnlDisplay, BorderLayout.CENTER);
+    		enableButtons();    
         }
         redraw();
     }
@@ -108,17 +112,48 @@ public class CargoFrame extends JFrame {
                 SwingUtilities.invokeLater(doRun);
             }
         });
-//        btnUnload = createButton("Unload", new ActionListener() {
-//        	//implementation here    
-//        });
-//        btnFind = createButton("Find", new ActionListener() {
-//        	//implementation here    
-//        });
-//        btnNewManifest = createButton("New Manifest", new ActionListener() {
-//        	//implementation here    
-//        });
+        btnUnload = createButton("Unload", new ActionListener() {
+        	@Override
+            public void actionPerformed(ActionEvent e) {
+                Runnable doRun = new Runnable() {
+                    @Override
+                    public void run() {
+                        CargoFrame.this.resetCanvas();
+                        CargoFrame.this.doUnload();
+                    }
+                };
+                SwingUtilities.invokeLater(doRun);
+            }    
+        });
+        btnFind = createButton("Find", new ActionListener() {
+        	@Override
+            public void actionPerformed(ActionEvent e) {
+                Runnable doRun = new Runnable() {
+                    @Override
+                    public void run() {
+                        CargoFrame.this.resetCanvas();
+                        CargoFrame.this.doFind();
+                    }
+                };
+                SwingUtilities.invokeLater(doRun);
+            }   
+        });
+        btnNewManifest = createButton("New Manifest", new ActionListener() {
+        	@Override
+            public void actionPerformed(ActionEvent e) {
+                Runnable doRun = new Runnable() {
+                    @Override
+                    public void run() {
+                        CargoFrame.this.setNewManifest();
+                    }
+                };
+                SwingUtilities.invokeLater(doRun);
+            }   
+        });
 
-      //implementation here    
+        setLayout(new BorderLayout());
+        pnlControls = createControlPanel();
+        add(pnlControls, BorderLayout.SOUTH);
         repaint();
     }
 
@@ -127,9 +162,15 @@ public class CargoFrame extends JFrame {
      *
      * @return User control panel.
      */
-//    private JPanel createControlPanel() {
-//    	//implementation here    
-//    }
+    private JPanel createControlPanel() {
+    	JPanel pnlButtons = new JPanel();
+	    pnlButtons.setLayout(new FlowLayout());
+	    pnlButtons.add(btnNewManifest);
+	    pnlButtons.add(btnLoad);
+	    pnlButtons.add(btnUnload);
+	    pnlButtons.add(btnFind);
+    	return pnlButtons;   
+    }
 
     /**
      * Factory method to create a JButton and add its ActionListener.

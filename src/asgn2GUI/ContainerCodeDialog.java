@@ -89,16 +89,31 @@ public class ContainerCodeDialog extends AbstractDialog {
              * Attempts to validate the ContainerCode entered in the Container Code text field.
              */
             private void validate() {
-            	//implementation here 
+            	ContainerCode codeValidation;
+            	boolean validated = false;
+            	lblErrorInfo.setText("");
+            	try {
+            		codeValidation = new ContainerCode(txtCode.getText());
+            		validated = true;
+            	} catch (InvalidCodeException e) {
+            		validated = false;
+            	}
+            	if (!validated) {
+            		lblErrorInfo.setText("Invalid Container Code");
+            	}
             }
         });
         
         JLabel lblCode = new JLabel(txtCode.getName() + ": ");
+        lblErrorInfo = new JLabel();
         constraints.anchor = GridBagConstraints.LINE_END;
-        constraints.insets = new Insets(20,2,20,2);
+        constraints.insets = new Insets(10,2,2,2);
         addToPanel(toReturn, lblCode, constraints, 0, 0, 1, 1);
         constraints.anchor = GridBagConstraints.LINE_START;
         addToPanel(toReturn, txtCode, constraints, 1, 0, 1, 1);
+        constraints.anchor = GridBagConstraints.CENTER;
+        constraints.insets = new Insets(0,0,0,0);
+        addToPanel(toReturn, lblErrorInfo, constraints, 0, 1, 2, 1);
 
         return toReturn;
     }
