@@ -1,6 +1,3 @@
-/**
- * @author Thanat Chokwijitkul n9234900
- */
 package asgn2Containers;
 
 import asgn2Codes.ContainerCode;

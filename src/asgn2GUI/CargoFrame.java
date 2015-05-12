@@ -14,6 +14,7 @@ import javax.swing.SwingUtilities;
 
 import asgn2Codes.ContainerCode;
 import asgn2Containers.FreightContainer;
+import asgn2Exceptions.ManifestException;
 import asgn2Manifests.CargoManifest;
 
 /**
@@ -190,31 +191,58 @@ public class CargoFrame extends JFrame {
      * Initiate the New Manifest dialog which sets the instance of CargoManifest to work with.
      */
     private void setNewManifest() {
-    	//implementation here    
+    	cargo = ManifestDialog.showDialog(this);
+    	if (cargo != null) {
+    		setCanvas(cargo);
+    	}
     }
 
     /**
      * Turns off container highlighting when an action other than Find is initiated.
      */
     private void resetCanvas() {
-    	//implementation here    
+    	canvas.setToFind(null);  
     }
 
     /**
      * Initiates the Load Container dialog.
      */
     private void doLoad() {
-    	//implementation here 
-    	//don't forget to redraw
+    	FreightContainer container = LoadContainerDialog.showDialog(this);
+    	if (container != null) {
+    		try {
+    			cargo.loadContainer(container);
+    		} catch (ManifestException e) {
+    			JOptionPane.showMessageDialog(null, e.getMessage(),
+    										  "Error", JOptionPane.ERROR_MESSAGE);
+    		}
+        	redraw();
+    	}
     }
 
     private void doUnload() {
-    	//implementation here 
-    	//don't forget to redraw
+    	ContainerCode code = ContainerCodeDialog.showDialog(this);
+    	if (code != null) {
+    		try {
+    			cargo.unloadContainer(code);
+    		} catch (ManifestException e) {
+    			JOptionPane.showMessageDialog(null, e.getMessage(),
+    										  "Error", JOptionPane.ERROR_MESSAGE);
+    		}
+        	redraw();
+    	}
     }
 
     private void doFind() {
-    	//implementation here 
+    	ContainerCode code = ContainerCodeDialog.showDialog(this);
+    	if (code != null) {
+    		if (cargo.whichStack(code) == null) {
+    			JOptionPane.showMessageDialog(null, "The specified container is not on board.",
+						  "Error", JOptionPane.ERROR_MESSAGE);
+    		} else {
+    			canvas.setToFind(code);
+    		}
+    	}
     }
 
     private void redraw() {
