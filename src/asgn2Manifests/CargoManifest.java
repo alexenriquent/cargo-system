@@ -384,4 +384,13 @@ public class CargoManifest {
 	private boolean codeIsNotNull(ContainerCode code) {
 		return code != null;
 	}
+	
+	/**
+	 * Simple getter method to return the number of stacks
+	 * 
+	 * @return The number of stacks 
+	 */
+	public Integer getNumStack() {
+		return this.numStacks;
+	}
 }
