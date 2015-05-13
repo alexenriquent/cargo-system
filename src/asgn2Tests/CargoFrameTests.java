@@ -66,7 +66,7 @@ public class CargoFrameTests {
     private static final String HEIGHT_1 = "1";
     private static final String HEIGHT_5 = "5";
 
-    private static final boolean USE_TEXT_VERSION = true;
+    private static final boolean USE_TEXT_VERSION = false;
     private static final int NO_PAUSE = 0;
     private static final int SHORT_PAUSE = 1500;
     private static final int LONG_PAUSE = 3000;

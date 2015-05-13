@@ -2,13 +2,17 @@ package asgn2GUI;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import asgn2Codes.ContainerCode;
 import asgn2Containers.DangerousGoodsContainer;
 import asgn2Containers.FreightContainer;
+import asgn2Containers.GeneralGoodsContainer;
 import asgn2Containers.RefrigeratedContainer;
+import asgn2Exceptions.ManifestException;
 import asgn2Manifests.CargoManifest;
 
 /**
@@ -24,9 +28,8 @@ public class CargoCanvas extends JPanel {
     private static final int VSPACE = 20;
 
     private final CargoManifest cargo;
-
-    private ContainerCode toFind;
-
+    private ContainerCode toFind;   
+    
     /**
      * Constructor
      *
@@ -44,7 +47,8 @@ public class CargoCanvas extends JPanel {
      * @param code ContainerCode to highlight.
      */
     public void setToFind(ContainerCode code) {
-        //implementation here - don't forget to repaint
+    	toFind = code;
+    	repaint();
     }
 
     /**
@@ -54,7 +58,26 @@ public class CargoCanvas extends JPanel {
      */
     @Override
     public void paint(Graphics g) {
-    	//Implementation here 
+    	int x = HSPACE;
+    	int y = VSPACE;
+    	if (cargo != null) {
+    		try {
+    			for (int i = 0; i < cargo.getNumStack(); i++) {
+        			FreightContainer[] currentStack = cargo.toArray(i);
+        			g.setColor(Color.BLACK);
+        			g.drawLine(x - 5, y, x - 5, y + 50);
+        			for (int j = 0; j < currentStack.length; j++) {
+        				drawContainer(g, currentStack[j], x, y);
+        				x += 130;
+        			}
+        			x = HSPACE;
+        			y += 70;
+        		}
+    		} catch (ManifestException e) {
+    			JOptionPane.showConfirmDialog(null, "Cannot display a container object.", 
+    										  "Error", JOptionPane.ERROR_MESSAGE);
+    		}
+    	}
     }
 
     /**
@@ -67,9 +90,48 @@ public class CargoCanvas extends JPanel {
      * @param y The y location for the Rectangle.
      */
     private void drawContainer(Graphics g, FreightContainer container, int x, int y) {
-    	//Implementation here 
-    	//Feel free to use some other method structure here, but this is the basis for the demo. 
-    	//Obviously you need the graphics context and container as parameters. 
-    	//But you can also use images if you wish. 
+    	if (container.getClass().equals(DangerousGoodsContainer.class)) {
+    		g.setColor(Color.RED);
+    		g.drawRect(x, y, WIDTH, HEIGHT);
+    		g.fillRect(x, y, WIDTH, HEIGHT);
+    		g.setColor(Color.WHITE);
+    		if (toFind != null) {
+    			if (toFind.equals(container.getCode())) {
+        			g.drawString("|| " + container.getCode().toString() + " ||", x + 10, y + 15);
+        		} else {
+        			g.drawString(container.getCode().toString(), x + 20, y + 15);
+        		}
+    		} else {
+    			g.drawString(container.getCode().toString(), x + 20, y + 15);
+    		}
+    	} else if (container.getClass().equals(GeneralGoodsContainer.class)) {
+    		g.setColor(Color.GRAY);
+    		g.drawRect(x, y, WIDTH, HEIGHT);
+    		g.fillRect(x, y, WIDTH, HEIGHT);
+    		g.setColor(Color.WHITE);
+    		if (toFind != null) {
+    			if (toFind.equals(container.getCode())) {
+        			g.drawString("|| " + container.getCode().toString() + " ||", x + 10, y + 15);
+        		} else {
+        			g.drawString(container.getCode().toString(), x + 20, y + 15);
+        		}
+    		} else {
+    			g.drawString(container.getCode().toString(), x + 20, y + 15);
+    		}
+    	} else if (container.getClass().equals(RefrigeratedContainer.class)) {
+    		g.setColor(Color.BLUE);
+    		g.drawRect(x, y, WIDTH, HEIGHT);
+    		g.fillRect(x, y, WIDTH, HEIGHT);
+    		g.setColor(Color.WHITE);
+    		if (toFind != null) {
+    			if (toFind.equals(container.getCode())) {
+        			g.drawString("|| " + container.getCode().toString() + " ||", x + 10, y + 15);
+        		} else {
+        			g.drawString(container.getCode().toString(), x + 20, y + 15);
+        		}
+    		} else {
+    			g.drawString(container.getCode().toString(), x + 20, y + 15);
+    		}
+    	}
     }
 }

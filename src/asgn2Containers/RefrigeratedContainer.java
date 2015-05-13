@@ -1,6 +1,3 @@
-/**
- * @author Thanat Chokwijitkul n9234900
- */
 package asgn2Containers;
 
 import asgn2Codes.ContainerCode;
@@ -15,6 +12,7 @@ import asgn2Exceptions.InvalidContainerException;
  * temperature, but we omit this feature here.)
  * 
  * @author CAB302
+ * @author Thanat Chokwijitkul n9234900
  * @version 1.0
  */
 public class RefrigeratedContainer extends FreightContainer {

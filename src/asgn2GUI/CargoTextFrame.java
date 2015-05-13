@@ -252,7 +252,12 @@ public class CargoTextFrame extends JFrame {
     private void doFind() {
     	ContainerCode code = ContainerCodeDialog.showDialog(this);
     	if (code != null) {
-    		canvas.setToFind(code);
+    		if (cargo.whichStack(code) == null) {
+    			JOptionPane.showMessageDialog(null, "The specified container is not on board.",
+						  "Error", JOptionPane.ERROR_MESSAGE);
+    		} else {
+    			canvas.setToFind(code);
+    		}
     	}
     }
 
