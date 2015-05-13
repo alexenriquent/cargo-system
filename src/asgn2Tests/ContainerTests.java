@@ -23,7 +23,7 @@ public class ContainerTests {
 	private RefrigeratedContainer RCTest;
 
 	//Define Static
-	private static final String C_CODE = "INKU2633836";
+
 	private static final Integer GROSSWEIGHT = 5;
 	private static final Integer CATEGORY = 5;
 	private static final Integer TEMPERATURE = 5;
@@ -36,6 +36,9 @@ public class ContainerTests {
 	private static final String CONTAINER_CODE_6 = "IBMU4882351";
 	
 	private ContainerCode code1;
+	private ContainerCode code2;
+
+
 	//Before
 	/**
 	 * Build a Object before each test case
@@ -45,6 +48,9 @@ public class ContainerTests {
 	@Before
 	public void setUp() throws InvalidContainerException, InvalidCodeException {
 		code1 = new ContainerCode(CONTAINER_CODE_1);
+		code2 = new ContainerCode(CONTAINER_CODE_2);
+
+		
 	}
 	
 	//=================================================================
@@ -57,7 +63,7 @@ public class ContainerTests {
 	 */
 	@Test 
 	public void CCConstructorDefaultInput() throws InvalidCodeException {
-		 CCTest = new ContainerCode(C_CODE);
+		 CCTest = new ContainerCode(CONTAINER_CODE_1);
 	}
 	
 	/**
@@ -84,13 +90,57 @@ public class ContainerTests {
 	
 	/**
 	 * Test method For {@link asgn2Codes.ContainerCode#ContainerCode(String)}
-	 * Test Invalid Owner Code Does Not Consister of three Upper-case character
+	 * Test Invalid Owner Code Does Not Consist of three Upper-case character
+	 * @throws InvalidCodeException
+	 */
+	@Test (expected = InvalidCodeException.class)
+	public void CCInvalidOwnerUpperCaseCode() throws InvalidCodeException {
+		CCTest = new ContainerCode("InkU2633836");
+		
+	}
+	
+	
+	/**
+	 * Test method For {@link asgn2Codes.ContainerCode#ContainerCode(String)}
+	 * Test Invalid Owner Code Does Not Consist of three Upper-case character
 	 * @throws InvalidCodeException
 	 */
 	@Test (expected = InvalidCodeException.class)
 	public void CCInvalidOwnerCode() throws InvalidCodeException {
-		CCTest = new ContainerCode("InkU2633836");
+		CCTest = new ContainerCode("INkU2633836");
 		
+	}
+	
+	/**
+	 * Test method For {@link asgn2Codes.ContainerCode#ContainerCode(String)}
+	 * Test Invalid Owner Code Does Not Consist of three character
+	 * @throws InvalidCodeException
+	 */
+	@Test (expected = InvalidCodeException.class)
+	public void CCInvalidOwnerCodeWithDigit() throws InvalidCodeException {
+		CCTest = new ContainerCode("I23U2633836");
+		
+	}
+	
+	/**
+	 * Test method for {@link asgn2Codes.ContainerCode#ContainerCode(String)}
+	 * Test for No Owner Code
+	 * @throws InvalidCodeException
+
+	 */
+	@Test (expected=InvalidCodeException.class)
+	public void ContainerCodeMissingOwnerCode() throws InvalidCodeException {
+		CCTest = new ContainerCode("U2633839");
+	}
+	
+	/**
+	 * Test method for {@link asgn2Codes.ContainerCode#ContainerCode(String)}
+	 * Test for not Identifier 
+	 * @throws InvalidCodeException
+	 */
+	@Test(expected=InvalidCodeException.class)
+	public void ContainerCodeMissingCatergoryIdentifier() throws InvalidCodeException {
+		CCTest = new ContainerCode("INK2633836");
 	}
 	
 	/**
@@ -114,7 +164,27 @@ public class ContainerTests {
 		CCTest = new ContainerCode("INKu2633836");
 		
 	}
+	
+	/**
+	 * Test method for {@link asgn2Codes.ContainerCode#ContainerCode(String)}
+	 * Test for empty code
+	 * @throws InvalidCodeException
+	 */
+	@Test(expected=InvalidCodeException.class)
+	public void ContainerCodeEmptyString() throws InvalidCodeException {
+		CCTest = new ContainerCode("");
+	}
 
+	/**
+	 * Test method for {@link asgn2Codes.ContainerCode#ContainerCode(String)}
+	 * Test for no Serial number and check Digit
+	 * @throws InvalidCodeException
+	 */
+	@Test (expected=InvalidCodeException.class)
+	public void ContainerCodeMissingSerialCheckDigit() throws InvalidCodeException {
+		CCTest = new ContainerCode("INKU");
+	}
+	
 	/**
 	 * Test method For {@link asgn2Codes.ContainerCode#ContainerCode(String)}
 	 * Test Serial Number Does not consist of six digit
@@ -123,7 +193,6 @@ public class ContainerTests {
 	@Test (expected = InvalidCodeException.class)
 	public void CCInvalidSerialNumber() throws InvalidCodeException {
 		CCTest = new ContainerCode("INKU26338A6");
-		
 	}
 	
 	/**
@@ -134,7 +203,6 @@ public class ContainerTests {
 	@Test (expected = InvalidCodeException.class)
 	public void CCInvalidSerialNumberAndaCaseinBetween() throws InvalidCodeException {
 		CCTest = new ContainerCode("INKU26338A67A");
-		
 	}
 	
 	/**
@@ -155,8 +223,19 @@ public class ContainerTests {
 	 */
 	@Test 
 	public void CCtoString() throws InvalidCodeException {
-		CCTest = new ContainerCode(C_CODE);
-		assertEquals(CCTest.toString(),C_CODE);
+		CCTest = new ContainerCode(CONTAINER_CODE_1);
+		assertEquals(CCTest.toString(),CONTAINER_CODE_1);
+	}
+	
+	/**
+	 * Test method For {@link asgn2Codes.ContainerCode#toString()}
+	 * Test toString whether False Equals to Default Value
+	 * @throws InvalidCodeException
+	 */
+	@Test 
+	public void CCtoStringFalse() throws InvalidCodeException {
+		CCTest = new ContainerCode(CONTAINER_CODE_1);
+		assertFalse(CCTest.toString() == CONTAINER_CODE_2);
 	}
 	
 	/**
@@ -166,9 +245,10 @@ public class ContainerTests {
 	 */
 	@Test 
 	public void CCequals() throws InvalidCodeException {
-		CCTest = new ContainerCode(C_CODE);
-		CCTest.equals(C_CODE);
-		assertTrue(CCTest.equals(C_CODE));
+		CCTest = new ContainerCode(CONTAINER_CODE_1);
+		CCTest.equals(CONTAINER_CODE_1);
+		assertTrue(CCTest.equals(CONTAINER_CODE_1));
+		assertFalse(CCTest.equals(CONTAINER_CODE_2));
 	}
 	
 	
@@ -195,6 +275,19 @@ public class ContainerTests {
 		ContainerCode CCTest2 = new ContainerCode(CONTAINER_CODE_1);
 		assertTrue(CCTest.equals(CCTest2));
 	}
+	
+	/**
+	 * Test method for {@link asgn2Codes.ContainerCode#ContainerCode(String)}
+	 * Test for null code
+	 * @throws NullPointerException
+	 * @throws InvalidCodeException
+
+	 */
+	@Test (expected=NullPointerException.class)
+	public void ContainerCodeNullString() throws NullPointerException, InvalidCodeException {
+		CCTest = new ContainerCode(null);
+	}
+	
 	
 	//=================================================================
 	//Test For Constructor DangerousGoodsContainer Class
@@ -290,6 +383,19 @@ public class ContainerTests {
 	}
 	
 	/**
+	 * Test method for {@link asgn2Containers.FreightContainer#getCode()}
+	 * Test For GetCode
+	 * @throws InvalidContainerException
+	 * @throws InvalidCodeException 
+	 */
+	@Test 
+	public void FCgetFalseCode() throws InvalidContainerException, InvalidCodeException {
+		code1 = new ContainerCode(CONTAINER_CODE_1);
+		GGCTest = new GeneralGoodsContainer(code1,GROSSWEIGHT);
+		assertFalse(GGCTest.getCode() == code2);
+	}
+	
+	/**
 	 * Test method for {@link asgn2Containers.FreightContainer#getGrossWeight()}
 	 * Test For GetGrossWeight
 	 * @throws InvalidContainerException
@@ -300,6 +406,19 @@ public class ContainerTests {
 		code1 = new ContainerCode(CONTAINER_CODE_1);
 		GGCTest = new GeneralGoodsContainer(code1,GROSSWEIGHT);
 		assertEquals(GGCTest.getGrossWeight(),GROSSWEIGHT);
+	}
+	
+	/**
+	 * Test method for {@link asgn2Containers.FreightContainer#getGrossWeight()}
+	 * Test For GetGrossWeight assertFalse Gross weight 
+	 * @throws InvalidContainerException
+	 * @throws InvalidCodeException 
+	 */
+	@Test 
+	public void FCgetFalseGrossWeight() throws InvalidContainerException, InvalidCodeException {
+		code1 = new ContainerCode(CONTAINER_CODE_1);
+		GGCTest = new GeneralGoodsContainer(code1,GROSSWEIGHT);
+		assertFalse(GGCTest.getGrossWeight() == 8);
 	}
 	//=================================================================
 	//Test For Constructor GeneralGoodsContainer Class
@@ -390,6 +509,19 @@ public class ContainerTests {
 		code1 = new ContainerCode(CONTAINER_CODE_1);
 		RCTest = new RefrigeratedContainer(code1,GROSSWEIGHT,TEMPERATURE);
 		assertEquals(RCTest.getTemperature(),TEMPERATURE);
+	}
+	
+	/**
+	 * Test method for {@link asgn2Containers.RefrigeratedContainer#getTemperature()}
+	 * Test For get False Temperature
+	 * @throws InvalidContainerException
+	 * @throws InvalidCodeException 
+	 */
+	@Test
+	public void RCGetFalseTemperature() throws InvalidContainerException, InvalidCodeException {
+		code1 = new ContainerCode(CONTAINER_CODE_1);
+		RCTest = new RefrigeratedContainer(code1,GROSSWEIGHT,TEMPERATURE);
+		assertFalse(RCTest.getTemperature() == 8);
 	}
 	
 	/**
