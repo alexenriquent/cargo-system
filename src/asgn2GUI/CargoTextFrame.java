@@ -74,7 +74,6 @@ public class CargoTextFrame extends JFrame {
         if (cargo == null) {
             disableButtons();
         } else {
-        	pnlDisplay = new JPanel(new BorderLayout());
             canvas = new CargoTextArea(cargo);
             pnlDisplay.add(canvas, BorderLayout.CENTER);
     		add(pnlDisplay, BorderLayout.CENTER);
@@ -164,7 +163,7 @@ public class CargoTextFrame extends JFrame {
         setLayout(new BorderLayout());
         pnlControls = createControlPanel();
         add(pnlControls, BorderLayout.SOUTH);
-          
+        pnlDisplay = new JPanel(new BorderLayout());
         repaint();
     }
 
@@ -201,10 +200,14 @@ public class CargoTextFrame extends JFrame {
      * Initiate the New Manifest dialog which sets the instance of CargoManifest to work with.
      */
     private void setNewManifest() {
+    	CargoManifest currentCargo = cargo;
     	cargo = ManifestDialog.showDialog(this);
     	if (cargo != null) {
     		setCanvas(cargo);
-    	}
+       	} else if (cargo == null) {
+    		cargo = currentCargo;
+    		redraw();
+       	}
     }
 
     /**

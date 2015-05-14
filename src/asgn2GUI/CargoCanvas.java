@@ -71,7 +71,7 @@ public class CargoCanvas extends JPanel {
         				x += 130;
         			}
         			x = HSPACE;
-        			y += 70;
+        			y += 60;
         		}
     		} catch (ManifestException e) {
     			JOptionPane.showConfirmDialog(null, "Cannot display a container object.", 

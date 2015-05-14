@@ -47,7 +47,6 @@ public class CargoFrame extends JFrame {
      */
     public CargoFrame(String title) throws HeadlessException {
         super(title);
-
         constructorHelper();
         disableButtons();
         redraw();
@@ -65,8 +64,7 @@ public class CargoFrame extends JFrame {
         }
         if (cargo == null) {
             disableButtons();
-        } else {
-        	pnlDisplay = new JPanel(new BorderLayout());
+        } else {       	
             canvas = new CargoCanvas(cargo);
             pnlDisplay.add(canvas, BorderLayout.CENTER);
     		add(pnlDisplay, BorderLayout.CENTER);
@@ -155,6 +153,7 @@ public class CargoFrame extends JFrame {
         setLayout(new BorderLayout());
         pnlControls = createControlPanel();
         add(pnlControls, BorderLayout.SOUTH);
+        pnlDisplay = new JPanel(new BorderLayout());
         repaint();
     }
 
@@ -191,10 +190,14 @@ public class CargoFrame extends JFrame {
      * Initiate the New Manifest dialog which sets the instance of CargoManifest to work with.
      */
     private void setNewManifest() {
+    	CargoManifest currentCargo = cargo;
     	cargo = ManifestDialog.showDialog(this);
     	if (cargo != null) {
     		setCanvas(cargo);
-    	}
+       	} else if (cargo == null) {
+    		cargo = currentCargo;
+    		redraw();
+       	}
     }
 
     /**
