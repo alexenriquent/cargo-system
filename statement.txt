@@ -1,11 +1,10 @@
-CAB302 Software Development
-Assignment 2 - Cargo System
+CAB302 SOFTWARE DEVELOPMENT
+ASSIGNMENT 2 - CARGO SYSTEM
 
 Thanat Chokwijitkul n9234900
 Month Yean Koh n9070095
 
-Summary of the Project Contribution
-
+SUMMARY OF THE PROJECT CONTRIBUTION
 Assignment 2 Part 1 - Test-Driven Development
 Summary of Contribution (Thanat Chokwijitkul)
 + The implementation of the ContainerCode class (coder)
@@ -28,3 +27,26 @@ Assignment 2 Part 2 - Graphical User Interface Programming
 + The implementation of the CargoTextArea class
 + The implementation of the CargoFrame class
 + The implementation of the CargoCanvas class
+
+STATEMENT OF AGREEMENT ON THE PROJECT CONTRIBUTION
+As specified in the assignment 2's specifications, when developing 
+the project, each of the team members needs to act as two different 
+roles, including coder and tester. Therefore, the project development 
+process have been managed according to those specifications. 
+This statement is to confirm that all the works in the project have 
+been appropriately contributed and both team members agree on the 
+summary of the project contribution mentioned in the previous section.
+
+STATEMENT OF COMPLETENESS
+This statement is to confirm that both versions of the CargoSystem 
+project, including text and graphic versions, have been attempted.
+All the requirements specified in the specifications have been
+completed with no known problem so far.
+
+GUI TESTS
+For the CargoSystem project, automated GUI tests have been used to
+test all the functionalities of the system. Another unit test class has
+been created using the automated GUI tests, which has been supplied as
+code drop for the assignment 2 part 2, as a template in order to provide the
+evidence showing that the graphical interface of the project functions
+properly and has been tested successfully.
