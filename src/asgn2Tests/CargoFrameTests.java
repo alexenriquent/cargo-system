@@ -1,3 +1,7 @@
+/**
+ * This file forms part of the CargoSystem Project
+ * Assignment Two - CAB302 2015
+ */
 package asgn2Tests;
 
 import static org.junit.Assert.assertEquals;

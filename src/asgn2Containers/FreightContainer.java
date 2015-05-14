@@ -1,3 +1,7 @@
+/**
+ * This file forms part of the CargoSystem Project
+ * Assignment Two - CAB302 2015
+ */
 package asgn2Containers;
 
 import asgn2Codes.ContainerCode;

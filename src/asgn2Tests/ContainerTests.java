@@ -1,7 +1,9 @@
 /**
-* @author Month Yean KOH n9070095
-*/
+ * This file forms part of the CargoSystem Project
+ * Assignment Two - CAB302 2015
+ */
 package asgn2Tests;
+
 import static org.junit.Assert.*;
 
 import org.junit.Before;
@@ -14,9 +16,16 @@ import asgn2Containers.RefrigeratedContainer;
 import asgn2Exceptions.InvalidCodeException;
 import asgn2Exceptions.InvalidContainerException;
 
+/**
+ * Defines unit tests for use cases of the <code>ContainerCode</code> class and
+ * all of the container classes, including <code>FreightContainer<code>,
+ * <code>DangerousGoodsContainer</code>, <code>GeneralGoodsContainer</code>
+ * and <code>refrigeratedContainer</code>.
+ * 
+ * @author Month Yean KOH n9070095
+ */
 public class ContainerTests {
-	
-	
+
 	private ContainerCode CCTest;
 	private DangerousGoodsContainer DGCTest;
 	private GeneralGoodsContainer GGCTest;
