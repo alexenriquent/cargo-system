@@ -206,7 +206,6 @@ public class CargoTextFrame extends JFrame {
     		setCanvas(cargo);
        	} else if (cargo == null) {
     		cargo = currentCargo;
-    		redraw();
        	}
     }
 
