@@ -1,0 +1,30 @@
+CAB302 Software Development
+Assignment 2 - Cargo System
+
+Thanat Chokwijitkul n9234900
+Month Yean Koh n9070095
+
+Summary of the Project Contribution
+
+Assignment 2 Part 1 - Test-Driven Development
+Summary of Contribution (Thanat Chokwijitkul)
++ The implementation of the ContainerCode class (coder)
++ The implementation of the FreightContainer class (coder)
++ The implementation of the DangerousGoodsContainer class (coder)
++ The implementation of the GeneralGoodsContainer class (coder)
++ The implementation of the RefrigeratedContainer class (coder)
++ The implementation of the ManifestTests class (tester)
+
+Summary of Contribution (Month Yean Koh)
++ The implementation of the ContainerTests class (tester)
++ The implementation of the CargoManifest class (coder)
+
+Assignment 2 Part 2 - Graphical User Interface Programming
++ The implementation of the AbstractDialog class
++ The implementation of the ManifestDialog class
++ The implementation of the ContainerCodeDialog class
++ The implementation of the LoadContainerDialog class
++ The implementation of the CargoTextFrame class
++ The implementation of the CargoTextArea class
++ The implementation of the CargoFrame class
++ The implementation of the CargoCanvas class

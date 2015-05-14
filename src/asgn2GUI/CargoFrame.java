@@ -28,7 +28,7 @@ import asgn2Manifests.CargoManifest;
  */
 public class CargoFrame extends JFrame {
 
-    private static final int WIDTH = 600;
+	private static final int WIDTH = 600;
     private static final int HEIGHT = 400;
 
     private JButton btnLoad;
@@ -195,7 +195,7 @@ public class CargoFrame extends JFrame {
      */
     private void setNewManifest() {
     	CargoManifest currentCargo = cargo;
-    	cargo = ManifestDialog.showDialog(this);
+    	cargo = ManifestDialog.showDialog(this);    	
     	if (cargo != null) {
     		setCanvas(cargo);
        	} else if (cargo == null) {
@@ -215,7 +215,7 @@ public class CargoFrame extends JFrame {
      * Initiates the Load Container dialog.
      */
     private void doLoad() {
-    	FreightContainer container = LoadContainerDialog.showDialog(this);
+    	FreightContainer container = LoadContainerDialog.showDialog(this);	
     	if (container != null) {
     		try {
     			cargo.loadContainer(container);

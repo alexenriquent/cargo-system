@@ -26,11 +26,6 @@ import asgn2Exceptions.InvalidContainerException;
  */
 public class ContainerTests {
 
-	private ContainerCode CCTest;
-	private DangerousGoodsContainer DGCTest;
-	private GeneralGoodsContainer GGCTest;
-	private RefrigeratedContainer RCTest;
-
 	//Define Static
 	private static final Integer GROSSWEIGHT = 5;
 	private static final Integer CATEGORY = 5;
@@ -45,6 +40,11 @@ public class ContainerTests {
 	
 	private ContainerCode code1;
 	private ContainerCode code2;
+	
+	private ContainerCode CCTest;
+	private DangerousGoodsContainer DGCTest;
+	private GeneralGoodsContainer GGCTest;
+	private RefrigeratedContainer RCTest;
 
 	//Before
 	/**
