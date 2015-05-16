@@ -28,6 +28,9 @@ Assignment 2 Part 2 - Graphical User Interface Programming
 + The implementation of the CargoFrame class
 + The implementation of the CargoCanvas class
 
+Additional test class
++ The implementation of the ManifestGUITests class
+
 STATEMENT OF AGREEMENT ON THE PROJECT CONTRIBUTION
 As specified in the assignment 2's specifications, when developing 
 the project, each of the team members needs to act as two different 
@@ -45,8 +48,8 @@ completed with no known problem so far.
 
 GUI TESTS
 For the CargoSystem project, automated GUI tests have been used to
-test all the functionalities of the system. Another unit test class has
-been created using the automated GUI tests, which has been supplied as
-code drop for the assignment 2 part 2, as a template in order to provide the
-evidence showing that the graphical interface of the project functions
-properly and has been tested successfully.
+test all the functionalities of the system. Another unit test class
+named "ManifestGUITests" has been created using the automated GUI tests, 
+which has been supplied as code drop for the assignment 2 part 2, as 
+a template in order to provide the evidence showing that the graphical 
+interface of the system functions and has been tested successfully.
