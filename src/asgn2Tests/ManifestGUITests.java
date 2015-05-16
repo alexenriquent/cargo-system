@@ -220,7 +220,7 @@ public class ManifestGUITests {
     }
     
     /**
-     * Confirms the frame used in test cases has been instantiated.
+     * Tests that the frame used in test cases has been instantiated.
      */
     @Test
     public void frameConstruction() {
@@ -228,7 +228,7 @@ public class ManifestGUITests {
     }
     
     /**
-     * Confirms that only "New Manifest" button is enabled at the
+     * Tests that only "New Manifest" button is enabled at the
      * initial state (when the manifest has not been instantiated).
      */
     @Test
@@ -240,7 +240,7 @@ public class ManifestGUITests {
     }
     
     /**
-     * Confirms that an error message appears if the "OK" button is clicked 
+     * Tests that an error message appears if the "OK" button is clicked 
      * but no input data given in the New Manifest dialog.
      */
     @Test
@@ -251,7 +251,7 @@ public class ManifestGUITests {
     }
     
     /**
-     * Confirms that an error message appears if given an invalid data type as
+     * Tests that an error message appears if given an invalid data type as
      * a number of stacks and the "OK" button is clicked in the New Manifest dialog.
      * 
      * A Manifest object is not instantiated in this test.
@@ -264,7 +264,7 @@ public class ManifestGUITests {
     }
     
     /**
-     * Confirms that an error message appears if given a negative number of stacks
+     * Tests that an error message appears if given a negative number of stacks
      * but valid values for both maximum height and weight and the "OK" button is 
      * clicked in the New Manifest dialog.
      * 
@@ -279,7 +279,7 @@ public class ManifestGUITests {
     }
     
     /**
-     * Confirms that an error message appears if given an invalid data type as
+     * Tests that an error message appears if given an invalid data type as
      * a maximum height and the "OK" button is clicked in the New Manifest dialog.
      * 
      * A Manifest object is not instantiated in this test.
@@ -292,7 +292,7 @@ public class ManifestGUITests {
     }
     
     /**
-     * Confirms that an error message appears if given a negative number of maximum 
+     * Tests that an error message appears if given a negative number of maximum 
      * height but valid number of stacks and maximum weight and the "OK" button is 
      * clicked in the New Manifest dialog.
      * 
@@ -307,7 +307,7 @@ public class ManifestGUITests {
     }
     
     /**
-     * Confirms that an error message appears if given an invalid data type as
+     * Tests that an error message appears if given an invalid data type as
      * a maximum weight and the "OK" button is clicked in the New Manifest dialog.
      * 
      * A Manifest object is not instantiated in this test.
@@ -320,7 +320,7 @@ public class ManifestGUITests {
     }   
     
     /**
-     * Confirms that an error message appears if given a negative number of maximum 
+     * Tests that an error message appears if given a negative number of maximum 
      * weight but valid number of stacks and maximum height and the "OK" button is 
      * clicked in the New Manifest dialog.
      * 
@@ -335,7 +335,7 @@ public class ManifestGUITests {
     }
     
     /**
-     * Confirms that all buttons including New Manifest, Load, Unload and Find
+     * Tests that all buttons including New Manifest, Load, Unload and Find
      * buttons are enabled after a Manifest object has been instantiated with 
      * valid values.
      */
@@ -350,7 +350,7 @@ public class ManifestGUITests {
     }
     
     /**
-     * Confirms that the canvas displays the correct representation 
+     * Tests that the canvas displays the correct representation 
      * if the manifest contains zero stack.
      */
     @Test
@@ -364,7 +364,7 @@ public class ManifestGUITests {
     }
     
     /**
-     * Confirms that the canvas displays the correct representation 
+     * Tests that the canvas displays the correct representation 
      * for a single empty stack.
      */
     @Test
@@ -378,7 +378,7 @@ public class ManifestGUITests {
     }
     
     /**
-     * Confirms that the canvas displays the correct string representation 
+     * Tests that the canvas displays the correct string representation 
      * for three empty stacks.
      */
     @Test
@@ -392,7 +392,7 @@ public class ManifestGUITests {
     }
     
     /**
-     * Confirms that the canvas displays the correct representation 
+     * Tests that the canvas displays the correct representation 
      * for five empty stacks.
      */
     @Test
@@ -406,7 +406,7 @@ public class ManifestGUITests {
     }
     
     /**
-     * Confirms that the canvas displays the correct representation 
+     * Tests that the canvas displays the correct representation 
      * if creating a new manifest with different stack number.
      */
     @Test
@@ -426,7 +426,7 @@ public class ManifestGUITests {
     }
     
     /**
-     * Confirms that the canvas displays the correct representation 
+     * Tests that the canvas displays the correct representation 
      * if trying to create a new manifest and then the cancel the operation.
      */
     @Test
@@ -446,7 +446,7 @@ public class ManifestGUITests {
     }
     
     /**
-     * Confirms that the canvas displays the correct representation 
+     * Tests that the canvas displays the correct representation 
      * for five empty stacks, then displays the correct representation for five empty 
      * stacks after creating a new manifest.
      */
@@ -467,7 +467,7 @@ public class ManifestGUITests {
     }
     
     /**
-     * Confirms that an error message is displayed if loading a new container
+     * Tests that an error message is displayed if loading a new container
      * would exceed the maximum weight limit.
      */
     @Test
@@ -484,7 +484,7 @@ public class ManifestGUITests {
     }
     
     /**
-     * Confirms that an error message is displayed if there is no space for
+     * Tests that an error message is displayed if there is no space for
      * a new container to be loaded.
      */
     @Test
@@ -503,7 +503,7 @@ public class ManifestGUITests {
     }
     
     /**
-     * Confirms that an error message is displayed if the gross weight of
+     * Tests that an error message is displayed if the gross weight of
      * the container is lower than 4 tons.
      */
     @Test
@@ -519,7 +519,7 @@ public class ManifestGUITests {
     }
     
     /**
-     * Confirms that an error message is displayed if the gross weight of
+     * Tests that an error message is displayed if the gross weight of
      * the container is greater than 30 tons.
      */
     @Test
@@ -535,7 +535,20 @@ public class ManifestGUITests {
     }
     
     /**
-     * Confirms that a valid general goods container is loaded to the manifest
+     * Tests that an error message is displayed if trying to load a new
+     * container with the same container code as one of the containers on board.
+     */
+    @Test
+    public void loadConatinerWithDuplicateContainerCode() {
+    	DialogFixture manifestDialog = prepareManifestDialog();
+        manifestDialogEnterText(manifestDialog, STACKS_1, HEIGHT_3, WEIGHT_100);
+        loadContainer(GENERAL_GOODS, CONTAINER_CODE_1, WEIGHT_10, null, null);
+        loadContainer(GENERAL_GOODS, CONTAINER_CODE_1, WEIGHT_10, null, null);
+        frame.optionPane().requireErrorMessage();
+    }
+    
+    /**
+     * Tests that a valid general goods container is loaded to the manifest
      * and displayed as expected.
      */
     @Test
@@ -550,7 +563,7 @@ public class ManifestGUITests {
     }
     
     /**
-     * Confirms that a valid dangerous goods container is loaded to the manifest
+     * Tests that a valid dangerous goods container is loaded to the manifest
      * and displayed as expected.
      */
     @Test
@@ -565,7 +578,7 @@ public class ManifestGUITests {
     }
     
     /**
-     * Confirms that a valid refrigerated goods container is loaded to the manifest
+     * Tests that a valid refrigerated goods container is loaded to the manifest
      * and displayed as expected.
      */
     @Test
@@ -580,7 +593,7 @@ public class ManifestGUITests {
     }
     
     /**
-     * Confirms that three valid general goods containers are loaded to the maximum
+     * Tests that three valid general goods containers are loaded to the maximum
      * height and displayed as expected.
      */
     @Test
@@ -599,7 +612,7 @@ public class ManifestGUITests {
     }
 	
     /**
-     * Confirms that four valid general goods containers are loaded to the maximum
+     * Tests that four valid general goods containers are loaded to the maximum
      * height and displayed as expected (by staring a new stack because the first
      * stack has reached its maximum height limit).
      */
@@ -621,7 +634,7 @@ public class ManifestGUITests {
     }
     
     /**
-     * Confirms that two containers with different types (general and dangerous 
+     * Tests that two containers with different types (general and dangerous 
      * goods containers) are loaded to the manifest and displayed as expected.
      */
     @Test
@@ -638,7 +651,7 @@ public class ManifestGUITests {
     }
     
     /**
-     * Confirms that three containers with different types (general, dangerous 
+     * Tests that three containers with different types (general, dangerous 
      * and refrigerated goods containers) are loaded to the manifest and displayed 
      * as expected.
      */
@@ -658,7 +671,7 @@ public class ManifestGUITests {
     }
     
     /**
-     * Confirms that five containers with different types (general, dangerous 
+     * Tests that five containers with different types (general, dangerous 
      * and refrigerated goods containers) are loaded to the manifest and displayed 
      * as expected.
      */
@@ -680,7 +693,7 @@ public class ManifestGUITests {
     }
     
     /**
-     * Confirms that the canvas displays the correct representation 
+     * Tests that the canvas displays the correct representation 
      * if creating a new manifest with different stack number after loading
      * a container i.e the canvas is reset and display the representation
      * of the new manifest.
@@ -703,7 +716,7 @@ public class ManifestGUITests {
     }
     
     /**
-     * Confirms that the manifest remains the same if trying to create a new manifest,
+     * Tests that the manifest remains the same if trying to create a new manifest,
      * then cancel the operation and keep loading a new container into the
      * same manifest.
      */
@@ -727,7 +740,7 @@ public class ManifestGUITests {
     }
     
     /**
-     * Confirms that the manifest remains the same if trying to load a new container,
+     * Tests that the manifest remains the same if trying to load a new container,
      * then cancel the operation and keep loading a new container into the
      * same manifest.
      */
@@ -752,7 +765,7 @@ public class ManifestGUITests {
     }
     
     /**
-     * Confirms that an error message appears if the container to be unloaded 
+     * Tests that an error message appears if the container to be unloaded 
      * is not on board.
      */
     @Test
@@ -769,7 +782,7 @@ public class ManifestGUITests {
     }
     
     /**
-     * Confirms that an error message appears if trying to unload an 
+     * Tests that an error message appears if trying to unload an 
      * unaccessible container.
      */
     @Test
@@ -788,7 +801,7 @@ public class ManifestGUITests {
     }
     
     /**
-     * Confirms that the specified container can be successfully unloaded if
+     * Tests that the specified container can be successfully unloaded if
      * it is accessible i.e. on top of a stack.
      */
     @Test
@@ -810,7 +823,7 @@ public class ManifestGUITests {
     }
     
     /**
-     * Confirms that the specified container can be successfully unloaded if
+     * Tests that the specified container can be successfully unloaded if
      * it is accessible i.e. on top of a stack, then replace the with 
      * a new container.
      */
@@ -836,7 +849,7 @@ public class ManifestGUITests {
     }
     
     /**
-     * Confirms that an error message appears if the specified container code
+     * Tests that an error message appears if the specified container code
      * is not 11 characters long.
      */
     @Test
@@ -848,7 +861,7 @@ public class ManifestGUITests {
     }
     
     /**
-     * Confirms that an error message appears if the specified container code
+     * Tests that an error message appears if the specified container code
      * contains invalid owner code.
      */
     @Test
@@ -860,7 +873,7 @@ public class ManifestGUITests {
     }
     
     /**
-     * Confirms that an error message appears if the specified container code
+     * Tests that an error message appears if the specified container code
      * contains invalid identifier.
      */
     @Test
@@ -872,7 +885,7 @@ public class ManifestGUITests {
     }
     
     /**
-     * Confirms that an error message appears if the specified container code
+     * Tests that an error message appears if the specified container code
      * contains invalid serialNumber.
      */
     @Test
@@ -884,7 +897,7 @@ public class ManifestGUITests {
     }
     
     /**
-     * Confirms that an error message appears if the specified container code
+     * Tests that an error message appears if the specified container code
      * contains incorrect check digit.
      */
     @Test
@@ -896,7 +909,7 @@ public class ManifestGUITests {
     }
     
     /**
-     * Confirms that an error message appears if the container with the
+     * Tests that an error message appears if the container with the
      * specified code is not on board.
      */
     @Test
@@ -908,7 +921,7 @@ public class ManifestGUITests {
     }
     
     /**
-     * Confirms that the container with specified container code is highlighted.
+     * Tests that the container with specified container code is highlighted.
      */
     @Test
     public void findCorrectContainer() {
@@ -930,7 +943,7 @@ public class ManifestGUITests {
     }
     
     /**
-     * Confirms that the manifest remains the same if trying to find a container,
+     * Tests that the manifest remains the same if trying to find a container,
      * then cancel the operation.
      */
     @Test
@@ -952,7 +965,7 @@ public class ManifestGUITests {
     }
     
     /**
-     * Confirms that the container highlighting is turned on if the specified
+     * Tests that the container highlighting is turned on if the specified
      * container is found on board and turned off when an action other than
      * Find is initiated.
      */
