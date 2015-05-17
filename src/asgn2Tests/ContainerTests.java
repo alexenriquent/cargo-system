@@ -241,7 +241,7 @@ public class ContainerTests {
 	
 	/**
 	 * Test method For {@link asgn2Codes.ContainerCode#toString()}
-	 * Test toString whether False Equals to Default Value
+	 * Test toString Whether is not the same with Another Code
 	 * @throws InvalidCodeException
 	 */
 	@Test 
@@ -252,7 +252,7 @@ public class ContainerTests {
 	
 	/**
 	 * Test method For {@link asgn2Codes.ContainerCode#equals(Object)}
-	 * Test toString whether Equals to Default Value
+	 * Test Equal whether there are same or not with another COde
 	 * @throws InvalidCodeException
 	 */
 	@Test 
@@ -277,7 +277,7 @@ public class ContainerTests {
 	
 	/**
 	 * Test method For {@link asgn2Codes.ContainerCode#equals(Object)}
-	 * Test if Two ContainerCode Are Equal
+	 * Test the Method with Checking Whether if Two ContainerCode Are Equal or Not
 	 * @throws InvalidCodeException
 	 */
 	@Test
@@ -305,7 +305,7 @@ public class ContainerTests {
 	/**
 	 * Test method for {@link asgn2Containers.DangerousGoodsContainer#getCategory()}
 	 * Test GetCategoris
-	 * Test AssertEquals If Both Categories Value Are the Same
+	 * Test If Both Categories Value Are the Same
 	 * @throws InvalidContainerException
 	 * @throws InvalidCodeException 
 	 */
@@ -319,7 +319,7 @@ public class ContainerTests {
 	/**
 	 * Test method for {@link asgn2Containers.DangerousGoodsContainer#getCategory()}
 	 * Test Get False Categories
-	 * Test AssertFalse If Both Value are not The Same
+	 * Test If Both Value are not The Same
 	 * @throws InvalidContainerException
 	 * @throws InvalidCodeException 
 	 */
@@ -388,7 +388,7 @@ public class ContainerTests {
 	/**
 	 * Test method for {@link asgn2Containers.FreightContainer#getCode()}
 	 * Test For GetCode
-	 * Test If Both of the Code are The Same
+	 * Test Whether Both of the Code Have The Same Code
 	 * @throws InvalidContainerException
 	 * @throws InvalidCodeException 
 	 */
@@ -402,7 +402,7 @@ public class ContainerTests {
 	/**
 	 * Test method for {@link asgn2Containers.FreightContainer#getCode()}
 	 * Test For GetCode
-	 * Test assertFalse If Both Of The Code Are Not Same.
+	 * Test If Both Of The Code Are Not Same.
 	 * @throws InvalidContainerException
 	 * @throws InvalidCodeException 
 	 */
@@ -416,7 +416,7 @@ public class ContainerTests {
 	/**
 	 * Test method for {@link asgn2Containers.FreightContainer#getGrossWeight()}
 	 * Test For GetGrossWeight
-	 * Test AsserEquals if Both of the value are the same.
+	 * Test if Both of the value are the same.
 	 * @throws InvalidContainerException
 	 * @throws InvalidCodeException 
 	 */
@@ -430,7 +430,7 @@ public class ContainerTests {
 	/**
 	 * Test method for {@link asgn2Containers.FreightContainer#getGrossWeight()}
 	 * Test For GetGrossWeight 
-	 * Test assertFalse if Gross weight are not Equal 
+	 * Test if Gross weight are not Equal 
 	 * @throws InvalidContainerException
 	 * @throws InvalidCodeException 
 	 */
@@ -458,7 +458,7 @@ public class ContainerTests {
 	/**
 	 * Test method for {@link asgn2Containers.GeneralGoodsContainer#GeneralGoodsContainer(ContainerCode, Integer)}
 	 * Test For Invalid GrossWeight 
-	 * Test If Gross Wight Less Then 4
+	 * Test If Gross Weight Less Then 4
 	 * @throws InvalidContainerException
 	 * @throws InvalidCodeException 
 	 */
@@ -539,7 +539,7 @@ public class ContainerTests {
 	/**
 	 * Test method for {@link asgn2Containers.RefrigeratedContainer#getTemperature()}
 	 * Test For get False Temperature
-	 * AssertFalse the Temperature are not the same
+	 * Test if the Temperature are not the same
 	 * @throws InvalidContainerException
 	 * @throws InvalidCodeException 
 	 */
@@ -553,7 +553,7 @@ public class ContainerTests {
 	/**
 	 * Test method for {@link asgn2Containers.RefrigeratedContainer#setTemperature(Integer)}
 	 * Test For Set Temperature and getTemperature
-	 * Test AssertTrue if both of them are Equal
+	 * Test if both of them are Equal
 	 * @throws InvalidContainerException
 	 * @throws InvalidCodeException 
 	 */
