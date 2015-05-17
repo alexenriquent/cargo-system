@@ -73,7 +73,8 @@ public class ContainerTests {
 	
 	/**
 	 * Test method For {@link asgn2Codes.ContainerCode#ContainerCode(String)}
-	 * Test Invalid Code Length If More then 11 Character
+	 * Confirm that the method throws an exception 
+	 * IF ContainerCode Length  More then 11 Character
 	 * @throws InvalidCodeException
 	 */
 	@Test (expected = InvalidCodeException.class)
@@ -84,7 +85,8 @@ public class ContainerTests {
 	
 	/**
 	 * Test method For {@link asgn2Codes.ContainerCode#ContainerCode(String)}
-	 * Test Invalid Code Length If Less then 11 Character
+	 * Confirm that the method throws an exception 
+	 * IF ContainerCode Length is Less then 11 Character
 	 * @throws InvalidCodeException
 	 */
 	@Test (expected = InvalidCodeException.class)
@@ -95,7 +97,8 @@ public class ContainerTests {
 	
 	/**
 	 * Test method For {@link asgn2Codes.ContainerCode#ContainerCode(String)}
-	 * Test Invalid Owner Code Does Not Consist of three Upper-case character
+	 * Confirm that the method throws an exception 
+	 * IF ContainerCode Does Not Consist of three Upper-case character
 	 * @throws InvalidCodeException
 	 */
 	@Test (expected = InvalidCodeException.class)
@@ -105,7 +108,8 @@ public class ContainerTests {
 	
 	/**
 	 * Test method For {@link asgn2Codes.ContainerCode#ContainerCode(String)}
-	 * Test Invalid Owner Code Does Not Consist of three Upper-case character
+	 * Confirm that the method throws an exception 
+	 * If ContainerCode Owner Code Does Not Consist of three Upper-case character
 	 * @throws InvalidCodeException
 	 */
 	@Test (expected = InvalidCodeException.class)
@@ -115,7 +119,8 @@ public class ContainerTests {
 	
 	/**
 	 * Test method For {@link asgn2Codes.ContainerCode#ContainerCode(String)}
-	 * Test Invalid Owner Code Does Not Consist of three character
+	 * Confirm that the method throws an exception 
+	 * If ContainerCode Owner Code Does Not Consist of three character
 	 * @throws InvalidCodeException
 	 */
 	@Test (expected = InvalidCodeException.class)
@@ -125,7 +130,8 @@ public class ContainerTests {
 	
 	/**
 	 * Test method for {@link asgn2Codes.ContainerCode#ContainerCode(String)}
-	 * Test for No Owner Code
+	 * Confirm that the method throws an exception 
+	 * If ContainerCode have No Owner Code
 	 * @throws InvalidCodeException
 	 */
 	@Test (expected = InvalidCodeException.class)
@@ -135,7 +141,8 @@ public class ContainerTests {
 	
 	/**
 	 * Test method for {@link asgn2Codes.ContainerCode#ContainerCode(String)}
-	 * Test for not Identifier 
+	 * Confirm that the method throws an exception 
+	 * If ContainerCode have not Identifier 
 	 * @throws InvalidCodeException
 	 */
 	@Test(expected = InvalidCodeException.class)
@@ -145,7 +152,8 @@ public class ContainerTests {
 	
 	/**
 	 * Test method For {@link asgn2Codes.ContainerCode#ContainerCode(String)}
-	 * Test Invalid Category Identifier is Not 'U'
+	 * Confirm that the method throws an exception 
+	 * IF ContainerCode Category Identifier is Not 'U'
 	 * @throws InvalidCodeException
 	 */
 	@Test (expected = InvalidCodeException.class)
@@ -156,7 +164,8 @@ public class ContainerTests {
 	
 	/**
 	 * Test method For {@link asgn2Codes.ContainerCode#ContainerCode(String)}
-	 * Test Invalid Category Identifier is Not Upper Case 'U'
+	 * Confirm that the method throws an exception 
+	 * IF ContainerCode Category Identifier is Not Upper Case 'U'
 	 * @throws InvalidCodeException
 	 */
 	@Test (expected = InvalidCodeException.class)
@@ -166,7 +175,8 @@ public class ContainerTests {
 	
 	/**
 	 * Test method for {@link asgn2Codes.ContainerCode#ContainerCode(String)}
-	 * Test for empty code
+	 * Confirm that the method throws an exception 
+	 * If ContainerCode Have empty code
 	 * @throws InvalidCodeException
 	 */
 	@Test (expected = InvalidCodeException.class)
@@ -176,7 +186,8 @@ public class ContainerTests {
 
 	/**
 	 * Test method for {@link asgn2Codes.ContainerCode#ContainerCode(String)}
-	 * Test for no Serial number and check Digit
+	 * Confirm that the method throws an exception 
+	 * If ContainerCode Serial number have no Digit
 	 * @throws InvalidCodeException
 	 */
 	@Test (expected = InvalidCodeException.class)
@@ -186,7 +197,8 @@ public class ContainerTests {
 	
 	/**
 	 * Test method For {@link asgn2Codes.ContainerCode#ContainerCode(String)}
-	 * Test Serial Number Does not consist of six digit
+	 * Confirm that the method throws an exception 
+	 * IF ContainerCode Serial Number Does not consist of six digit
 	 * @throws InvalidCodeException
 	 */
 	@Test (expected = InvalidCodeException.class)
@@ -196,7 +208,8 @@ public class ContainerTests {
 	
 	/**
 	 * Test method For {@link asgn2Codes.ContainerCode#ContainerCode(String)}
-	 * Test Serial Number Does not consist of six digit and a Case In Between
+	 * Confirm that the method throws an exception 
+	 * IF ContainerCode Serial Number Does not consist of six digit and a Case In Between
 	 * @throws InvalidCodeException
 	 */
 	@Test (expected = InvalidCodeException.class)
@@ -206,7 +219,8 @@ public class ContainerTests {
 	
 	/**
 	 * Test method For {@link asgn2Codes.ContainerCode#ContainerCode(String)}
-	 * Test InCorrect Digit more then 6 Digit
+	 * Confirm that the method throws an exception 
+	 * If More then 6 Digit
 	 * @throws InvalidCodeException
 	 */
 	@Test (expected = InvalidCodeException.class)
@@ -251,7 +265,7 @@ public class ContainerTests {
 	
 	/**
 	 * Test method For {@link asgn2Codes.ContainerCode#equals(Object)}
-	 * Test Two ContainerCode Are Not Equal
+	 * Test if Two ContainerCode Are Not Equal
 	 * @throws InvalidCodeException
 	 */
 	@Test
@@ -263,7 +277,7 @@ public class ContainerTests {
 	
 	/**
 	 * Test method For {@link asgn2Codes.ContainerCode#equals(Object)}
-	 * Test Two ContainerCode Are Equal
+	 * Test if Two ContainerCode Are Equal
 	 * @throws InvalidCodeException
 	 */
 	@Test
@@ -291,6 +305,7 @@ public class ContainerTests {
 	/**
 	 * Test method for {@link asgn2Containers.DangerousGoodsContainer#getCategory()}
 	 * Test GetCategoris
+	 * Test AssertEquals If Both Categories Value Are the Same
 	 * @throws InvalidContainerException
 	 * @throws InvalidCodeException 
 	 */
@@ -304,6 +319,7 @@ public class ContainerTests {
 	/**
 	 * Test method for {@link asgn2Containers.DangerousGoodsContainer#getCategory()}
 	 * Test Get False Categories
+	 * Test AssertFalse If Both Value are not The Same
 	 * @throws InvalidContainerException
 	 * @throws InvalidCodeException 
 	 */
@@ -316,7 +332,8 @@ public class ContainerTests {
 	
 	/**
 	 * Test method for {@link asgn2Containers.DangerousGoodsContainer#DangerousGoodsContainer(ContainerCode, Integer, Integer)}
-	 * Test For InvalidGrossWeight LESS THEN 4
+	 * Test For InvalidGrossWeight 
+	 * Confirm that the method throws an exception IF Gross Weight Less Then 4
 	 * @throws InvalidContainerException
 	 * @throws InvalidCodeException 
 	 */
@@ -328,7 +345,8 @@ public class ContainerTests {
 	
 	/**
 	 * Test method for {@link asgn2Containers.DangerousGoodsContainer#DangerousGoodsContainer(ContainerCode, Integer, Integer)}
-	 * Test For InvalidGrossWeight More Then 30
+	 * Test For InvalidGrossWeight 
+	 * Confirm that the method throws an exception If GrossWeight More Then 30
 	 * @throws InvalidContainerException
 	 * @throws InvalidCodeException 
 	 */
@@ -340,7 +358,8 @@ public class ContainerTests {
 	
 	/**
 	 * Test method for {@link asgn2Containers.DangerousGoodsContainer#DangerousGoodsContainer(ContainerCode, Integer, Integer)}
-	 * Test For Invalid Categories Less Then 1
+	 * Test For Invalid Categories
+	 * Confirm that the method throws an exception If Categories Less Then 1
 	 * @throws InvalidContainerException
 	 * @throws InvalidCodeException 
 	 */
@@ -352,7 +371,8 @@ public class ContainerTests {
 
 	/**
 	 * Test method for {@link asgn2Containers.DangerousGoodsContainer#DangerousGoodsContainer(ContainerCode, Integer, Integer)}
-	 * Test For Invalid Categories More Then 9
+	 * Test For Invalid Categories 
+	 * Confirm that the method throws an exception If Categories More Then 9
 	 * @throws InvalidContainerException
 	 * @throws InvalidCodeException 
 	 */
@@ -368,6 +388,7 @@ public class ContainerTests {
 	/**
 	 * Test method for {@link asgn2Containers.FreightContainer#getCode()}
 	 * Test For GetCode
+	 * Test If Both of the Code are The Same
 	 * @throws InvalidContainerException
 	 * @throws InvalidCodeException 
 	 */
@@ -381,6 +402,7 @@ public class ContainerTests {
 	/**
 	 * Test method for {@link asgn2Containers.FreightContainer#getCode()}
 	 * Test For GetCode
+	 * Test assertFalse If Both Of The Code Are Not Same.
 	 * @throws InvalidContainerException
 	 * @throws InvalidCodeException 
 	 */
@@ -394,6 +416,7 @@ public class ContainerTests {
 	/**
 	 * Test method for {@link asgn2Containers.FreightContainer#getGrossWeight()}
 	 * Test For GetGrossWeight
+	 * Test AsserEquals if Both of the value are the same.
 	 * @throws InvalidContainerException
 	 * @throws InvalidCodeException 
 	 */
@@ -406,7 +429,8 @@ public class ContainerTests {
 	
 	/**
 	 * Test method for {@link asgn2Containers.FreightContainer#getGrossWeight()}
-	 * Test For GetGrossWeight assertFalse Gross weight 
+	 * Test For GetGrossWeight 
+	 * Test assertFalse if Gross weight are not Equal 
 	 * @throws InvalidContainerException
 	 * @throws InvalidCodeException 
 	 */
@@ -433,7 +457,8 @@ public class ContainerTests {
 	
 	/**
 	 * Test method for {@link asgn2Containers.GeneralGoodsContainer#GeneralGoodsContainer(ContainerCode, Integer)}
-	 * Test For Invalid GrossWeight If Less Then 4
+	 * Test For Invalid GrossWeight 
+	 * Test If Gross Wight Less Then 4
 	 * @throws InvalidContainerException
 	 * @throws InvalidCodeException 
 	 */
@@ -445,7 +470,8 @@ public class ContainerTests {
 	
 	/**
 	 * Test method for {@link asgn2Containers.GeneralGoodsContainer#GeneralGoodsContainer(ContainerCode, Integer)}
-	 * Test For Invalid GrossWeight If More Then 30
+	 * Test For Invalid GrossWeight 
+	 * Test If Gross Weight More Then 30
 	 * @throws InvalidContainerException
 	 * @throws InvalidCodeException 
 	 */
@@ -472,7 +498,8 @@ public class ContainerTests {
 	
 	/**
 	 * Test method for {@link asgn2Containers.RefrigeratedContainer#RefrigeratedContainer(ContainerCode, Integer, Integer)}
-	 * Test For InvalidGrossWeight Less Then 4
+	 * Test For InvalidGrossWeight 
+	 * Test If  Gross Weight Less Then 4
 	 * @throws InvalidContainerException
 	 * @throws InvalidCodeException 
 	 */
@@ -484,7 +511,8 @@ public class ContainerTests {
 	
 	/**
 	 * Test method for {@link asgn2Containers.RefrigeratedContainer#RefrigeratedContainer(ContainerCode, Integer, Integer)}
-	 * Test For InvalidGrossWeight More Then 30
+	 * Test For InvalidGrossWeight 
+	 * Test If Gross Weight More Then 30
 	 * @throws InvalidContainerException
 	 * @throws InvalidCodeException 
 	 */
@@ -496,7 +524,8 @@ public class ContainerTests {
 	
 	/**
 	 * Test method for {@link asgn2Containers.RefrigeratedContainer#getTemperature()}
-	 * Test For getTemperature
+	 * Test For getTemperature 
+	 * Test Whether both of them are the same.
 	 * @throws InvalidContainerException
 	 * @throws InvalidCodeException 
 	 */
@@ -510,6 +539,7 @@ public class ContainerTests {
 	/**
 	 * Test method for {@link asgn2Containers.RefrigeratedContainer#getTemperature()}
 	 * Test For get False Temperature
+	 * AssertFalse the Temperature are not the same
 	 * @throws InvalidContainerException
 	 * @throws InvalidCodeException 
 	 */
@@ -523,6 +553,7 @@ public class ContainerTests {
 	/**
 	 * Test method for {@link asgn2Containers.RefrigeratedContainer#setTemperature(Integer)}
 	 * Test For Set Temperature and getTemperature
+	 * Test AssertTrue if both of them are Equal
 	 * @throws InvalidContainerException
 	 * @throws InvalidCodeException 
 	 */
