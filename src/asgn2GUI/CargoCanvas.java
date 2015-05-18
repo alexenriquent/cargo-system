@@ -65,18 +65,23 @@ public class CargoCanvas extends JPanel {
     public void paint(Graphics g) {
     	int x = HSPACE;
     	int y = VSPACE;
+    	int xLineSpace = 5;
+    	int yLineSpace = 50;
+    	int containerSpace = 130;
+    	int stackSpace = 60;
+    	
     	if (cargo != null) {
     		try {
     			for (int i = 0; i < cargo.getNumStack(); i++) {
         			FreightContainer[] currentStack = cargo.toArray(i);
         			g.setColor(Color.BLACK);
-        			g.drawLine(x - 5, y, x - 5, y + 50);
+        			g.drawLine(x - xLineSpace, y, x - xLineSpace, y + yLineSpace);
         			for (int j = 0; j < currentStack.length; j++) {
         				drawContainer(g, currentStack[j], x, y);
-        				x += 130;
+        				x += containerSpace;
         			}
         			x = HSPACE;
-        			y += 60;
+        			y += stackSpace;
         		}
     		} catch (ManifestException e) {
     			JOptionPane.showConfirmDialog(null, "Cannot display a container object.", 
@@ -95,6 +100,9 @@ public class CargoCanvas extends JPanel {
      * @param y The y location for the Rectangle.
      */
     private void drawContainer(Graphics g, FreightContainer container, int x, int y) {
+    	int xSpace = x + 20;
+    	int ySpace = y + 15;
+    	int foundSpace = x + 10;
     	if (container.getClass().equals(DangerousGoodsContainer.class)) {
     		g.setColor(Color.RED);
     		g.drawRect(x, y, WIDTH, HEIGHT);
@@ -102,12 +110,12 @@ public class CargoCanvas extends JPanel {
     		g.setColor(Color.WHITE);
     		if (toFind != null) {
     			if (toFind.equals(container.getCode())) {
-        			g.drawString("|| " + container.getCode().toString() + " ||", x + 10, y + 15);
+        			g.drawString("|| " + container.getCode().toString() + " ||", foundSpace, ySpace);
         		} else {
-        			g.drawString(container.getCode().toString(), x + 20, y + 15);
+        			g.drawString(container.getCode().toString(), xSpace, ySpace);
         		}
     		} else {
-    			g.drawString(container.getCode().toString(), x + 20, y + 15);
+    			g.drawString(container.getCode().toString(), xSpace, ySpace);
     		}
     	} else if (container.getClass().equals(GeneralGoodsContainer.class)) {
     		g.setColor(Color.GRAY);
@@ -116,12 +124,12 @@ public class CargoCanvas extends JPanel {
     		g.setColor(Color.WHITE);
     		if (toFind != null) {
     			if (toFind.equals(container.getCode())) {
-        			g.drawString("|| " + container.getCode().toString() + " ||", x + 10, y + 15);
+        			g.drawString("|| " + container.getCode().toString() + " ||", foundSpace, ySpace);
         		} else {
-        			g.drawString(container.getCode().toString(), x + 20, y + 15);
+        			g.drawString(container.getCode().toString(), xSpace, ySpace);
         		}
     		} else {
-    			g.drawString(container.getCode().toString(), x + 20, y + 15);
+    			g.drawString(container.getCode().toString(), xSpace, ySpace);
     		}
     	} else if (container.getClass().equals(RefrigeratedContainer.class)) {
     		g.setColor(Color.BLUE);
@@ -130,12 +138,12 @@ public class CargoCanvas extends JPanel {
     		g.setColor(Color.WHITE);
     		if (toFind != null) {
     			if (toFind.equals(container.getCode())) {
-        			g.drawString("|| " + container.getCode().toString() + " ||", x + 10, y + 15);
+        			g.drawString("|| " + container.getCode().toString() + " ||", foundSpace, ySpace);
         		} else {
-        			g.drawString(container.getCode().toString(), x + 20, y + 15);
+        			g.drawString(container.getCode().toString(), xSpace, ySpace);
         		}
     		} else {
-    			g.drawString(container.getCode().toString(), x + 20, y + 15);
+    			g.drawString(container.getCode().toString(), xSpace, ySpace);
     		}
     	}
     }
