@@ -25,6 +25,7 @@ import asgn2Manifests.CargoManifest;
  * The main window for the Cargo Manifest graphics application.
  *
  * @author CAB302
+ * @author Thanat Chokwijitkul n9234900
  */
 public class CargoFrame extends JFrame {
 

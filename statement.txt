@@ -19,17 +19,21 @@ Summary of Contribution (Month Yean Koh)
 + The implementation of the CargoManifest class (coder)
 
 Assignment 2 Part 2 - Graphical User Interface Programming
-+ The implementation of the AbstractDialog class
-+ The implementation of the ManifestDialog class
-+ The implementation of the ContainerCodeDialog class
-+ The implementation of the LoadContainerDialog class
+Summary of Contribution (Thanat Chokwijitkul)
 + The implementation of the CargoTextFrame class
 + The implementation of the CargoTextArea class
 + The implementation of the CargoFrame class
 + The implementation of the CargoCanvas class
 
+Summary of Contribution (Month Yean Koh)
++ The implementation of the AbstractDialog class
++ The implementation of the ManifestDialog class
++ The implementation of the ContainerCodeDialog class
++ The implementation of the LoadContainerDialog class
+
 Additional test class
-+ The implementation of the ManifestGUITests class
+Summary of Contribution (Thanat Chokwijitkul and Month Yean Koh)
++ The implementation of the ManifestGUITests class 
 
 STATEMENT OF AGREEMENT ON THE PROJECT CONTRIBUTION
 As specified in the assignment 2's specifications, when developing 

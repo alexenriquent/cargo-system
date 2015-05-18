@@ -30,6 +30,7 @@ import asgn2Exceptions.InvalidCodeException;
  * Creates a dialog box allowing the user to enter a ContainerCode.
  *
  * @author CAB302
+ * @author Month Yean Koh n9070095
  */
 public class ContainerCodeDialog extends AbstractDialog {
 

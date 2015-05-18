@@ -35,6 +35,7 @@ import asgn2Manifests.CargoManifest;
  * The main window for the Cargo Manifest Text application.
  *
  * @author CAB302
+ * @author Thanat Chokwijitkul n9234900
  */
 public class CargoTextFrame extends JFrame {
 

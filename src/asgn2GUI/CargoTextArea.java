@@ -15,6 +15,7 @@ import asgn2Manifests.CargoManifest;
  * Creates a JTextArea in which textual components are laid out to represent the cargo manifest.
  *
  * @author CAB302.
+ * @author Thanat Chokwijitkul n9234900
  */
 public class CargoTextArea extends JTextArea {
 

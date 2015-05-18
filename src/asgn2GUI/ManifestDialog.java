@@ -24,6 +24,7 @@ import asgn2Manifests.CargoManifest;
  * Creates a dialog box allowing the user to enter parameters for a new <code>CargoManifest</code>.
  *
  * @author CAB302
+ * @author Month Yean Koh n9070095
  */
 public class ManifestDialog extends AbstractDialog {
 	

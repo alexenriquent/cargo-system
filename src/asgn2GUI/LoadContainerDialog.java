@@ -33,6 +33,7 @@ import asgn2Exceptions.InvalidContainerException;
  * Creates a dialog box allowing the user to enter information required for loading a container.
  *
  * @author CAB302
+ * @author Month Yean Koh n9070095
  */
 public class LoadContainerDialog extends AbstractDialog implements ActionListener, ItemListener {
 
