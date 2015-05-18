@@ -38,6 +38,22 @@ public class ContainerTests {
 	private static final String CONTAINER_CODE_5 = "QUTU7200318";
 	private static final String CONTAINER_CODE_6 = "IBMU4882351";
 	
+	private static final String INVALID_CONTAINER_CODE_1 = "IBMU48823511"; // Invalid length More Character
+	private static final String INVALID_CONTAINER_CODE_2 = "IBMU488211"; // Invalid length Less Character
+	private static final String INVALID_CONTAINER_CODE_3 = "InkU2633836"; // Does Not Consist of three Upper-case character
+	private static final String INVALID_CONTAINER_CODE_4 = "INkU2633836"; // Does Not Consist of three Upper-case character
+	private static final String INVALID_CONTAINER_CODE_5 = "I23U2633836"; // Owner Code Does Not Consist of three character
+	
+	private static final String INVALID_CONTAINER_CODE_6 = "U2633839"; // Have No Owner Code
+    private static final String INVALID_CONTAINER_CODE_7 = "INK2633836"; // ContainerCode have not Identifier
+    private static final String INVALID_CONTAINER_CODE_8 = "INKX2633836"; // ContainerCode Category Identifier is Not 'U'
+	private static final String INVALID_CONTAINER_CODE_9 = "INKu2633836"; // ContainerCode Category Identifier is Not Upper Case 'U'
+    private static final String INVALID_CONTAINER_CODE_10 = ""; // ContainerCode Have empty code
+    private static final String INVALID_CONTAINER_CODE_11 = "INKU"; // ContainerCode Serial number have no Digit
+    private static final String INVALID_CONTAINER_CODE_12 = "INKU2638A6"; //  Serial Number Replace by Character In between
+    private static final String INVALID_CONTAINER_CODE_13 = "INKU26338A67A"; // Serial Number Have Character In between
+    private static final String INVALID_CONTAINER_CODE_14 = "INKU26338786"; // Serial Number HAve More Then 6 Digit
+	
 	private ContainerCode code1;
 	private ContainerCode code2;
 	
@@ -73,145 +89,159 @@ public class ContainerTests {
 	
 	/**
 	 * Test method For {@link asgn2Codes.ContainerCode#ContainerCode(String)}
-	 * Test Invalid Code Length If More then 11 Character
+	 * Confirm that the method throws an exception 
+	 * IF ContainerCode Length  More then 11 Character
 	 * @throws InvalidCodeException
 	 */
 	@Test (expected = InvalidCodeException.class)
 	public void CCInvalidCodeLength() throws InvalidCodeException {
-		CCTest = new ContainerCode("INKU26338376");
+		CCTest = new ContainerCode(INVALID_CONTAINER_CODE_1);
 		
 	}
 	
 	/**
 	 * Test method For {@link asgn2Codes.ContainerCode#ContainerCode(String)}
-	 * Test Invalid Code Length If Less then 11 Character
+	 * Confirm that the method throws an exception 
+	 * IF ContainerCode Length is Less then 11 Character
 	 * @throws InvalidCodeException
 	 */
 	@Test (expected = InvalidCodeException.class)
 	public void CCInvalidCodeLengthLessThen11() throws InvalidCodeException {
-		CCTest = new ContainerCode("INKU263376");
+		CCTest = new ContainerCode(INVALID_CONTAINER_CODE_2);
 		
 	}
 	
 	/**
 	 * Test method For {@link asgn2Codes.ContainerCode#ContainerCode(String)}
-	 * Test Invalid Owner Code Does Not Consist of three Upper-case character
+	 * Confirm that the method throws an exception 
+	 * IF ContainerCode Does Not Consist of three Upper-case character
 	 * @throws InvalidCodeException
 	 */
 	@Test (expected = InvalidCodeException.class)
 	public void CCInvalidOwnerUpperCaseCode() throws InvalidCodeException {
-		CCTest = new ContainerCode("InkU2633836");
+		CCTest = new ContainerCode(INVALID_CONTAINER_CODE_3);
 	}
 	
 	/**
 	 * Test method For {@link asgn2Codes.ContainerCode#ContainerCode(String)}
-	 * Test Invalid Owner Code Does Not Consist of three Upper-case character
+	 * Confirm that the method throws an exception 
+	 * If ContainerCode Owner Code Does Not Consist of three Upper-case character
 	 * @throws InvalidCodeException
 	 */
 	@Test (expected = InvalidCodeException.class)
 	public void CCInvalidOwnerCode() throws InvalidCodeException {
-		CCTest = new ContainerCode("INkU2633836");
+		CCTest = new ContainerCode(INVALID_CONTAINER_CODE_4);
 	}
 	
 	/**
 	 * Test method For {@link asgn2Codes.ContainerCode#ContainerCode(String)}
-	 * Test Invalid Owner Code Does Not Consist of three character
+	 * Confirm that the method throws an exception 
+	 * If ContainerCode Owner Code Does Not Consist of three character
 	 * @throws InvalidCodeException
 	 */
 	@Test (expected = InvalidCodeException.class)
 	public void CCInvalidOwnerCodeWithDigit() throws InvalidCodeException {
-		CCTest = new ContainerCode("I23U2633836");
+		CCTest = new ContainerCode(INVALID_CONTAINER_CODE_5);
 	}
 	
 	/**
 	 * Test method for {@link asgn2Codes.ContainerCode#ContainerCode(String)}
-	 * Test for No Owner Code
+	 * Confirm that the method throws an exception 
+	 * If ContainerCode have No Owner Code
 	 * @throws InvalidCodeException
 	 */
 	@Test (expected = InvalidCodeException.class)
 	public void ContainerCodeMissingOwnerCode() throws InvalidCodeException {
-		CCTest = new ContainerCode("U2633839");
+		CCTest = new ContainerCode(INVALID_CONTAINER_CODE_6);
 	}
 	
 	/**
 	 * Test method for {@link asgn2Codes.ContainerCode#ContainerCode(String)}
-	 * Test for not Identifier 
+	 * Confirm that the method throws an exception 
+	 * If ContainerCode have not Identifier 
 	 * @throws InvalidCodeException
 	 */
 	@Test(expected = InvalidCodeException.class)
 	public void ContainerCodeMissingCatergoryIdentifier() throws InvalidCodeException {
-		CCTest = new ContainerCode("INK2633836");
+		CCTest = new ContainerCode(INVALID_CONTAINER_CODE_7);
 	}
 	
 	/**
 	 * Test method For {@link asgn2Codes.ContainerCode#ContainerCode(String)}
-	 * Test Invalid Category Identifier is Not 'U'
+	 * Confirm that the method throws an exception 
+	 * IF ContainerCode Category Identifier is Not 'U'
 	 * @throws InvalidCodeException
 	 */
 	@Test (expected = InvalidCodeException.class)
 	public void CCInvalidCategoryIdentifier() throws InvalidCodeException {
-		CCTest = new ContainerCode("INKX2633836");
+		CCTest = new ContainerCode(INVALID_CONTAINER_CODE_8);
 		
 	}
 	
 	/**
 	 * Test method For {@link asgn2Codes.ContainerCode#ContainerCode(String)}
-	 * Test Invalid Category Identifier is Not Upper Case 'U'
+	 * Confirm that the method throws an exception 
+	 * IF ContainerCode Category Identifier is Not Upper Case 'U'
 	 * @throws InvalidCodeException
 	 */
 	@Test (expected = InvalidCodeException.class)
 	public void CCInvalidCategoryIdentifiersmallercase() throws InvalidCodeException {
-		CCTest = new ContainerCode("INKu2633836");
+		CCTest = new ContainerCode(INVALID_CONTAINER_CODE_9);
 	}
 	
 	/**
 	 * Test method for {@link asgn2Codes.ContainerCode#ContainerCode(String)}
-	 * Test for empty code
+	 * Confirm that the method throws an exception 
+	 * If ContainerCode Have empty code
 	 * @throws InvalidCodeException
 	 */
 	@Test (expected = InvalidCodeException.class)
 	public void ContainerCodeEmptyString() throws InvalidCodeException {
-		CCTest = new ContainerCode("");
+		CCTest = new ContainerCode(INVALID_CONTAINER_CODE_10);
 	}
 
 	/**
 	 * Test method for {@link asgn2Codes.ContainerCode#ContainerCode(String)}
-	 * Test for no Serial number and check Digit
+	 * Confirm that the method throws an exception 
+	 * If ContainerCode Serial number have no Digit
 	 * @throws InvalidCodeException
 	 */
 	@Test (expected = InvalidCodeException.class)
 	public void ContainerCodeMissingSerialCheckDigit() throws InvalidCodeException {
-		CCTest = new ContainerCode("INKU");
+		CCTest = new ContainerCode(INVALID_CONTAINER_CODE_11);
 	}
 	
 	/**
 	 * Test method For {@link asgn2Codes.ContainerCode#ContainerCode(String)}
-	 * Test Serial Number Does not consist of six digit
+	 * Confirm that the method throws an exception 
+	 * IF ContainerCode Serial Number Does not consist of six digit AND With Character Inside
 	 * @throws InvalidCodeException
 	 */
 	@Test (expected = InvalidCodeException.class)
 	public void CCInvalidSerialNumber() throws InvalidCodeException {
-		CCTest = new ContainerCode("INKU26338A6");
+		CCTest = new ContainerCode(INVALID_CONTAINER_CODE_12);
 	}
 	
 	/**
 	 * Test method For {@link asgn2Codes.ContainerCode#ContainerCode(String)}
-	 * Test Serial Number Does not consist of six digit and a Case In Between
+	 * Confirm that the method throws an exception 
+	 * IF ContainerCode Serial Number Does consist of six digit but with some Character In Between
 	 * @throws InvalidCodeException
 	 */
 	@Test (expected = InvalidCodeException.class)
 	public void CCInvalidSerialNumberAndaCaseinBetween() throws InvalidCodeException {
-		CCTest = new ContainerCode("INKU26338A67A");
+		CCTest = new ContainerCode(INVALID_CONTAINER_CODE_13);
 	}
 	
 	/**
 	 * Test method For {@link asgn2Codes.ContainerCode#ContainerCode(String)}
-	 * Test InCorrect Digit more then 6 Digit
+	 * Confirm that the method throws an exception 
+	 * If More then 6 Digit
 	 * @throws InvalidCodeException
 	 */
 	@Test (expected = InvalidCodeException.class)
 	public void CCInvalidCheckDigit() throws InvalidCodeException {
-		CCTest = new ContainerCode("INKU26338786");
+		CCTest = new ContainerCode(INVALID_CONTAINER_CODE_14);
 	}
 	
 	/**
@@ -227,7 +257,7 @@ public class ContainerTests {
 	
 	/**
 	 * Test method For {@link asgn2Codes.ContainerCode#toString()}
-	 * Test toString whether False Equals to Default Value
+	 * Test toString Whether is not the same code or  with Another Code
 	 * @throws InvalidCodeException
 	 */
 	@Test 
@@ -238,7 +268,7 @@ public class ContainerTests {
 	
 	/**
 	 * Test method For {@link asgn2Codes.ContainerCode#equals(Object)}
-	 * Test toString whether Equals to Default Value
+	 * Test Equal whether there is the  same code or not with another COde
 	 * @throws InvalidCodeException
 	 */
 	@Test 
@@ -251,7 +281,7 @@ public class ContainerTests {
 	
 	/**
 	 * Test method For {@link asgn2Codes.ContainerCode#equals(Object)}
-	 * Test Two ContainerCode Are Not Equal
+	 * Test if both Two ContainerCode Are Not the same
 	 * @throws InvalidCodeException
 	 */
 	@Test
@@ -263,7 +293,7 @@ public class ContainerTests {
 	
 	/**
 	 * Test method For {@link asgn2Codes.ContainerCode#equals(Object)}
-	 * Test Two ContainerCode Are Equal
+	 * Test the Method with Checking Whether if Two ContainerCode Are Equal or Not
 	 * @throws InvalidCodeException
 	 */
 	@Test
@@ -291,6 +321,7 @@ public class ContainerTests {
 	/**
 	 * Test method for {@link asgn2Containers.DangerousGoodsContainer#getCategory()}
 	 * Test GetCategoris
+	 * Test If Both Categories Value Are the Same
 	 * @throws InvalidContainerException
 	 * @throws InvalidCodeException 
 	 */
@@ -304,6 +335,7 @@ public class ContainerTests {
 	/**
 	 * Test method for {@link asgn2Containers.DangerousGoodsContainer#getCategory()}
 	 * Test Get False Categories
+	 * Test If Both Value are not The Same
 	 * @throws InvalidContainerException
 	 * @throws InvalidCodeException 
 	 */
@@ -316,7 +348,8 @@ public class ContainerTests {
 	
 	/**
 	 * Test method for {@link asgn2Containers.DangerousGoodsContainer#DangerousGoodsContainer(ContainerCode, Integer, Integer)}
-	 * Test For InvalidGrossWeight LESS THEN 4
+	 * Test For InvalidGrossWeight 
+	 * Confirm that the method throws an exception IF Gross Weight Less Then 4
 	 * @throws InvalidContainerException
 	 * @throws InvalidCodeException 
 	 */
@@ -328,7 +361,8 @@ public class ContainerTests {
 	
 	/**
 	 * Test method for {@link asgn2Containers.DangerousGoodsContainer#DangerousGoodsContainer(ContainerCode, Integer, Integer)}
-	 * Test For InvalidGrossWeight More Then 30
+	 * Test For InvalidGrossWeight 
+	 * Confirm that the method throws an exception If GrossWeight More Then 30
 	 * @throws InvalidContainerException
 	 * @throws InvalidCodeException 
 	 */
@@ -340,7 +374,8 @@ public class ContainerTests {
 	
 	/**
 	 * Test method for {@link asgn2Containers.DangerousGoodsContainer#DangerousGoodsContainer(ContainerCode, Integer, Integer)}
-	 * Test For Invalid Categories Less Then 1
+	 * Test For Invalid Categories
+	 * Confirm that the method throws an exception If Categories Less Then 1
 	 * @throws InvalidContainerException
 	 * @throws InvalidCodeException 
 	 */
@@ -352,7 +387,8 @@ public class ContainerTests {
 
 	/**
 	 * Test method for {@link asgn2Containers.DangerousGoodsContainer#DangerousGoodsContainer(ContainerCode, Integer, Integer)}
-	 * Test For Invalid Categories More Then 9
+	 * Test For Invalid Categories 
+	 * Confirm that the method throws an exception If Categories More Then 9
 	 * @throws InvalidContainerException
 	 * @throws InvalidCodeException 
 	 */
@@ -368,6 +404,7 @@ public class ContainerTests {
 	/**
 	 * Test method for {@link asgn2Containers.FreightContainer#getCode()}
 	 * Test For GetCode
+	 * Test Whether Both of the Code Have The Same Code
 	 * @throws InvalidContainerException
 	 * @throws InvalidCodeException 
 	 */
@@ -381,6 +418,7 @@ public class ContainerTests {
 	/**
 	 * Test method for {@link asgn2Containers.FreightContainer#getCode()}
 	 * Test For GetCode
+	 * Test If Both Of The Code Are Not Same.
 	 * @throws InvalidContainerException
 	 * @throws InvalidCodeException 
 	 */
@@ -394,6 +432,7 @@ public class ContainerTests {
 	/**
 	 * Test method for {@link asgn2Containers.FreightContainer#getGrossWeight()}
 	 * Test For GetGrossWeight
+	 * Test if Both of the value are the same.
 	 * @throws InvalidContainerException
 	 * @throws InvalidCodeException 
 	 */
@@ -406,7 +445,8 @@ public class ContainerTests {
 	
 	/**
 	 * Test method for {@link asgn2Containers.FreightContainer#getGrossWeight()}
-	 * Test For GetGrossWeight assertFalse Gross weight 
+	 * Test For GetGrossWeight 
+	 * Test if Gross weight are not Equal 
 	 * @throws InvalidContainerException
 	 * @throws InvalidCodeException 
 	 */
@@ -433,7 +473,8 @@ public class ContainerTests {
 	
 	/**
 	 * Test method for {@link asgn2Containers.GeneralGoodsContainer#GeneralGoodsContainer(ContainerCode, Integer)}
-	 * Test For Invalid GrossWeight If Less Then 4
+	 * Test For Invalid GrossWeight 
+	 * Test If Gross Weight Less Then 4
 	 * @throws InvalidContainerException
 	 * @throws InvalidCodeException 
 	 */
@@ -445,7 +486,8 @@ public class ContainerTests {
 	
 	/**
 	 * Test method for {@link asgn2Containers.GeneralGoodsContainer#GeneralGoodsContainer(ContainerCode, Integer)}
-	 * Test For Invalid GrossWeight If More Then 30
+	 * Test For Invalid GrossWeight 
+	 * Test If Gross Weight More Then 30
 	 * @throws InvalidContainerException
 	 * @throws InvalidCodeException 
 	 */
@@ -472,7 +514,8 @@ public class ContainerTests {
 	
 	/**
 	 * Test method for {@link asgn2Containers.RefrigeratedContainer#RefrigeratedContainer(ContainerCode, Integer, Integer)}
-	 * Test For InvalidGrossWeight Less Then 4
+	 * Test For InvalidGrossWeight 
+	 * Test If  Gross Weight Less Then 4
 	 * @throws InvalidContainerException
 	 * @throws InvalidCodeException 
 	 */
@@ -484,7 +527,8 @@ public class ContainerTests {
 	
 	/**
 	 * Test method for {@link asgn2Containers.RefrigeratedContainer#RefrigeratedContainer(ContainerCode, Integer, Integer)}
-	 * Test For InvalidGrossWeight More Then 30
+	 * Test For InvalidGrossWeight 
+	 * Test If Gross Weight More Then 30
 	 * @throws InvalidContainerException
 	 * @throws InvalidCodeException 
 	 */
@@ -496,7 +540,8 @@ public class ContainerTests {
 	
 	/**
 	 * Test method for {@link asgn2Containers.RefrigeratedContainer#getTemperature()}
-	 * Test For getTemperature
+	 * Test For getTemperature 
+	 * Test Whether both of them are the same.
 	 * @throws InvalidContainerException
 	 * @throws InvalidCodeException 
 	 */
@@ -510,6 +555,7 @@ public class ContainerTests {
 	/**
 	 * Test method for {@link asgn2Containers.RefrigeratedContainer#getTemperature()}
 	 * Test For get False Temperature
+	 * Test if the Temperature are not the same
 	 * @throws InvalidContainerException
 	 * @throws InvalidCodeException 
 	 */
@@ -523,6 +569,7 @@ public class ContainerTests {
 	/**
 	 * Test method for {@link asgn2Containers.RefrigeratedContainer#setTemperature(Integer)}
 	 * Test For Set Temperature and getTemperature
+	 * Test if both of them are Equal
 	 * @throws InvalidContainerException
 	 * @throws InvalidCodeException 
 	 */
