@@ -27,6 +27,8 @@ import asgn2GUI.CargoTextFrame;
  * Defines FEST Swing tests for various scenarios of the Cargo System.
  * This test class uses the CargoFrameTests class created by Malcolm 
  * as a template. 
+ * 
+ * @author Month Yean Koh n9070095
  */
 public class ManifestGUITests {
 	
