@@ -158,7 +158,9 @@ public class ManifestGUITests {
         }
     }
     
-    /*     
+    /*
+     * @author Malcolm
+     *      
      * Helper - Brings up a ManifestDilaog for further interaction in tests.
      */
     private DialogFixture prepareManifestDialog() {
@@ -168,6 +170,8 @@ public class ManifestGUITests {
     }
 
     /*
+     * @author Malcolm
+     * 
      * Helper - Puts text in the relevant text areas of the ManifestDialog.
      */
     private void manifestDialogEnterText(DialogFixture dialog, String stacks, String height, String weight) {
@@ -184,6 +188,8 @@ public class ManifestGUITests {
     }
     
     /*
+     * @author Malcolm
+     * 
      * Helper - Enters data into a Create Manifest dialog
      */
     private void loadContainer(String containerType, String code, String weight,
@@ -202,6 +208,8 @@ public class ManifestGUITests {
     }
     
     /*
+     * @author Malcolm
+     * 
      * Helper - Clicks the Unload button and enters a valid container code.
      */
     private void unloadContainer(String code) {
@@ -212,6 +220,8 @@ public class ManifestGUITests {
     }
     
     /*
+     * @author Malcolm
+     * 
      * Helper - Clicks the Find button and enters a valid container code.
      */
     private void findContainer(String code) {
