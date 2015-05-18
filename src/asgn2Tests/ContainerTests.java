@@ -38,6 +38,22 @@ public class ContainerTests {
 	private static final String CONTAINER_CODE_5 = "QUTU7200318";
 	private static final String CONTAINER_CODE_6 = "IBMU4882351";
 	
+	private static final String INVALID_CONTAINER_CODE_1 = "IBMU48823511"; // Invalid length More Character
+	private static final String INVALID_CONTAINER_CODE_2 = "IBMU488211"; // Invalid length Less Character
+	private static final String INVALID_CONTAINER_CODE_3 = "InkU2633836"; // Does Not Consist of three Upper-case character
+	private static final String INVALID_CONTAINER_CODE_4 = "INkU2633836"; // Does Not Consist of three Upper-case character
+	private static final String INVALID_CONTAINER_CODE_5 = "I23U2633836"; // Owner Code Does Not Consist of three character
+	
+	private static final String INVALID_CONTAINER_CODE_6 = "U2633839"; // Have No Owner Code
+    private static final String INVALID_CONTAINER_CODE_7 = "INK2633836"; // ContainerCode have not Identifier
+    private static final String INVALID_CONTAINER_CODE_8 = "INKX2633836"; // ContainerCode Category Identifier is Not 'U'
+	private static final String INVALID_CONTAINER_CODE_9 = "INKu2633836"; // ContainerCode Category Identifier is Not Upper Case 'U'
+    private static final String INVALID_CONTAINER_CODE_10 = ""; // ContainerCode Have empty code
+    private static final String INVALID_CONTAINER_CODE_11 = "INKU"; // ContainerCode Serial number have no Digit
+    private static final String INVALID_CONTAINER_CODE_12 = "INKU2638A6"; //  Serial Number Replace by Character In between
+    private static final String INVALID_CONTAINER_CODE_13 = "INKU26338A67A"; // Serial Number Have Character In between
+    private static final String INVALID_CONTAINER_CODE_14 = "INKU26338786"; // Serial Number HAve More Then 6 Digit
+	
 	private ContainerCode code1;
 	private ContainerCode code2;
 	
@@ -79,7 +95,7 @@ public class ContainerTests {
 	 */
 	@Test (expected = InvalidCodeException.class)
 	public void CCInvalidCodeLength() throws InvalidCodeException {
-		CCTest = new ContainerCode("INKU26338376");
+		CCTest = new ContainerCode(INVALID_CONTAINER_CODE_1);
 		
 	}
 	
@@ -91,7 +107,7 @@ public class ContainerTests {
 	 */
 	@Test (expected = InvalidCodeException.class)
 	public void CCInvalidCodeLengthLessThen11() throws InvalidCodeException {
-		CCTest = new ContainerCode("INKU263376");
+		CCTest = new ContainerCode(INVALID_CONTAINER_CODE_2);
 		
 	}
 	
@@ -103,7 +119,7 @@ public class ContainerTests {
 	 */
 	@Test (expected = InvalidCodeException.class)
 	public void CCInvalidOwnerUpperCaseCode() throws InvalidCodeException {
-		CCTest = new ContainerCode("InkU2633836");
+		CCTest = new ContainerCode(INVALID_CONTAINER_CODE_3);
 	}
 	
 	/**
@@ -114,7 +130,7 @@ public class ContainerTests {
 	 */
 	@Test (expected = InvalidCodeException.class)
 	public void CCInvalidOwnerCode() throws InvalidCodeException {
-		CCTest = new ContainerCode("INkU2633836");
+		CCTest = new ContainerCode(INVALID_CONTAINER_CODE_4);
 	}
 	
 	/**
@@ -125,7 +141,7 @@ public class ContainerTests {
 	 */
 	@Test (expected = InvalidCodeException.class)
 	public void CCInvalidOwnerCodeWithDigit() throws InvalidCodeException {
-		CCTest = new ContainerCode("I23U2633836");
+		CCTest = new ContainerCode(INVALID_CONTAINER_CODE_5);
 	}
 	
 	/**
@@ -136,7 +152,7 @@ public class ContainerTests {
 	 */
 	@Test (expected = InvalidCodeException.class)
 	public void ContainerCodeMissingOwnerCode() throws InvalidCodeException {
-		CCTest = new ContainerCode("U2633839");
+		CCTest = new ContainerCode(INVALID_CONTAINER_CODE_6);
 	}
 	
 	/**
@@ -147,7 +163,7 @@ public class ContainerTests {
 	 */
 	@Test(expected = InvalidCodeException.class)
 	public void ContainerCodeMissingCatergoryIdentifier() throws InvalidCodeException {
-		CCTest = new ContainerCode("INK2633836");
+		CCTest = new ContainerCode(INVALID_CONTAINER_CODE_7);
 	}
 	
 	/**
@@ -158,7 +174,7 @@ public class ContainerTests {
 	 */
 	@Test (expected = InvalidCodeException.class)
 	public void CCInvalidCategoryIdentifier() throws InvalidCodeException {
-		CCTest = new ContainerCode("INKX2633836");
+		CCTest = new ContainerCode(INVALID_CONTAINER_CODE_8);
 		
 	}
 	
@@ -170,7 +186,7 @@ public class ContainerTests {
 	 */
 	@Test (expected = InvalidCodeException.class)
 	public void CCInvalidCategoryIdentifiersmallercase() throws InvalidCodeException {
-		CCTest = new ContainerCode("INKu2633836");
+		CCTest = new ContainerCode(INVALID_CONTAINER_CODE_9);
 	}
 	
 	/**
@@ -181,7 +197,7 @@ public class ContainerTests {
 	 */
 	@Test (expected = InvalidCodeException.class)
 	public void ContainerCodeEmptyString() throws InvalidCodeException {
-		CCTest = new ContainerCode("");
+		CCTest = new ContainerCode(INVALID_CONTAINER_CODE_10);
 	}
 
 	/**
@@ -192,29 +208,29 @@ public class ContainerTests {
 	 */
 	@Test (expected = InvalidCodeException.class)
 	public void ContainerCodeMissingSerialCheckDigit() throws InvalidCodeException {
-		CCTest = new ContainerCode("INKU");
+		CCTest = new ContainerCode(INVALID_CONTAINER_CODE_11);
 	}
 	
 	/**
 	 * Test method For {@link asgn2Codes.ContainerCode#ContainerCode(String)}
 	 * Confirm that the method throws an exception 
-	 * IF ContainerCode Serial Number Does not consist of six digit
+	 * IF ContainerCode Serial Number Does not consist of six digit AND With Character Inside
 	 * @throws InvalidCodeException
 	 */
 	@Test (expected = InvalidCodeException.class)
 	public void CCInvalidSerialNumber() throws InvalidCodeException {
-		CCTest = new ContainerCode("INKU26338A6");
+		CCTest = new ContainerCode(INVALID_CONTAINER_CODE_12);
 	}
 	
 	/**
 	 * Test method For {@link asgn2Codes.ContainerCode#ContainerCode(String)}
 	 * Confirm that the method throws an exception 
-	 * IF ContainerCode Serial Number Does not consist of six digit and a Case In Between
+	 * IF ContainerCode Serial Number Does consist of six digit but with some Character In Between
 	 * @throws InvalidCodeException
 	 */
 	@Test (expected = InvalidCodeException.class)
 	public void CCInvalidSerialNumberAndaCaseinBetween() throws InvalidCodeException {
-		CCTest = new ContainerCode("INKU26338A67A");
+		CCTest = new ContainerCode(INVALID_CONTAINER_CODE_13);
 	}
 	
 	/**
@@ -225,7 +241,7 @@ public class ContainerTests {
 	 */
 	@Test (expected = InvalidCodeException.class)
 	public void CCInvalidCheckDigit() throws InvalidCodeException {
-		CCTest = new ContainerCode("INKU26338786");
+		CCTest = new ContainerCode(INVALID_CONTAINER_CODE_14);
 	}
 	
 	/**
@@ -241,7 +257,7 @@ public class ContainerTests {
 	
 	/**
 	 * Test method For {@link asgn2Codes.ContainerCode#toString()}
-	 * Test toString Whether is not the same with Another Code
+	 * Test toString Whether is not the same code or  with Another Code
 	 * @throws InvalidCodeException
 	 */
 	@Test 
@@ -252,7 +268,7 @@ public class ContainerTests {
 	
 	/**
 	 * Test method For {@link asgn2Codes.ContainerCode#equals(Object)}
-	 * Test Equal whether there are same or not with another COde
+	 * Test Equal whether there is the  same code or not with another COde
 	 * @throws InvalidCodeException
 	 */
 	@Test 
@@ -265,7 +281,7 @@ public class ContainerTests {
 	
 	/**
 	 * Test method For {@link asgn2Codes.ContainerCode#equals(Object)}
-	 * Test if Two ContainerCode Are Not Equal
+	 * Test if both Two ContainerCode Are Not the same
 	 * @throws InvalidCodeException
 	 */
 	@Test
