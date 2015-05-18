@@ -1,0 +1,623 @@
+* fc4770b : Updated the statement of completeness
+* b51fa63 : Updated regular language for ManifestException
+*   0d1e6e2 : Merge branch 'master' of https://bitbucket.org/cab302/assignment2release
+|\  
+| * fe82bb7 : Update exception matching
+* | aa58abd : Added some local variables in CargoCanvas
+* |   23606b7 : Updated ManifestGUITests
+|\ \  
+| * \   88420ee : Merge branch 'master' of https://bitbucket.org/alexenriquent/cargo-system
+| |\ \  
+| * | | ab9221c : Implement MainFestGuiTEst
+| * | | 9a8a27e : Implement Invalid Container Code
+| * | | d421f49 : Implement COmmenting
+| * | | 75eba44 : Implement Comment
+* | | | cde47f0 : Summary of the project contribution
+| |/ /  
+|/| |   
+* | | f624ad0 : Updated author's name
+|/ /  
+* | 8304825 : Tested some functionalities of CargoFrame
+* | f9130ba : Updated statement.txt
+* | 05ea2f7 : Tested functionalities of CargoTextFrame and CargoFrame
+* | 19278e8 : Set up ManifestGUITests
+* | 9657f1a : Updated statement.txt (incomplete: part 2 contribution)
+* | 3b1f2bd : Added statement.txt
+* | 98345b4 : Added a context comment indicating project and environment
+* | 94a6537 : Updated setNewManifest() in ManifestTextFrame
+* |   00cfcd1 : Merge branch 'master' of https://bitbucket.org/alexenriquent/cargo-system
+|\ \  
+| * \   d9088b6 : Merge branch 'master' of https://bitbucket.org/alexenriquent/cargo-system
+| |\ \  
+| * | | 84901c3 : Improve Code Quality
+* | | | 534605e : Error handling when creating a new manifest
+| |/ /  
+|/| |   
+* | |   ce795ec : Merge branch 'master' of https://bitbucket.org/alexenriquent/cargo-system
+|\ \ \  
+| |/ /  
+| * | 579ed49 : ImplementTEst
+* | | 3fc9c23 : The graphic version runs for the first time
+* | | beccb3d : Initial implementation of CargoFrame
+* | | 7ac4605 : Implemented the code validation method in ContainerCodeDialog
+* | | 8490654 : Updated header comments
+|/ /  
+* | 33a04cc : CargoTextFrame passed all the tests in CargoFrameTests for the first time
+* | 41b1cf3 : Updated least significant digit (LSD) algorithm
+* | cce45a3 : CargoFrameTests finally runs properly
+* | 8722cdd : Testing
+* |   88843cf : Merge branch 'master' of https://bitbucket.org/alexenriquent/cargo-system
+|\ \  
+| * \   2c3c609 : Merge branch 'master' of https://bitbucket.org/alexenriquent/cargo-system
+| |\ \  
+| * | | c309480 : Set visibility of ManifestDialog
+| * | | b8ad306 : Updated the JOptionPane message boxes to JOptionPane.ERROR_MESSAGE
+| * | | c15411b : Dealing with referencing a non-static field with a static method
+| * | | cf608a8 : The text version compiles and runs for the first time
+| * | | 4893fea : Dealing with CardLayout in LoadContainerDialog
+| * | | 60dfad3 : Implemented ContainerCodeDialog
+| * | | 5194924 : Modified AbstractDialog and CargoDialog
+| * | | 98628c0 : Initial implemetation of CargoTextFrame
+| * | | 05ecd67 : Initial implementation of AbstractDialog and ManifestDialog
+* | | | e37fb16 : Container Test Implement Code Quality add Author
+* | | | f012132 : Implement Code Quality
+| |/ /  
+|/| |   
+* | | cebd1d0 : ContainerTest FIX String Code.
+|/ /  
+* | 0ed9288 : Updated Javadoc
+* | 50ca203 : Fixed conflicts in .classpath
+* |   fd52a81 : Merged with origin
+|\ \  
+| |/  
+| * e7a98bd : Inclusion of GUI and FEST libraries
+* | 962cdab : Updated classpath
+* | bcd0bc5 : Remove Local Variable
+* | 1af7718 : Fix Container Test With RefrigeratedContainer
+* | 0fe2be4 : have a look with Freight Container Test?
+* | 403c28e : Added & Implement Container Code Test
+* | c8ac2f0 : Remove Abstract From Freight Container Implement Test With Freight Container
+* | 83b49ce : Implement Container Test
+* | e8a8dac : Refactoring some methods in CargoManifest and more unit tests to ManifestTests
+* | 6218126 : Created an object for all the constructor test cases in ManifestTests
+* | fa06bf7 : README.md edited online with Bitbucket
+* |   39a58fd : Merge branch 'master' of https://bitbucket.org/alexenriquent/cargo-system
+|\ \  
+| * | ce898c6 : Implement Test
+| * | cf1de19 : ConTainerTEst Help
+* | | 97b01aa : Removed java.util.jar.Manifest
+|/ /  
+* | 0d0aa57 : Added more unit tests to ManifestTests
+* | 3437505 : Added more unit tests to ManifestTests
+* | 61606c0 : Add Author Name
+* |   214b546 : Merge branch 'master' of https://bitbucket.org/alexenriquent/cargo-system
+|\ \  
+| * | 8b60b55 : CargoMainFest Implementation
+| * | fd4ddeb : ConTainerTEst
+* | | 8560a84 : Changes to the ManifestTests class
+|/ /  
+* | 38e7526 : ContainerTEst
+* | 8222786 : Refactoring some trivial methods in the asgn2Containers package
+* | 53ddf81 : Implementation of the RefrigeratedContainer class
+* | 0649559 : Implementation of the GeneralGoodsContainer class
+* | 8f8a9e2 : Implementation of the DangerousGoodsContainer class
+* | 3107c33 : Implementation of the FreightContainer class
+* | 4636df5 : Implementation of a class for container codes
+* | c3d7b10 : Implementation of an exception class hierarchy
+* | 89a7304 : README.md edited online with Bitbucket
+|/  
+* 3ba2cdd : Initial commit of release codecommit fc4770b2b372cd633f48289127357283328a23e9
+Author: Thanat Chokwijitkul <alexenriquent@gmail.com>
+Date:   Tue May 19 09:40:38 2015 +1000
+
+    Updated the statement of completeness
+
+commit b51fa63522e98529c6ba788dea2ebe2233b6d1cf
+Author: Thanat Chokwijitkul <alexenriquent@gmail.com>
+Date:   Mon May 18 17:28:48 2015 +1000
+
+    Updated regular language for ManifestException
+
+commit 0d1e6e25b36c9b64086e5294c98d79e0d637f572
+Merge: aa58abd fe82bb7
+Author: Thanat Chokwijitkul <alexenriquent@gmail.com>
+Date:   Mon May 18 16:35:44 2015 +1000
+
+    Merge branch 'master' of https://bitbucket.org/cab302/assignment2release
+
+commit aa58abd753fb660859698d7f9f87692fdd2c90c9
+Author: Thanat Chokwijitkul <alexenriquent@gmail.com>
+Date:   Mon May 18 16:19:58 2015 +1000
+
+    Added some local variables in CargoCanvas
+
+commit 23606b797e9d92fc89f6a613aaab89fbbfc0a0be
+Merge: cde47f0 88420ee
+Author: Thanat Chokwijitkul <alexenriquent@gmail.com>
+Date:   Mon May 18 14:10:22 2015 +1000
+
+    Updated ManifestGUITests
+
+commit cde47f09656bb33bf485a8f9455fec5135df9057
+Author: Thanat Chokwijitkul <alexenriquent@gmail.com>
+Date:   Mon May 18 14:07:01 2015 +1000
+
+    Summary of the project contribution
+
+commit 88420ee5e6245d44ae029236ca3809374b43dfe2
+Merge: ab9221c f624ad0
+Author: XuiKoh <silversui@hotmail.com>
+Date:   Mon May 18 13:42:58 2015 +1000
+
+    Merge branch 'master' of https://bitbucket.org/alexenriquent/cargo-system
+
+commit f624ad0ce38e13b4b8ea56c4a1e17a3fd9f251b0
+Author: Thanat Chokwijitkul <alexenriquent@gmail.com>
+Date:   Mon May 18 13:25:01 2015 +1000
+
+    Updated author's name
+
+commit ab9221cac432bf15533f8b115066bb5020200bcc
+Author: XuiKoh <silversui@hotmail.com>
+Date:   Mon May 18 13:24:00 2015 +1000
+
+    Implement MainFestGuiTEst
+
+commit 9a8a27e3278aede500ff8e4fdcc7ca0a608c08a6
+Author: XuiKoh <silversui@hotmail.com>
+Date:   Mon May 18 11:49:49 2015 +1000
+
+    Implement Invalid Container Code
+
+commit d421f4985a3a27faf2b2e8831cbf45bd009b1658
+Author: XuiKoh <silversui@hotmail.com>
+Date:   Sun May 17 20:54:19 2015 +1000
+
+    Implement COmmenting
+
+commit 75eba446c0b4521068d1d96c75b65b027198cb3a
+Author: XuiKoh <silversui@hotmail.com>
+Date:   Sun May 17 19:10:51 2015 +1000
+
+    Implement Comment
+
+commit 8304825b9eb4f71efa92c7dc7f77402cefcd684f
+Author: Thanat Chokwijitkul <alexenriquent@gmail.com>
+Date:   Sun May 17 09:55:38 2015 +1000
+
+    Tested some functionalities of CargoFrame
+
+commit f9130babc61fdf3c6ce0a4fc2c84e07b6630b3f1
+Author: Thanat Chokwijitkul <alexenriquent@gmail.com>
+Date:   Sat May 16 16:16:58 2015 +1000
+
+    Updated statement.txt
+
+commit 05ea2f785005ade35ea296e10b476bce52e650b4
+Author: Thanat Chokwijitkul <alexenriquent@gmail.com>
+Date:   Sat May 16 16:13:35 2015 +1000
+
+    Tested functionalities of CargoTextFrame and CargoFrame
+
+commit 19278e8c702c060a92385b289cce9b5fa7ad945d
+Author: Thanat Chokwijitkul <alexenriquent@gmail.com>
+Date:   Fri May 15 10:16:10 2015 +1000
+
+    Set up ManifestGUITests
+
+commit fe82bb722576a2b5e254fa15acc689eccd7dc550
+Author: Malcolm Corney <m.corney@tpg.com.au>
+Date:   Fri May 15 09:49:44 2015 +1000
+
+    Update exception matching
+
+commit 9657f1ad02e53960e481fca41f3a9818a7ded032
+Author: Thanat Chokwijitkul <alexenriquent@gmail.com>
+Date:   Fri May 15 09:44:24 2015 +1000
+
+    Updated statement.txt (incomplete: part 2 contribution)
+
+commit 3b1f2bd1fa4c12ca133cdd47f07bd288332247f4
+Author: Thanat Chokwijitkul <alexenriquent@gmail.com>
+Date:   Thu May 14 20:16:15 2015 +1000
+
+    Added statement.txt
+
+commit 98345b4dc73c7d632d871ccf4c7df00a4930e118
+Author: Thanat Chokwijitkul <alexenriquent@gmail.com>
+Date:   Thu May 14 19:40:37 2015 +1000
+
+    Added a context comment indicating project and environment
+
+commit 94a65373bc3110a862d01cc31c3f752acd7594c1
+Author: Thanat Chokwijitkul <alexenriquent@gmail.com>
+Date:   Thu May 14 18:51:41 2015 +1000
+
+    Updated setNewManifest() in ManifestTextFrame
+
+commit 00cfcd165fa420a4e283b2d2e4a7426cb63b816d
+Merge: 534605e d9088b6
+Author: Thanat Chokwijitkul <alexenriquent@gmail.com>
+Date:   Thu May 14 16:02:48 2015 +1000
+
+    Merge branch 'master' of https://bitbucket.org/alexenriquent/cargo-system
+
+commit 534605e76bc38a8bdefb4cb33a91e3483a2056a2
+Author: Thanat Chokwijitkul <alexenriquent@gmail.com>
+Date:   Thu May 14 16:01:59 2015 +1000
+
+    Error handling when creating a new manifest
+
+commit d9088b66daae857644c00c2174eda06653978e8b
+Merge: 84901c3 ce795ec
+Author: XuiKoh <silversui@hotmail.com>
+Date:   Wed May 13 23:59:39 2015 +1000
+
+    Merge branch 'master' of https://bitbucket.org/alexenriquent/cargo-system
+
+commit ce795ec6e157e500298e8c6f5f3202e244867e28
+Merge: 3fc9c23 579ed49
+Author: Thanat Chokwijitkul <alexenriquent@gmail.com>
+Date:   Wed May 13 21:33:16 2015 +1000
+
+    Merge branch 'master' of https://bitbucket.org/alexenriquent/cargo-system
+
+commit 3fc9c23068ac27f0589ed640255ec6012a62a95f
+Author: Thanat Chokwijitkul <alexenriquent@gmail.com>
+Date:   Wed May 13 21:32:32 2015 +1000
+
+    The graphic version runs for the first time
+
+commit 84901c31e986838b79366c43e7955cf0cf0692dd
+Author: XuiKoh <silversui@hotmail.com>
+Date:   Wed May 13 20:22:38 2015 +1000
+
+    Improve Code Quality
+
+commit 579ed496faa56fe3ee780159464e2ecf855fe0a2
+Author: XuiKoh <silversui@hotmail.com>
+Date:   Wed May 13 16:54:25 2015 +1000
+
+    ImplementTEst
+
+commit beccb3df740c202f7133ae0cf4ee4576faf9bbd4
+Author: Thanat Chokwijitkul <alexenriquent@gmail.com>
+Date:   Wed May 13 08:40:57 2015 +1000
+
+    Initial implementation of CargoFrame
+
+commit 7ac46057a7668a25975206570b4b54e1ccc32b1f
+Author: Thanat Chokwijitkul <alexenriquent@gmail.com>
+Date:   Tue May 12 12:06:34 2015 +1000
+
+    Implemented the code validation method in ContainerCodeDialog
+
+commit 84906545ec6e9dfe0fc84e85ccdf37c553a0d81c
+Author: Thanat Chokwijitkul <alexenriquent@gmail.com>
+Date:   Tue May 12 10:56:59 2015 +1000
+
+    Updated header comments
+
+commit 33a04cccd51dd02686c7145decbe087739e43152
+Author: Thanat Chokwijitkul <alexenriquent@gmail.com>
+Date:   Tue May 12 09:53:04 2015 +1000
+
+    CargoTextFrame passed all the tests in CargoFrameTests for the first time
+
+commit 41b1cf3845c7496781cf1ee50e464e3278ee1fd1
+Author: Thanat Chokwijitkul <alexenriquent@gmail.com>
+Date:   Tue May 12 09:45:39 2015 +1000
+
+    Updated least significant digit (LSD) algorithm
+
+commit cce45a352a06743419e85c96a42cec6cb4f727a9
+Author: Thanat Chokwijitkul <alexenriquent@gmail.com>
+Date:   Tue May 12 09:31:56 2015 +1000
+
+    CargoFrameTests finally runs properly
+
+commit 8722cddfce13631c7c130e92a873892b996414bc
+Author: XuiKoh <silversui@hotmail.com>
+Date:   Tue May 12 00:16:05 2015 +1000
+
+    Testing
+
+commit 88843cf5b94a6e1eb11feca92f91d4f14d966699
+Merge: e37fb16 2c3c609
+Author: XuiKoh <silversui@hotmail.com>
+Date:   Mon May 11 22:41:12 2015 +1000
+
+    Merge branch 'master' of https://bitbucket.org/alexenriquent/cargo-system
+
+commit e37fb16500926d743e2576bc8fd9963571fbe909
+Author: XuiKoh <silversui@hotmail.com>
+Date:   Mon May 11 22:02:59 2015 +1000
+
+    Container Test Implement Code Quality add Author
+
+commit 2c3c60927cdbe8173f62f8f9550514f6c2b6427d
+Merge: c309480 cebd1d0
+Author: Thanat Chokwijitkul <alexenriquent@gmail.com>
+Date:   Mon May 11 16:19:41 2015 +1000
+
+    Merge branch 'master' of https://bitbucket.org/alexenriquent/cargo-system
+
+commit c309480d8d2bbca96de7fdf18a29db2c87666ae3
+Author: Thanat Chokwijitkul <alexenriquent@gmail.com>
+Date:   Mon May 11 16:19:06 2015 +1000
+
+    Set visibility of ManifestDialog
+
+commit f01213294e999aff8279f3734b9a393d77c8cb14
+Author: XuiKoh <silversui@hotmail.com>
+Date:   Mon May 11 13:40:59 2015 +1000
+
+    Implement Code Quality
+
+commit b8ad30640d5b4b770a7fd831554ff7bf671f7138
+Author: Thanat Chokwijitkul <alexenriquent@gmail.com>
+Date:   Mon May 11 11:42:17 2015 +1000
+
+    Updated the JOptionPane message boxes to JOptionPane.ERROR_MESSAGE
+
+commit c15411b0020b1df11a4f95b65dc16f6acf1496eb
+Author: Thanat Chokwijitkul <alexenriquent@gmail.com>
+Date:   Mon May 11 08:43:11 2015 +1000
+
+    Dealing with referencing a non-static field with a static method
+
+commit cf608a8a58087d0f1a312f264ea3c394247e2ef2
+Author: Thanat Chokwijitkul <alexenriquent@gmail.com>
+Date:   Sun May 10 22:13:10 2015 +1000
+
+    The text version compiles and runs for the first time
+
+commit 4893feaa4a11162e2bc261d747666cfe4db0c206
+Author: Thanat Chokwijitkul <alexenriquent@gmail.com>
+Date:   Sun May 10 19:13:42 2015 +1000
+
+    Dealing with CardLayout in LoadContainerDialog
+
+commit 60dfad33e4bc799e81342f0a5805fe252fd78923
+Author: Thanat Chokwijitkul <alexenriquent@gmail.com>
+Date:   Sun May 10 13:50:54 2015 +1000
+
+    Implemented ContainerCodeDialog
+
+commit 519492442515faf1d2dd593e9b574c6c439bee91
+Author: Thanat Chokwijitkul <alexenriquent@gmail.com>
+Date:   Sun May 10 12:20:50 2015 +1000
+
+    Modified AbstractDialog and CargoDialog
+
+commit cebd1d08478f2daceee027866472cf76d58ad69a
+Author: XuiKoh <silversui@hotmail.com>
+Date:   Sat May 9 23:05:30 2015 +1000
+
+    ContainerTest FIX String Code.
+
+commit 98628c0297673e8a504ccf5fcb854ed6261ab54e
+Author: Thanat Chokwijitkul <alexenriquent@gmail.com>
+Date:   Sat May 9 21:31:16 2015 +1000
+
+    Initial implemetation of CargoTextFrame
+
+commit 05ecd6760c7249b97c5ffd6d8e72000f697a7d48
+Author: Thanat Chokwijitkul <alexenriquent@gmail.com>
+Date:   Sat May 9 15:41:51 2015 +1000
+
+    Initial implementation of AbstractDialog and ManifestDialog
+
+commit 0ed9288acef7e437b7645f9ef2fdfe9322245752
+Author: Thanat Chokwijitkul <alexenriquent@gmail.com>
+Date:   Sat May 9 11:46:36 2015 +1000
+
+    Updated Javadoc
+
+commit 50ca2033b202d75720c46a400a6246748a5a01ca
+Author: Thanat Chokwijitkul <alexenriquent@gmail.com>
+Date:   Sat May 9 11:39:24 2015 +1000
+
+    Fixed conflicts in .classpath
+
+commit fd52a815d774e613262d2b3b7347304f49741016
+Merge: 962cdab e7a98bd
+Author: Thanat Chokwijitkul <alexenriquent@gmail.com>
+Date:   Sat May 9 11:33:33 2015 +1000
+
+    Merged with origin
+
+commit 962cdab14b0e3c2f89e843ccf0edf15e7a4a6739
+Author: Thanat Chokwijitkul <alexenriquent@gmail.com>
+Date:   Sat May 9 11:32:35 2015 +1000
+
+    Updated classpath
+
+commit e7a98bd6d33ee8e84dff4908f3f0d1d72cd14ebd
+Author: James M. Hogan <j.hogan@qut.edu.au>
+Date:   Fri May 8 21:50:15 2015 +1000
+
+    Inclusion of GUI and FEST libraries
+
+commit bcd0bc5ac0085a993e4159e18bdfc5d578ff290e
+Author: XuiKoh <silversui@hotmail.com>
+Date:   Thu May 7 15:08:07 2015 +1000
+
+    Remove Local Variable
+
+commit 1af7718c07cc70114c54760cf91b25280030a050
+Author: XuiKoh <silversui@hotmail.com>
+Date:   Thu May 7 15:03:07 2015 +1000
+
+    Fix Container Test With RefrigeratedContainer
+
+commit 0fe2be41f5afd77d1f12155136dc161291e90481
+Author: XuiKoh <silversui@hotmail.com>
+Date:   Thu May 7 13:15:22 2015 +1000
+
+    have a look with Freight Container Test?
+
+commit 403c28e343b49f3ffd86d205839dd979404f34cd
+Author: XuiKoh <silversui@hotmail.com>
+Date:   Thu May 7 02:30:01 2015 +1000
+
+    Added & Implement Container Code Test
+
+commit c8ac2f0cd36bea7a05805a42ff848e9fb991301f
+Author: XuiKoh <silversui@hotmail.com>
+Date:   Thu May 7 00:52:20 2015 +1000
+
+    Remove Abstract From Freight Container
+    Implement Test With Freight Container
+
+commit 83b49cec8dbb6b3f677e2124476e898a5e5adbdf
+Author: XuiKoh <silversui@hotmail.com>
+Date:   Thu May 7 00:34:04 2015 +1000
+
+    Implement Container Test
+
+commit e8a8dace029d6de7ac77373410e78d83fa511746
+Author: Thanat Chokwijitkul <alexenriquent@gmail.com>
+Date:   Wed May 6 10:27:39 2015 +1000
+
+    Refactoring some methods in CargoManifest and more unit tests to ManifestTests
+
+commit 62181262df0703ef9e6d4241d2e1ce81ce7283bb
+Author: Thanat Chokwijitkul <alexenriquent@gmail.com>
+Date:   Tue May 5 19:27:11 2015 +1000
+
+    Created an object for all the constructor test cases in ManifestTests
+
+commit fa06bf7aa4b0b739e8f207c3b8c8e7b612284df8
+Author: Thanat Chokwijitkul <alexenriquent@gmail.com>
+Date:   Tue May 5 09:03:43 2015 +0000
+
+    README.md edited online with Bitbucket
+
+commit 39a58fd279fec4cb2777545b7c86b3f5dde298f8
+Merge: 97b01aa ce898c6
+Author: Thanat Chokwijitkul <alexenriquent@gmail.com>
+Date:   Tue May 5 18:35:14 2015 +1000
+
+    Merge branch 'master' of https://bitbucket.org/alexenriquent/cargo-system
+
+commit 97b01aa28e41300ed9b02afc310a3684a1afd0a5
+Author: Thanat Chokwijitkul <alexenriquent@gmail.com>
+Date:   Tue May 5 18:34:38 2015 +1000
+
+    Removed java.util.jar.Manifest
+
+commit ce898c623043effab6921cd3a5dcc4f058e77441
+Author: XuiKoh <silversui@hotmail.com>
+Date:   Tue May 5 16:11:04 2015 +1000
+
+    Implement Test
+
+commit cf1de190048ca84e82317832a65c706a44a75cdc
+Author: XuiKoh <silversui@hotmail.com>
+Date:   Tue May 5 14:34:58 2015 +1000
+
+    ConTainerTEst Help
+
+commit 0d0aa57c08091d61857c0103628b6bb88af9e248
+Author: Thanat Chokwijitkul <alexenriquent@gmail.com>
+Date:   Tue May 5 11:28:38 2015 +1000
+
+    Added more unit tests to ManifestTests
+
+commit 34375056d2a0b75edfee6ed4b9107bebb4d19e52
+Author: Thanat Chokwijitkul <alexenriquent@gmail.com>
+Date:   Mon May 4 17:04:46 2015 +1000
+
+    Added more unit tests to ManifestTests
+
+commit 61606c0e9aae2bc4792cbd651bc9c6264f974e28
+Author: XuiKoh <silversui@hotmail.com>
+Date:   Mon May 4 14:02:56 2015 +1000
+
+    Add Author Name
+
+commit 214b546358deeeca4f57f0bf00434eb710c44a3d
+Merge: 8560a84 8b60b55
+Author: Thanat Chokwijitkul <alexenriquent@gmail.com>
+Date:   Mon May 4 13:53:52 2015 +1000
+
+    Merge branch 'master' of https://bitbucket.org/alexenriquent/cargo-system
+
+commit 8560a8452cc4dab5dbf57ab31b9d1810f7048d12
+Author: Thanat Chokwijitkul <alexenriquent@gmail.com>
+Date:   Mon May 4 13:53:42 2015 +1000
+
+    Changes to the ManifestTests class
+
+commit 8b60b55ec7b44d6a1584ba3f0aab871cd876b9c8
+Author: XuiKoh <silversui@hotmail.com>
+Date:   Mon May 4 13:50:38 2015 +1000
+
+    CargoMainFest Implementation
+
+commit fd4ddeb44ca0ce401526303e415e88006d746f6f
+Author: XuiKoh <silversui@hotmail.com>
+Date:   Mon May 4 01:54:24 2015 +1000
+
+    ConTainerTEst
+
+commit 38e75264adf7dec10e3c7a63e2c611d835beda4a
+Author: XuiKoh <silversui@hotmail.com>
+Date:   Sat May 2 22:04:40 2015 +1000
+
+    ContainerTEst
+
+commit 8222786a61eff952fcbce40f95954c564c361b00
+Author: Thanat Chokwijitkul <alexenriquent@gmail.com>
+Date:   Sat May 2 16:56:16 2015 +1000
+
+    Refactoring some trivial methods in the asgn2Containers package
+
+commit 53ddf816d746242464f4839d69f255e9a8be8a16
+Author: Thanat Chokwijitkul <alexenriquent@gmail.com>
+Date:   Sat May 2 16:27:27 2015 +1000
+
+    Implementation of the RefrigeratedContainer class
+
+commit 0649559961e3e49178cf9f104e30118ca5552d13
+Author: Thanat Chokwijitkul <alexenriquent@gmail.com>
+Date:   Sat May 2 16:19:20 2015 +1000
+
+    Implementation of the GeneralGoodsContainer class
+
+commit 8f8a9e29c95bdc7c0de13205aa6c934e6cef6c7f
+Author: Thanat Chokwijitkul <alexenriquent@gmail.com>
+Date:   Sat May 2 16:12:08 2015 +1000
+
+    Implementation of the DangerousGoodsContainer class
+
+commit 3107c33d2ba0904bef432631f69dc76f3908ae48
+Author: Thanat Chokwijitkul <alexenriquent@gmail.com>
+Date:   Sat May 2 15:50:54 2015 +1000
+
+    Implementation of the FreightContainer class
+
+commit 4636df5bcbd4e6dbb4c5d076697bd79f9c7289fe
+Author: Thanat Chokwijitkul <alexenriquent@gmail.com>
+Date:   Sat May 2 12:54:08 2015 +1000
+
+    Implementation of a class for container codes
+
+commit c3d7b10f29913432fe6f82fa53b9cec2b296d805
+Author: Thanat Chokwijitkul <alexenriquent@gmail.com>
+Date:   Sat May 2 10:19:26 2015 +1000
+
+    Implementation of an exception class hierarchy
+
+commit 89a7304dcccdd13350f65700e52deef5d38afe98
+Author: Thanat Chokwijitkul <alexenriquent@gmail.com>
+Date:   Fri May 1 10:16:31 2015 +0000
+
+    README.md edited online with Bitbucket
+
+commit 3ba2cdd9426ffbb57a3e1efd6d3bfe6eeeba70a6
+Author: James M. Hogan <j.hogan@qut.edu.au>
+Date:   Mon Apr 27 23:08:22 2015 +1000
+
+    Initial commit of release code
