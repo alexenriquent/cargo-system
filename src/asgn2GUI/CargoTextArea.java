@@ -16,6 +16,7 @@ import asgn2Manifests.CargoManifest;
  *
  * @author CAB302.
  * @author Thanat Chokwijitkul n9234900
+ * @author Month Yean Koh n9070095
  */
 public class CargoTextArea extends JTextArea {
 

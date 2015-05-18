@@ -88,7 +88,7 @@ public class ManifestGUITests {
 	private static final boolean GRAPHIC_VERSION = true;
     private static final int SHORT_PAUSE = 1500;
 
-    private static final Pattern CARGO_EXCEPTION_PATTERN = Pattern.compile("CargoException:.+");
+    private static final Pattern MANIFEST_EXCEPTION_PATTERN = Pattern.compile(".*ManifestException:.+");
 
     private FrameFixture frame;
     private JFrame frameUnderTest;
@@ -288,7 +288,7 @@ public class ManifestGUITests {
     	DialogFixture manifestDialog = prepareManifestDialog();
     	manifestDialogEnterText(manifestDialog, NEGATIVE_VALUE, HEIGHT_1, WEIGHT_100);
     	manifestDialog.optionPane().requireErrorMessage();
-    	manifestDialog.optionPane().requireMessage(CARGO_EXCEPTION_PATTERN);
+    	manifestDialog.optionPane().requireMessage(MANIFEST_EXCEPTION_PATTERN);
     }
     
     /**
@@ -316,7 +316,7 @@ public class ManifestGUITests {
     	DialogFixture manifestDialog = prepareManifestDialog();
     	manifestDialogEnterText(manifestDialog, STACKS_1, NEGATIVE_VALUE, WEIGHT_100);
     	manifestDialog.optionPane().requireErrorMessage();
-    	manifestDialog.optionPane().requireMessage(CARGO_EXCEPTION_PATTERN);
+    	manifestDialog.optionPane().requireMessage(MANIFEST_EXCEPTION_PATTERN);
     }
     
     /**
@@ -344,7 +344,7 @@ public class ManifestGUITests {
     	DialogFixture manifestDialog = prepareManifestDialog();
     	manifestDialogEnterText(manifestDialog, STACKS_1, HEIGHT_1, NEGATIVE_VALUE);
     	manifestDialog.optionPane().requireErrorMessage();
-    	manifestDialog.optionPane().requireMessage(CARGO_EXCEPTION_PATTERN);
+    	manifestDialog.optionPane().requireMessage(MANIFEST_EXCEPTION_PATTERN);
     }
     
     /**
