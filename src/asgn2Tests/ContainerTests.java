@@ -33,10 +33,6 @@ public class ContainerTests {
 	
 	private static final String CONTAINER_CODE_1 = "INKU2633836";
 	private static final String CONTAINER_CODE_2 = "KOCU8090115";
-	private static final String CONTAINER_CODE_3 = "MSCU6639871";
-	private static final String CONTAINER_CODE_4 = "CSQU3054387";
-	private static final String CONTAINER_CODE_5 = "QUTU7200318";
-	private static final String CONTAINER_CODE_6 = "IBMU4882351";
 	
 	private static final String INVALID_CONTAINER_CODE_1 = "IBMU48823511"; // Invalid length More Character
 	private static final String INVALID_CONTAINER_CODE_2 = "IBMU488211"; // Invalid length Less Character
@@ -55,14 +51,13 @@ public class ContainerTests {
     private static final String INVALID_CONTAINER_CODE_14 = "INKU26338786"; // Serial Number HAve More Then 6 Digit
 	
 	private ContainerCode code1;
-	private ContainerCode code2;
-	
+	private ContainerCode code2;	
 	private ContainerCode CCTest;
+	
 	private DangerousGoodsContainer DGCTest;
 	private GeneralGoodsContainer GGCTest;
 	private RefrigeratedContainer RCTest;
 
-	//Before
 	/**
 	 * Build a Object before each test case
 	 * @throws InvalidContainerException
@@ -580,6 +575,6 @@ public class ContainerTests {
 		Integer temperature = 7;
 		RCTest.setTemperature(temperature);
 		assertTrue(RCTest.getTemperature() == temperature);
-		}
+	}
 	
 }

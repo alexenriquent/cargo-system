@@ -19,17 +19,15 @@ Summary of Contribution (Month Yean Koh)
 + The implementation of the CargoManifest class (coder)
 
 Assignment 2 Part 2 - Graphical User Interface Programming
-Summary of Contribution (Thanat Chokwijitkul)
-+ The implementation of the CargoTextFrame class
-+ The implementation of the CargoTextArea class
-+ The implementation of the CargoFrame class
-+ The implementation of the CargoCanvas class
-
-Summary of Contribution (Month Yean Koh)
+Summary of Contribution (Thanat Chokwijitkul and Month Yean Koh)
 + The implementation of the AbstractDialog class
 + The implementation of the ManifestDialog class
 + The implementation of the ContainerCodeDialog class
 + The implementation of the LoadContainerDialog class
++ The implementation of the CargoTextFrame class
++ The implementation of the CargoTextArea class
++ The implementation of the CargoFrame class
++ The implementation of the CargoCanvas class
 
 Additional test class
 Summary of Contribution (Thanat Chokwijitkul and Month Yean Koh)
@@ -55,5 +53,5 @@ For the CargoSystem project, automated GUI tests have been used to
 test all the functionalities of the system. Another unit test class
 named "ManifestGUITests" has been created using the automated GUI tests, 
 which has been supplied as code drop for the assignment 2 part 2, as 
-a template in order to provide the evidence showing that the graphical 
+a template in order to provide an evidence showing that the graphical 
 interface of the system functions and has been tested successfully.
