@@ -1,3 +1,9 @@
+*   cc04c12 : Merge branch 'master' of https://bitbucket.org/alexenriquent/cargo-system
+|\  
+| * 23bf025 : Replace Variable Name
+* | e5bc1c5 : Ensured both versions (text and graphic) function properly
+|/  
+* e9cbb3b : Generated the Repo log file
 * fc4770b : Updated the statement of completeness
 * b51fa63 : Updated regular language for ManifestException
 *   0d1e6e2 : Merge branch 'master' of https://bitbucket.org/cab302/assignment2release
@@ -106,7 +112,32 @@
 * | c3d7b10 : Implementation of an exception class hierarchy
 * | 89a7304 : README.md edited online with Bitbucket
 |/  
-* 3ba2cdd : Initial commit of release codecommit fc4770b2b372cd633f48289127357283328a23e9
+* 3ba2cdd : Initial commit of release codecommit cc04c12aa481eaa9b1c9b703094fff7ea682e67b
+Merge: e5bc1c5 23bf025
+Author: Thanat Chokwijitkul <alexenriquent@gmail.com>
+Date:   Sat May 23 19:21:23 2015 +1000
+
+    Merge branch 'master' of https://bitbucket.org/alexenriquent/cargo-system
+
+commit e5bc1c53ce92666aaabfb4c19c43dcdfeb17eb27
+Author: Thanat Chokwijitkul <alexenriquent@gmail.com>
+Date:   Sat May 23 19:21:01 2015 +1000
+
+    Ensured both versions (text and graphic) function properly
+
+commit 23bf02553da204804dde413c3913d723733426e5
+Author: XuiKoh <silversui@hotmail.com>
+Date:   Fri May 22 22:56:03 2015 +1000
+
+    Replace Variable Name
+
+commit e9cbb3be37e475463d53edd5aa9c8d5495bb6ec2
+Author: Thanat Chokwijitkul <alexenriquent@gmail.com>
+Date:   Tue May 19 09:48:54 2015 +1000
+
+    Generated the Repo log file
+
+commit fc4770b2b372cd633f48289127357283328a23e9
 Author: Thanat Chokwijitkul <alexenriquent@gmail.com>
 Date:   Tue May 19 09:40:38 2015 +1000
 
