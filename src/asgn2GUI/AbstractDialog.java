@@ -6,19 +6,15 @@ package asgn2GUI;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
-import java.awt.FlowLayout;
 import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 
 /**
  * Provides base class for dialog boxes used for data entry.
@@ -29,7 +25,7 @@ import javax.swing.SwingUtilities;
  */
 public abstract class AbstractDialog extends JDialog implements ActionListener {
 
-    private JButton btnOK;
+	private JButton btnOK;
     private JButton btnCancel;
 
     /**

@@ -4,12 +4,8 @@
  */
 package asgn2GUI;
 
-import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-// import java.awt.event.ActionEvent;
-// import java.awt.event.ActionListener;
-
 
 import java.awt.Insets;
 
@@ -23,7 +19,6 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import asgn2Codes.ContainerCode;
-import asgn2Exceptions.CargoException;
 import asgn2Exceptions.InvalidCodeException;
 
 /**

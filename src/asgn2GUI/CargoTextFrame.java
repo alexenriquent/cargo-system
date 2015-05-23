@@ -5,20 +5,12 @@
 package asgn2GUI;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Container;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -26,8 +18,6 @@ import javax.swing.SwingUtilities;
 
 import asgn2Codes.ContainerCode;
 import asgn2Containers.FreightContainer;
-import asgn2Containers.GeneralGoodsContainer;
-import asgn2Exceptions.InvalidCodeException;
 import asgn2Exceptions.ManifestException;
 import asgn2Manifests.CargoManifest;
 

@@ -14,9 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
 
-import asgn2Exceptions.CargoException;
 import asgn2Exceptions.ManifestException;
 import asgn2Manifests.CargoManifest;
 
