@@ -31,6 +31,14 @@ public class ContainerTests {
 	private static final Integer CATEGORY = 5;
 	private static final Integer TEMPERATURE = 5;
 	
+	private static final Integer INVALID_GROSSWEIGHT_LESS = 2;
+	private static final Integer INVALID_GROSSWEIGHT_MORE = 31;
+	
+	private static final Integer INVALID_CATEGORY_LESS = 0;
+	private static final Integer INVALID_CATEGORY_MORE = 10;
+	
+	private static final Integer TEMPERATURE_2 = 15;
+	
 	private static final String CONTAINER_CODE_1 = "INKU2633836";
 	private static final String CONTAINER_CODE_2 = "KOCU8090115";
 	
@@ -351,7 +359,7 @@ public class ContainerTests {
 	@Test (expected = InvalidContainerException.class)
 	public void  DGCinvalidGrossWeightLessThen4() throws InvalidContainerException, InvalidCodeException {
 		code1 = new ContainerCode(CONTAINER_CODE_1);
-		DGCTest = new DangerousGoodsContainer(code1, 2, CATEGORY);
+		DGCTest = new DangerousGoodsContainer(code1, INVALID_GROSSWEIGHT_LESS, CATEGORY);
 	}
 	
 	/**
@@ -364,7 +372,7 @@ public class ContainerTests {
 	@Test (expected = InvalidContainerException.class)
 	public void  DGCinvalidGrossWeightMoreThen30() throws InvalidContainerException, InvalidCodeException {
 		code1 = new ContainerCode(CONTAINER_CODE_1);
-		DGCTest = new DangerousGoodsContainer(code1, 31, CATEGORY);
+		DGCTest = new DangerousGoodsContainer(code1, INVALID_GROSSWEIGHT_MORE, CATEGORY);
 	}
 	
 	/**
@@ -377,7 +385,7 @@ public class ContainerTests {
 	@Test (expected = InvalidContainerException.class)
 	public void DGCinvalidCategoriesLessthen1 () throws InvalidContainerException, InvalidCodeException {
 		code1 = new ContainerCode(CONTAINER_CODE_1);
-		DGCTest = new DangerousGoodsContainer(code1, GROSSWEIGHT,0);
+		DGCTest = new DangerousGoodsContainer(code1, GROSSWEIGHT, INVALID_CATEGORY_LESS);
 	}
 
 	/**
@@ -390,7 +398,7 @@ public class ContainerTests {
 	@Test (expected = InvalidContainerException.class)
 	public void DGCinvalidCategoriesMorethen9 () throws InvalidContainerException, InvalidCodeException {
 		code1 = new ContainerCode(CONTAINER_CODE_1);
-		DGCTest = new DangerousGoodsContainer(code1, GROSSWEIGHT,10);
+		DGCTest = new DangerousGoodsContainer(code1, GROSSWEIGHT, INVALID_CATEGORY_MORE);
 	}
 	
 	//=================================================================
@@ -449,7 +457,7 @@ public class ContainerTests {
 	public void FCgetFalseGrossWeight() throws InvalidContainerException, InvalidCodeException {
 		code1 = new ContainerCode(CONTAINER_CODE_1);
 		GGCTest = new GeneralGoodsContainer(code1, GROSSWEIGHT);
-		assertFalse(GGCTest.getGrossWeight() == 8);
+		assertFalse(GGCTest.getGrossWeight() == INVALID_GROSSWEIGHT_MORE);
 	}
 	//=================================================================
 	//Test For Constructor GeneralGoodsContainer Class
@@ -476,7 +484,7 @@ public class ContainerTests {
 	@Test (expected = InvalidContainerException.class)
 	public void GGCInvalidGrossWeightLessThen4() throws InvalidContainerException, InvalidCodeException {
 		code1 = new ContainerCode(CONTAINER_CODE_1);
-		GGCTest = new GeneralGoodsContainer(code1, 3);
+		GGCTest = new GeneralGoodsContainer(code1, INVALID_GROSSWEIGHT_LESS);
 	}
 	
 	/**
@@ -489,7 +497,7 @@ public class ContainerTests {
 	@Test (expected = InvalidContainerException.class)
 	public void GGCInvalidGrossWeightMoreThen30() throws InvalidContainerException, InvalidCodeException {
 		code1 = new ContainerCode(CONTAINER_CODE_1);
-		GGCTest = new GeneralGoodsContainer(code1, 31);
+		GGCTest = new GeneralGoodsContainer(code1, INVALID_GROSSWEIGHT_MORE);
 	}
 	
 	//=================================================================
@@ -517,7 +525,7 @@ public class ContainerTests {
 	@Test (expected = InvalidContainerException.class)
 	public void RCConstructorInvalidGrossWeightLessThen4() throws InvalidContainerException, InvalidCodeException {
 		code1 = new ContainerCode(CONTAINER_CODE_1);
-		RCTest = new RefrigeratedContainer(code1, 3, TEMPERATURE);
+		RCTest = new RefrigeratedContainer(code1, INVALID_GROSSWEIGHT_LESS, TEMPERATURE);
 	}
 	
 	/**
@@ -530,7 +538,7 @@ public class ContainerTests {
 	@Test (expected = InvalidContainerException.class)
 	public void RCConstructorInvalidGrossWeightMoreThen30() throws InvalidContainerException, InvalidCodeException {
 		code1 = new ContainerCode(CONTAINER_CODE_1);
-		RCTest = new RefrigeratedContainer(code1, 31, TEMPERATURE);
+		RCTest = new RefrigeratedContainer(code1, INVALID_GROSSWEIGHT_MORE, TEMPERATURE);
 	}
 	
 	/**
@@ -558,7 +566,7 @@ public class ContainerTests {
 	public void RCGetFalseTemperature() throws InvalidContainerException, InvalidCodeException {
 		code1 = new ContainerCode(CONTAINER_CODE_1);
 		RCTest = new RefrigeratedContainer(code1, GROSSWEIGHT, TEMPERATURE);
-		assertFalse(RCTest.getTemperature() == 8);
+		assertFalse(RCTest.getTemperature() == TEMPERATURE_2);
 	}
 	
 	/**
