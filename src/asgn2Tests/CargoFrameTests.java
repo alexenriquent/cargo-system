@@ -487,4 +487,556 @@ public class CargoFrameTests {
             assertEquals(expected, testFrame.textBox(CARGO_TEXT_AREA).text());
         }
     }
+    
+    /**
+     * Tests that the canvas displays the correct representation 
+     * if the manifest contains zero stack.
+     */
+    @Test
+    public void manifestWithZeroEmptyStack() {
+    	DialogFixture manifestDialog = prepareManifestDialog();
+        manifestDialogEnterText(manifestDialog, ZERO, HEIGHT_1, WEIGHT_100);
+        if (frameUnderTest instanceof CargoTextFrame) {
+        	String expectedString = "";
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
+        }
+    }
+    
+    /**
+     * Tests that the canvas displays the correct representation 
+     * for five empty stacks.
+     */
+    @Test
+    public void manifestWithFiveEmptyStack() {
+    	DialogFixture manifestDialog = prepareManifestDialog();
+        manifestDialogEnterText(manifestDialog, STACKS_5, HEIGHT_1, WEIGHT_100);
+        if (frameUnderTest instanceof CargoTextFrame) {
+        	String expectedString = "||  ||\n||  ||\n||  ||\n||  ||\n||  ||\n";
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
+        }
+    }
+    
+    /**
+     * Tests that the canvas displays the correct representation 
+     * if creating a new manifest with different stack number.
+     */
+    @Test
+    public void createNewManifestAgain() {
+    	DialogFixture manifestDialog = prepareManifestDialog();
+        manifestDialogEnterText(manifestDialog, STACKS_5, HEIGHT_1, WEIGHT_100);
+        if (frameUnderTest instanceof CargoTextFrame) {
+        	String expectedString = "||  ||\n||  ||\n||  ||\n||  ||\n||  ||\n";
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
+        }
+        manifestDialog = prepareManifestDialog();
+        manifestDialogEnterText(manifestDialog, STACKS_3, HEIGHT_1, WEIGHT_100);
+        if (frameUnderTest instanceof CargoTextFrame) {
+        	String expectedString = "||  ||\n||  ||\n||  ||\n";
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
+        }
+    }
+    
+    /**
+     * Tests that the canvas displays the correct representation 
+     * if trying to create a new manifest and then the cancel the operation.
+     */
+    @Test
+    public void manifestRemaninsTheSame() {
+    	DialogFixture manifestDialog = prepareManifestDialog();
+        manifestDialogEnterText(manifestDialog, STACKS_5, HEIGHT_1, WEIGHT_100);
+        if (frameUnderTest instanceof CargoTextFrame) {
+        	String expectedString = "||  ||\n||  ||\n||  ||\n||  ||\n||  ||\n";
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
+        }
+        manifestDialog = prepareManifestDialog();
+        manifestDialog.button(CANCEL).click();
+        if (frameUnderTest instanceof CargoTextFrame) {
+        	String expectedString = "||  ||\n||  ||\n||  ||\n||  ||\n||  ||\n";
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
+        }
+    }
+    
+    /**
+     * Tests that the canvas displays the correct representation 
+     * for five empty stacks, then displays the correct representation for five empty 
+     * stacks after creating a new manifest.
+     */
+    @Test
+    public void manifestWithFiveStackThenCreateNewManifestWithThreeStacks() {
+    	DialogFixture manifestDialog = prepareManifestDialog();
+        manifestDialogEnterText(manifestDialog, STACKS_5, HEIGHT_1, WEIGHT_100);
+        if (frameUnderTest instanceof CargoTextFrame) {
+        	String expectedString = "||  ||\n||  ||\n||  ||\n||  ||\n||  ||\n";
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
+        }
+        manifestDialog = prepareManifestDialog();
+        manifestDialogEnterText(manifestDialog, STACKS_3, HEIGHT_1, WEIGHT_100);
+        if (frameUnderTest instanceof CargoTextFrame) {
+        	String expectedString = "||  ||\n||  ||\n||  ||\n";
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
+        }
+    }
+    
+    /**
+     * Tests that an error message is displayed if there is no space for
+     * a new container to be loaded.
+     */
+    @Test
+    public void noSpaceAvilableForNewContainer() {
+    	DialogFixture manifestDialog = prepareManifestDialog();
+        manifestDialogEnterText(manifestDialog, STACKS_2, HEIGHT_3, WEIGHT_30);
+        loadContainer(GENERAL_GOODS, CONTAINER_CODE_1, WEIGHT_10, null, null);
+        loadContainer(DANGEROUS_GOODS, CONTAINER_CODE_2, WEIGHT_10, CATEGORY_1, null);
+        loadContainer(REFRIGERATED_GOODS, CONTAINER_CODE_3, WEIGHT_10, null, TEMPERATURE_MINUS_5);
+        testFrame.optionPane().requireErrorMessage();
+        if (frameUnderTest instanceof CargoTextFrame) {
+            String expectedString = "|| " + CONTAINER_CODE_1 + " ||\n"
+            					  + "|| " + CONTAINER_CODE_2 + " ||\n";
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
+        }
+    }
+    
+    /**
+     * Tests that an error message is displayed if the gross weight of
+     * the container is lower than 4 tons.
+     */
+    @Test
+    public void loadConatinerWithWeightLowerThanMinimumWeight() {
+    	DialogFixture manifestDialog = prepareManifestDialog();
+        manifestDialogEnterText(manifestDialog, STACKS_1, HEIGHT_1, WEIGHT_20);
+        loadContainer(GENERAL_GOODS, CONTAINER_CODE_1, WEIGHT_3, null, null);
+        testFrame.optionPane().requireErrorMessage();
+        if (frameUnderTest instanceof CargoTextFrame) {
+            String expectedString = "|| " + " ||\n";
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
+        }
+    }
+    
+    /**
+     * Tests that an error message is displayed if the gross weight of
+     * the container is greater than 30 tons.
+     */
+    @Test
+    public void loadConatinerWithWeightGreaterThanMaximumWeight() {
+    	DialogFixture manifestDialog = prepareManifestDialog();
+        manifestDialogEnterText(manifestDialog, STACKS_1, HEIGHT_1, WEIGHT_100);
+        loadContainer(GENERAL_GOODS, CONTAINER_CODE_1, WEIGHT_31, null, null);
+        testFrame.optionPane().requireErrorMessage();
+        if (frameUnderTest instanceof CargoTextFrame) {
+            String expectedString = "|| " + " ||\n";
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
+        }
+    }
+    
+    /**
+     * Tests that an error message is displayed if trying to load a new
+     * container with the same container code as one of the containers on board.
+     */
+    @Test
+    public void loadConatinerWithDuplicateContainerCode() {
+    	DialogFixture manifestDialog = prepareManifestDialog();
+        manifestDialogEnterText(manifestDialog, STACKS_1, HEIGHT_3, WEIGHT_100);
+        loadContainer(GENERAL_GOODS, CONTAINER_CODE_1, WEIGHT_10, null, null);
+        loadContainer(GENERAL_GOODS, CONTAINER_CODE_1, WEIGHT_10, null, null);
+        testFrame.optionPane().requireErrorMessage();
+    }
+    
+    /**
+     * Tests that three valid general goods containers are loaded to the maximum
+     * height and displayed as expected.
+     */
+    @Test
+    public void loadThreeGeneralGoodsConatinerToMaxHeight() {
+    	DialogFixture manifestDialog = prepareManifestDialog();
+        manifestDialogEnterText(manifestDialog, STACKS_1, HEIGHT_3, WEIGHT_100);
+        loadContainer(GENERAL_GOODS, CONTAINER_CODE_1, WEIGHT_10, null, null);
+        loadContainer(GENERAL_GOODS, CONTAINER_CODE_2, WEIGHT_10, null, null);
+        loadContainer(GENERAL_GOODS, CONTAINER_CODE_3, WEIGHT_10, null, null);
+        if (frameUnderTest instanceof CargoTextFrame) {
+            String expectedString = "|| " + CONTAINER_CODE_1 + " || "
+            							  + CONTAINER_CODE_2 + " || "
+            							  + CONTAINER_CODE_3 + " ||\n";
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
+        }
+    }
+    
+    /**
+     * Tests that four valid general goods containers are loaded to the maximum
+     * height and displayed as expected (by staring a new stack because the first
+     * stack has reached its maximum height limit).
+     */
+    @Test
+    public void loadFourGeneralGoodsConatinerToStartNewStack() {
+    	DialogFixture manifestDialog = prepareManifestDialog();
+        manifestDialogEnterText(manifestDialog, STACKS_2, HEIGHT_3, WEIGHT_100);
+        loadContainer(GENERAL_GOODS, CONTAINER_CODE_1, WEIGHT_10, null, null);
+        loadContainer(GENERAL_GOODS, CONTAINER_CODE_2, WEIGHT_10, null, null);
+        loadContainer(GENERAL_GOODS, CONTAINER_CODE_3, WEIGHT_10, null, null);
+        loadContainer(GENERAL_GOODS, CONTAINER_CODE_4, WEIGHT_10, null, null);
+        if (frameUnderTest instanceof CargoTextFrame) {
+            String expectedString = "|| " + CONTAINER_CODE_1 + " || "
+            							  + CONTAINER_CODE_2 + " || "
+            							  + CONTAINER_CODE_3 + " ||\n"
+            					  + "|| " + CONTAINER_CODE_4 + " ||\n";
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
+        }
+    }
+    
+    /**
+     * Tests that two containers with different types (general and dangerous 
+     * goods containers) are loaded to the manifest and displayed as expected.
+     */
+    @Test
+    public void loadTwoConatinersWithTwoDifferntTypes() {
+    	DialogFixture manifestDialog = prepareManifestDialog();
+        manifestDialogEnterText(manifestDialog, STACKS_2, HEIGHT_1, WEIGHT_20);
+        loadContainer(GENERAL_GOODS, CONTAINER_CODE_1, WEIGHT_10, null, null);
+        loadContainer(DANGEROUS_GOODS, CONTAINER_CODE_2, WEIGHT_10, CATEGORY_1, null);
+        if (frameUnderTest instanceof CargoTextFrame) {
+            String expectedString = "|| " + CONTAINER_CODE_1 + " ||\n"
+            					  + "|| " + CONTAINER_CODE_2 + " ||\n";
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
+        }
+    }
+    
+    /**
+     * Tests that three containers with different types (general, dangerous 
+     * and refrigerated goods containers) are loaded to the manifest and displayed 
+     * as expected.
+     */
+    @Test
+    public void loadThreeConatinersWithThreeDifferntTypes() {
+    	DialogFixture manifestDialog = prepareManifestDialog();
+        manifestDialogEnterText(manifestDialog, STACKS_3, HEIGHT_1, WEIGHT_30);
+        loadContainer(GENERAL_GOODS, CONTAINER_CODE_1, WEIGHT_10, null, null);
+        loadContainer(DANGEROUS_GOODS, CONTAINER_CODE_2, WEIGHT_10, CATEGORY_1, null);
+        loadContainer(REFRIGERATED_GOODS, CONTAINER_CODE_3, WEIGHT_10, null, TEMPERATURE_MINUS_5);
+        if (frameUnderTest instanceof CargoTextFrame) {
+            String expectedString = "|| " + CONTAINER_CODE_1 + " ||\n"
+            					  + "|| " + CONTAINER_CODE_2 + " ||\n"
+            					  + "|| " + CONTAINER_CODE_3 + " ||\n";
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
+        }
+    }
+    
+    /**
+     * Tests that five containers with different types (general, dangerous 
+     * and refrigerated goods containers) are loaded to the manifest and displayed 
+     * as expected.
+     */
+    @Test
+    public void loadFiveConatinersWithThreeDifferntTypes() {
+    	DialogFixture manifestDialog = prepareManifestDialog();
+        manifestDialogEnterText(manifestDialog, STACKS_3, HEIGHT_3, WEIGHT_100);
+        loadContainer(GENERAL_GOODS, CONTAINER_CODE_1, WEIGHT_10, null, null);
+        loadContainer(DANGEROUS_GOODS, CONTAINER_CODE_2, WEIGHT_10, CATEGORY_1, null);
+        loadContainer(REFRIGERATED_GOODS, CONTAINER_CODE_3, WEIGHT_10, null, TEMPERATURE_MINUS_5);
+        loadContainer(GENERAL_GOODS, CONTAINER_CODE_4, WEIGHT_10, null, null);
+        loadContainer(REFRIGERATED_GOODS, CONTAINER_CODE_5, WEIGHT_10, null, TEMPERATURE_MINUS_5);
+        if (frameUnderTest instanceof CargoTextFrame) {
+            String expectedString = "|| " + CONTAINER_CODE_1 + " || " + CONTAINER_CODE_4 + " ||\n"
+            					  + "|| " + CONTAINER_CODE_2 + " ||\n"
+            					  + "|| " + CONTAINER_CODE_3 + " || " + CONTAINER_CODE_5 + " ||\n";
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
+        }
+    }
+    
+    /**
+     * Tests that the canvas displays the correct representation 
+     * if creating a new manifest with different stack number after loading
+     * a container i.e the canvas is reset and display the representation
+     * of the new manifest.
+     */
+    @Test
+    public void loadContainerAndCreateNewManifestAgain() {
+    	DialogFixture manifestDialog = prepareManifestDialog();
+        manifestDialogEnterText(manifestDialog, STACKS_1, HEIGHT_1, WEIGHT_100);
+        loadContainer(GENERAL_GOODS, CONTAINER_CODE_1, WEIGHT_10, null, null);
+        if (frameUnderTest instanceof CargoTextFrame) {
+        	String expectedString = "|| " + CONTAINER_CODE_1 + " ||\n";
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
+        }
+        manifestDialog = prepareManifestDialog();
+        manifestDialogEnterText(manifestDialog, STACKS_3, HEIGHT_1, WEIGHT_100);
+        if (frameUnderTest instanceof CargoTextFrame) {
+        	String expectedString = "||  ||\n||  ||\n||  ||\n";
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
+        }
+    }
+    
+    /**
+     * Tests that the manifest remains the same if trying to create a new manifest,
+     * then cancel the operation and keep loading a new container into the
+     * same manifest.
+     */
+    @Test
+    public void manifestRemainTheSameAfterCancellingCreatingNewManifest() {
+    	DialogFixture manifestDialog = prepareManifestDialog();
+        manifestDialogEnterText(manifestDialog, STACKS_1, HEIGHT_3, WEIGHT_100);
+        loadContainer(GENERAL_GOODS, CONTAINER_CODE_1, WEIGHT_10, null, null);
+        if (frameUnderTest instanceof CargoTextFrame) {
+        	String expectedString = "|| " + CONTAINER_CODE_1 + " ||\n";
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
+        }
+        manifestDialog = prepareManifestDialog();
+        manifestDialog.button(CANCEL).click();
+        loadContainer(GENERAL_GOODS, CONTAINER_CODE_2, WEIGHT_10, null, null);
+        if (frameUnderTest instanceof CargoTextFrame) {
+        	String expectedString = "|| " + CONTAINER_CODE_1 + " || " 
+        								  + CONTAINER_CODE_2 + " ||\n";
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
+        }
+    }
+    
+    /**
+     * Tests that the manifest remains the same if trying to load a new container,
+     * then cancel the operation and keep loading a new container into the
+     * same manifest.
+     */
+    @Test
+    public void manifestRemainTheSameAfterCancellingLoadingNewContainer() {
+    	DialogFixture manifestDialog = prepareManifestDialog();
+        manifestDialogEnterText(manifestDialog, STACKS_1, HEIGHT_3, WEIGHT_100);
+        loadContainer(GENERAL_GOODS, CONTAINER_CODE_1, WEIGHT_10, null, null);
+        if (frameUnderTest instanceof CargoTextFrame) {
+        	String expectedString = "|| " + CONTAINER_CODE_1 + " ||\n";
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
+        }
+        testFrame.button(LOAD).click();
+        DialogFixture containerDialog = testFrame.dialog(CONTAINER_INFORMATION);
+        containerDialog.button(CANCEL).click();
+        loadContainer(GENERAL_GOODS, CONTAINER_CODE_2, WEIGHT_10, null, null);
+        if (frameUnderTest instanceof CargoTextFrame) {
+        	String expectedString = "|| " + CONTAINER_CODE_1 + " || " 
+        								  + CONTAINER_CODE_2 + " ||\n";
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
+        }
+    }
+    
+    /**
+     * Tests that an error message appears if the container to be unloaded 
+     * is not on board.
+     */
+    @Test
+    public void UnloadButContainerIsNotOnBoard() {
+    	DialogFixture manifestDialog = prepareManifestDialog();
+        manifestDialogEnterText(manifestDialog, STACKS_1, HEIGHT_3, WEIGHT_30);
+        loadContainer(GENERAL_GOODS, CONTAINER_CODE_1, WEIGHT_10, null, null);
+        if (frameUnderTest instanceof CargoTextFrame) {
+            String expectedString = "|| " + CONTAINER_CODE_1 + " ||\n";
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
+        }
+        unloadContainer(CONTAINER_CODE_2);
+        testFrame.optionPane().requireErrorMessage();
+    }
+    
+    /**
+     * Tests that an error message appears if trying to unload an 
+     * unaccessible container.
+     */
+    @Test
+    public void unloadUnaccessibleContainer() {
+    	DialogFixture manifestDialog = prepareManifestDialog();
+        manifestDialogEnterText(manifestDialog, STACKS_1, HEIGHT_3, WEIGHT_30);
+        loadContainer(GENERAL_GOODS, CONTAINER_CODE_1, WEIGHT_10, null, null);
+        loadContainer(GENERAL_GOODS, CONTAINER_CODE_2, WEIGHT_10, null, null);
+        if (frameUnderTest instanceof CargoTextFrame) {
+            String expectedString = "|| " + CONTAINER_CODE_1 + " || " 
+            							  + CONTAINER_CODE_2 + " ||\n";
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
+        }
+        unloadContainer(CONTAINER_CODE_1);
+        testFrame.optionPane().requireErrorMessage();
+    }
+    
+    /**
+     * Tests that the specified container can be successfully unloaded if
+     * it is accessible i.e. on top of a stack.
+     */
+    @Test
+    public void unloadAccessibleContainer() {
+    	DialogFixture manifestDialog = prepareManifestDialog();
+        manifestDialogEnterText(manifestDialog, STACKS_1, HEIGHT_3, WEIGHT_30);
+        loadContainer(GENERAL_GOODS, CONTAINER_CODE_1, WEIGHT_10, null, null);
+        loadContainer(GENERAL_GOODS, CONTAINER_CODE_2, WEIGHT_10, null, null);
+        if (frameUnderTest instanceof CargoTextFrame) {
+            String expectedString = "|| " + CONTAINER_CODE_1 + " || " 
+            							  + CONTAINER_CODE_2 + " ||\n";
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
+        }
+        unloadContainer(CONTAINER_CODE_2);
+        if (frameUnderTest instanceof CargoTextFrame) {
+            String expectedString = "|| " + CONTAINER_CODE_1 + " ||\n";
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
+        }
+    }
+    
+    /**
+     * Tests that the specified container can be successfully unloaded if
+     * it is accessible i.e. on top of a stack, then replace the with 
+     * a new container.
+     */
+    @Test
+    public void unloadAndReplaceWithNewContainer() {
+    	DialogFixture manifestDialog = prepareManifestDialog();
+        manifestDialogEnterText(manifestDialog, STACKS_1, HEIGHT_3, WEIGHT_20);
+        loadContainer(GENERAL_GOODS, CONTAINER_CODE_1, WEIGHT_10, null, null);
+        if (frameUnderTest instanceof CargoTextFrame) {
+            String expectedString = "|| " + CONTAINER_CODE_1 + " ||\n";
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
+        }
+        unloadContainer(CONTAINER_CODE_1);
+        if (frameUnderTest instanceof CargoTextFrame) {
+            String expectedString = "|| " + " ||\n";
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
+        }
+        loadContainer(GENERAL_GOODS, CONTAINER_CODE_2, WEIGHT_20, null, null);
+        if (frameUnderTest instanceof CargoTextFrame) {
+            String expectedString = "|| " + CONTAINER_CODE_2 + " ||\n";
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
+        }
+    }
+    
+    /**
+     * Tests that an error message appears if the specified container code
+     * is not 11 characters long.
+     */
+    @Test
+    public void containerCodeWithInvalidLength() {
+    	DialogFixture manifestDialog = prepareManifestDialog();
+        manifestDialogEnterText(manifestDialog, STACKS_1, HEIGHT_1, WEIGHT_10);
+        findContainer(INVALID_CONTAINER_CODE_1);
+        testFrame.optionPane().requireErrorMessage();
+    }
+    
+    /**
+     * Tests that an error message appears if the specified container code
+     * contains invalid owner code.
+     */
+    @Test
+    public void containerCodeWithInvalidOwnerCode() {
+    	DialogFixture manifestDialog = prepareManifestDialog();
+        manifestDialogEnterText(manifestDialog, STACKS_1, HEIGHT_1, WEIGHT_10);
+        findContainer(INVALID_CONTAINER_CODE_2);
+        testFrame.optionPane().requireErrorMessage();
+    }
+    
+    /**
+     * Tests that an error message appears if the specified container code
+     * contains invalid identifier.
+     */
+    @Test
+    public void containerCodeWithInvalidIdentifier() {
+    	DialogFixture manifestDialog = prepareManifestDialog();
+        manifestDialogEnterText(manifestDialog, STACKS_1, HEIGHT_1, WEIGHT_10);
+        findContainer(INVALID_CONTAINER_CODE_3);
+        testFrame.optionPane().requireErrorMessage();
+    }
+    
+    /**
+     * Tests that an error message appears if the specified container code
+     * contains invalid serialNumber.
+     */
+    @Test
+    public void containerCodeWithInvalidSerialNumber() {
+    	DialogFixture manifestDialog = prepareManifestDialog();
+        manifestDialogEnterText(manifestDialog, STACKS_1, HEIGHT_1, WEIGHT_20);
+        findContainer(INVALID_CONTAINER_CODE_4);
+        testFrame.optionPane().requireErrorMessage();
+    }
+    
+    /**
+     * Tests that an error message appears if the specified container code
+     * contains incorrect check digit.
+     */
+    @Test
+    public void containerCodeWithIncorrectCheckDigit() {
+    	DialogFixture manifestDialog = prepareManifestDialog();
+        manifestDialogEnterText(manifestDialog, STACKS_1, HEIGHT_1, WEIGHT_20);
+        findContainer(INVALID_CONTAINER_CODE_5);
+        testFrame.optionPane().requireErrorMessage();
+    }
+    
+    /**
+     * Tests that an error message appears if the container with the
+     * specified code is not on board.
+     */
+    @Test
+    public void findButContainerIsNotOnBoard() {
+    	DialogFixture manifestDialog = prepareManifestDialog();
+        manifestDialogEnterText(manifestDialog, STACKS_1, HEIGHT_3, WEIGHT_20);
+        findContainer(CONTAINER_CODE_1);
+        testFrame.optionPane().requireErrorMessage();
+    }
+    
+    /**
+     * Tests that the container with specified container code is highlighted.
+     */
+    @Test
+    public void findCorrectContainer() {
+    	DialogFixture manifestDialog = prepareManifestDialog();
+        manifestDialogEnterText(manifestDialog, STACKS_1, HEIGHT_3, WEIGHT_30);
+        loadContainer(GENERAL_GOODS, CONTAINER_CODE_1, WEIGHT_10, null, null);
+        loadContainer(GENERAL_GOODS, CONTAINER_CODE_2, WEIGHT_20, null, null);
+        if (frameUnderTest instanceof CargoTextFrame) {
+            String expectedString = "|| " + CONTAINER_CODE_1 + " || " 
+            							  + CONTAINER_CODE_2 + " ||\n";
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
+        }
+        findContainer(CONTAINER_CODE_1);
+        if (frameUnderTest instanceof CargoTextFrame) {
+            String expectedString = "||*" + CONTAINER_CODE_1 + "*|| " 
+            							  + CONTAINER_CODE_2 + " ||\n";
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
+        }
+    }
+    
+    /**
+     * Tests that the manifest remains the same if trying to find a container,
+     * then cancel the operation.
+     */
+    @Test
+    public void manifestRemainTheSameAfterCancellingFindingContainer() {
+    	DialogFixture manifestDialog = prepareManifestDialog();
+        manifestDialogEnterText(manifestDialog, STACKS_1, HEIGHT_3, WEIGHT_100);
+        loadContainer(GENERAL_GOODS, CONTAINER_CODE_1, WEIGHT_10, null, null);
+        if (frameUnderTest instanceof CargoTextFrame) {
+        	String expectedString = "|| " + CONTAINER_CODE_1 + " ||\n";
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
+        }
+        testFrame.button(FIND).click();
+        DialogFixture findDialog = testFrame.dialog("Container Dialog");
+        findDialog.button(CANCEL).click();
+        if (frameUnderTest instanceof CargoTextFrame) {
+        	String expectedString = "|| " + CONTAINER_CODE_1 + " ||\n";
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
+        }
+    }
+    
+    /**
+     * Tests that the container highlighting is turned on if the specified
+     * container is found on board and turned off when an action other than
+     * Find is initiated.
+     */
+    @Test
+    public void containerHighlightingFunctionsCorrectly() {
+    	DialogFixture manifestDialog = prepareManifestDialog();
+        manifestDialogEnterText(manifestDialog, STACKS_1, HEIGHT_3, WEIGHT_100);
+        loadContainer(GENERAL_GOODS, CONTAINER_CODE_1, WEIGHT_10, null, null);
+        if (frameUnderTest instanceof CargoTextFrame) {
+        	String expectedString = "|| " + CONTAINER_CODE_1 + " ||\n";
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
+        }
+        findContainer(CONTAINER_CODE_1);
+        if (frameUnderTest instanceof CargoTextFrame) {
+            String expectedString = "||*" + CONTAINER_CODE_1 + "*||\n";
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
+        }
+        loadContainer(GENERAL_GOODS, CONTAINER_CODE_2, WEIGHT_10, null, null);
+        if (frameUnderTest instanceof CargoTextFrame) {
+        	String expectedString = "|| " + CONTAINER_CODE_1 + " || " 
+        								  + CONTAINER_CODE_2 + " ||\n";
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
+        }
+    }
 }
