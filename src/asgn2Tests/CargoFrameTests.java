@@ -84,7 +84,6 @@ public class CargoFrameTests {
     private static final String HEIGHT_3 = "3";
     private static final String HEIGHT_5 = "5";
     
-    private static final String OK = "OK";
 	private static final String CANCEL = "Cancel";
     private static final String CONTAINER_CODE_1 = "INKU2633836";
 	private static final String CONTAINER_CODE_2 = "KOCU8090115";
