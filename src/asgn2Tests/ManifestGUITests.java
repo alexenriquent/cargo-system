@@ -53,7 +53,7 @@ public class ManifestGUITests {
     private static final String REFRIGERATED_GOODS = "Refrigerated Goods";
     private static final String DANGEROUS_GOODS = "Dangerous Goods";
     private static final String GOODS_CATEGORY = "Goods Category";
-    private static final String TEMPERATURE = "Temperature";
+    private static final String TEMPERATURE2 = "Temperature";
 
 	private static final String CONTAINER_CODE_1 = "INKU2633836";
 	private static final String CONTAINER_CODE_2 = "KOCU8090115";
@@ -82,15 +82,15 @@ public class ManifestGUITests {
     private static final String CATEGORY_1 = "1";
     private static final String TEMPERATURE_MINUS_5 = "-5";
     private static final String ZERO = "0";
-    private static final String NEGATIVE_VALUE = "-1";
-    private static final String ALPHABET_A = "A";
+    private static final String NEGATIVE = "-1";
+    private static final String NOT_NUMERIC = "A";
 	
 	private static final boolean GRAPHIC_VERSION = true;
     private static final int SHORT_PAUSE = 1500;
 
     private static final Pattern MANIFEST_EXCEPTION_PATTERN = Pattern.compile(".*ManifestException:.+");
 
-    private FrameFixture frame;
+    private FrameFixture testFrame;
     private JFrame frameUnderTest;
     
     /**
@@ -130,7 +130,7 @@ public class ManifestGUITests {
                 }
             });
         }
-        frame = new FrameFixture(frameUnderTest);
+        testFrame = new FrameFixture(frameUnderTest);
     }
     
     /**
@@ -141,7 +141,7 @@ public class ManifestGUITests {
     @After
     public void tearDown() {
         delay(SHORT_PAUSE);
-        frame.cleanUp();
+        testFrame.cleanUp();
     }
     
     /**
@@ -165,8 +165,8 @@ public class ManifestGUITests {
      * Helper - Brings up a ManifestDilaog for further interaction in tests.
      */
     private DialogFixture prepareManifestDialog() {
-        frame.button(NEW_MANIFEST).click();
-        DialogFixture manifestFixture = frame.dialog(NEW_MANIFEST);
+        testFrame.button(NEW_MANIFEST).click();
+        DialogFixture manifestFixture = testFrame.dialog(NEW_MANIFEST);
         return manifestFixture;
     }
 
@@ -195,15 +195,15 @@ public class ManifestGUITests {
      */
     private void loadContainer(String containerType, String code, String weight,
             String goodsCat, String temperature) {
-        frame.button(LOAD).click();
-        DialogFixture containerDialog = frame.dialog(CONTAINER_INFORMATION);
+        testFrame.button(LOAD).click();
+        DialogFixture containerDialog = testFrame.dialog(CONTAINER_INFORMATION);
         containerDialog.comboBox(CONTAINER_TYPE).selectItem(containerType);
         containerDialog.textBox(CONTAINER_CODE).enterText(code);
         containerDialog.textBox(CONTAINER_WEIGHT).enterText(weight);
         if (containerType.equals(DANGEROUS_GOODS)) {
             containerDialog.textBox(GOODS_CATEGORY).enterText(goodsCat);
         } else if (containerType.equals(REFRIGERATED_GOODS)) {
-            containerDialog.textBox(TEMPERATURE).enterText(temperature);
+            containerDialog.textBox(TEMPERATURE2).enterText(temperature);
         }
         containerDialog.button(OK).click();
     }
@@ -214,8 +214,8 @@ public class ManifestGUITests {
      * Helper - Clicks the Unload button and enters a valid container code.
      */
     private void unloadContainer(String code) {
-        frame.button(UNLOAD).click();
-        DialogFixture containerDialog = frame.dialog("Container Dialog");
+        testFrame.button(UNLOAD).click();
+        DialogFixture containerDialog = testFrame.dialog("Container Dialog");
         containerDialog.textBox(CONTAINER_CODE).enterText(code);
         containerDialog.button(OK).click();
     }
@@ -226,141 +226,141 @@ public class ManifestGUITests {
      * Helper - Clicks the Find button and enters a valid container code.
      */
     private void findContainer(String code) {
-        frame.button(FIND).click();
-        DialogFixture containerDialog = frame.dialog("Container Dialog");
+        testFrame.button(FIND).click();
+        DialogFixture containerDialog = testFrame.dialog("Container Dialog");
         containerDialog.textBox(CONTAINER_CODE).enterText(code);
         containerDialog.button(OK).click();
     }
     
-    /**
-     * Tests that the frame used in test cases has been instantiated.
-     */
-    @Test
-    public void frameConstruction() {
-    	assertNotNull(frame);
-    }
-    
-    /**
-     * Tests that only "New Manifest" button is enabled at the
-     * initial state (when the manifest has not been instantiated).
-     */
-    @Test
-    public void initialButtonState() {
-    	frame.button(NEW_MANIFEST).requireEnabled();
-    	frame.button(LOAD).requireDisabled();
-    	frame.button(UNLOAD).requireDisabled();
-    	frame.button(FIND).requireDisabled();
-    }
-    
-    /**
-     * Tests that an error message appears if the "OK" button is clicked 
-     * but no input data given in the New Manifest dialog.
-     */
-    @Test
-    public void newManifestNoInputData() {
-    	DialogFixture manifestDialog = prepareManifestDialog();
-    	manifestDialogEnterText(manifestDialog, null, null, null);
-    	manifestDialog.optionPane().requireErrorMessage();
-    }
-    
-    /**
-     * Tests that an error message appears if given an invalid data type as
-     * a number of stacks and the "OK" button is clicked in the New Manifest dialog.
-     * 
-     * A Manifest object is not instantiated in this test.
-     */
-    @Test
-    public void newManifestWithAlphabetInputAsStackNumber() {
-    	DialogFixture manifestDialog = prepareManifestDialog();
-    	manifestDialogEnterText(manifestDialog, ALPHABET_A, null, null);
-    	manifestDialog.optionPane().requireErrorMessage();
-    }
-    
-    /**
-     * Tests that an error message appears if given a negative number of stacks
-     * but valid values for both maximum height and weight and the "OK" button is 
-     * clicked in the New Manifest dialog.
-     * 
-     * A Manifest object is instantiated in this test.
-     */
-    @Test
-    public void newManifestWithNegativeStackNumber() {
-    	DialogFixture manifestDialog = prepareManifestDialog();
-    	manifestDialogEnterText(manifestDialog, NEGATIVE_VALUE, HEIGHT_1, WEIGHT_100);
-    	manifestDialog.optionPane().requireErrorMessage();
-    	manifestDialog.optionPane().requireMessage(MANIFEST_EXCEPTION_PATTERN);
-    }
-    
-    /**
-     * Tests that an error message appears if given an invalid data type as
-     * a maximum height and the "OK" button is clicked in the New Manifest dialog.
-     * 
-     * A Manifest object is not instantiated in this test.
-     */
-    @Test
-    public void newManifestWithAlphabetInputAsMaximumHeight() {
-    	DialogFixture manifestDialog = prepareManifestDialog();
-    	manifestDialogEnterText(manifestDialog, STACKS_1, ALPHABET_A, null);
-    	manifestDialog.optionPane().requireErrorMessage();
-    }
-    
-    /**
-     * Tests that an error message appears if given a negative number of maximum 
-     * height but valid number of stacks and maximum weight and the "OK" button is 
-     * clicked in the New Manifest dialog.
-     * 
-     * A Manifest object is instantiated in this test.
-     */
-    @Test
-    public void newManifestWithNegativeMaximumHeight() {
-    	DialogFixture manifestDialog = prepareManifestDialog();
-    	manifestDialogEnterText(manifestDialog, STACKS_1, NEGATIVE_VALUE, WEIGHT_100);
-    	manifestDialog.optionPane().requireErrorMessage();
-    	manifestDialog.optionPane().requireMessage(MANIFEST_EXCEPTION_PATTERN);
-    }
-    
-    /**
-     * Tests that an error message appears if given an invalid data type as
-     * a maximum weight and the "OK" button is clicked in the New Manifest dialog.
-     * 
-     * A Manifest object is not instantiated in this test.
-     */
-    @Test
-    public void newManifestWithAlphabetInputAsMaximumWeight() {
-    	DialogFixture manifestDialog = prepareManifestDialog();
-    	manifestDialogEnterText(manifestDialog, STACKS_1, HEIGHT_1, ALPHABET_A);
-    	manifestDialog.optionPane().requireErrorMessage();
-    }   
-    
-    /**
-     * Tests that an error message appears if given a negative number of maximum 
-     * weight but valid number of stacks and maximum height and the "OK" button is 
-     * clicked in the New Manifest dialog.
-     * 
-     * A Manifest object is instantiated in this test.
-     */
-    @Test
-    public void newManifestWithNegativeMaximumWeight() {
-    	DialogFixture manifestDialog = prepareManifestDialog();
-    	manifestDialogEnterText(manifestDialog, STACKS_1, HEIGHT_1, NEGATIVE_VALUE);
-    	manifestDialog.optionPane().requireErrorMessage();
-    	manifestDialog.optionPane().requireMessage(MANIFEST_EXCEPTION_PATTERN);
-    }
-    
-    /**
-     * Tests that all buttons including New Manifest, Load, Unload and Find
-     * buttons are enabled after a Manifest object has been instantiated with 
-     * valid values.
-     */
-    @Test
-    public void ButtonStateAfterInstantiatingNewManifest() {
-    	DialogFixture manifestDialog = prepareManifestDialog();
-    	manifestDialogEnterText(manifestDialog, STACKS_1, HEIGHT_1, WEIGHT_100);
-    	frame.button(NEW_MANIFEST).requireEnabled();
-        frame.button(LOAD).requireEnabled();
-        frame.button(UNLOAD).requireEnabled();
-        frame.button(FIND).requireEnabled();
-    }
+//    /**
+//     * Tests that the frame used in test cases has been instantiated.
+//     */
+//    @Test
+//    public void frameConstruction() {
+//    	assertNotNull(testFrame);
+//    }
+//    
+//    /**
+//     * Tests that only "New Manifest" button is enabled at the
+//     * initial state (when the manifest has not been instantiated).
+//     */
+//    @Test
+//    public void initialButtonState() {
+//    	testFrame.button(NEW_MANIFEST).requireEnabled();
+//    	testFrame.button(LOAD).requireDisabled();
+//    	testFrame.button(UNLOAD).requireDisabled();
+//    	testFrame.button(FIND).requireDisabled();
+//    }
+//    
+//    /**
+//     * Tests that an error message appears if the "OK" button is clicked 
+//     * but no input data given in the New Manifest dialog.
+//     */
+//    @Test
+//    public void newManifestNoInputData() {
+//    	DialogFixture manifestDialog = prepareManifestDialog();
+//    	manifestDialogEnterText(manifestDialog, null, null, null);
+//    	manifestDialog.optionPane().requireErrorMessage();
+//    }
+//    
+//    /**
+//     * Tests that an error message appears if given an invalid data type as
+//     * a number of stacks and the "OK" button is clicked in the New Manifest dialog.
+//     * 
+//     * A Manifest object is not instantiated in this test.
+//     */
+//    @Test
+//    public void newManifestWithAlphabetInputAsStackNumber() {
+//    	DialogFixture manifestDialog = prepareManifestDialog();
+//    	manifestDialogEnterText(manifestDialog, NOT_NUMERIC, null, null);
+//    	manifestDialog.optionPane().requireErrorMessage();
+//    }
+//    
+//    /**
+//     * Tests that an error message appears if given a negative number of stacks
+//     * but valid values for both maximum height and weight and the "OK" button is 
+//     * clicked in the New Manifest dialog.
+//     * 
+//     * A Manifest object is instantiated in this test.
+//     */
+//    @Test
+//    public void newManifestWithNegativeStackNumber() {
+//    	DialogFixture manifestDialog = prepareManifestDialog();
+//    	manifestDialogEnterText(manifestDialog, NEGATIVE, HEIGHT_1, WEIGHT_100);
+//    	manifestDialog.optionPane().requireErrorMessage();
+//    	manifestDialog.optionPane().requireMessage(MANIFEST_EXCEPTION_PATTERN);
+//    }
+//    
+//    /**
+//     * Tests that an error message appears if given an invalid data type as
+//     * a maximum height and the "OK" button is clicked in the New Manifest dialog.
+//     * 
+//     * A Manifest object is not instantiated in this test.
+//     */
+//    @Test
+//    public void newManifestWithAlphabetInputAsMaximumHeight() {
+//    	DialogFixture manifestDialog = prepareManifestDialog();
+//    	manifestDialogEnterText(manifestDialog, STACKS_1, NOT_NUMERIC, null);
+//    	manifestDialog.optionPane().requireErrorMessage();
+//    }
+//    
+//    /**
+//     * Tests that an error message appears if given a negative number of maximum 
+//     * height but valid number of stacks and maximum weight and the "OK" button is 
+//     * clicked in the New Manifest dialog.
+//     * 
+//     * A Manifest object is instantiated in this test.
+//     */
+//    @Test
+//    public void newManifestWithNegativeMaximumHeight() {
+//    	DialogFixture manifestDialog = prepareManifestDialog();
+//    	manifestDialogEnterText(manifestDialog, STACKS_1, NEGATIVE, WEIGHT_100);
+//    	manifestDialog.optionPane().requireErrorMessage();
+//    	manifestDialog.optionPane().requireMessage(MANIFEST_EXCEPTION_PATTERN);
+//    }
+//    
+//    /**
+//     * Tests that an error message appears if given an invalid data type as
+//     * a maximum weight and the "OK" button is clicked in the New Manifest dialog.
+//     * 
+//     * A Manifest object is not instantiated in this test.
+//     */
+//    @Test
+//    public void newManifestWithAlphabetInputAsMaximumWeight() {
+//    	DialogFixture manifestDialog = prepareManifestDialog();
+//    	manifestDialogEnterText(manifestDialog, STACKS_1, HEIGHT_1, NOT_NUMERIC);
+//    	manifestDialog.optionPane().requireErrorMessage();
+//    }   
+//    
+//    /**
+//     * Tests that an error message appears if given a negative number of maximum 
+//     * weight but valid number of stacks and maximum height and the "OK" button is 
+//     * clicked in the New Manifest dialog.
+//     * 
+//     * A Manifest object is instantiated in this test.
+//     */
+//    @Test
+//    public void newManifestWithNegativeMaximumWeight() {
+//    	DialogFixture manifestDialog = prepareManifestDialog();
+//    	manifestDialogEnterText(manifestDialog, STACKS_1, HEIGHT_1, NEGATIVE);
+//    	manifestDialog.optionPane().requireErrorMessage();
+//    	manifestDialog.optionPane().requireMessage(MANIFEST_EXCEPTION_PATTERN);
+//    }
+//    
+//    /**
+//     * Tests that all buttons including New Manifest, Load, Unload and Find
+//     * buttons are enabled after a Manifest object has been instantiated with 
+//     * valid values.
+//     */
+//    @Test
+//    public void ButtonStateAfterInstantiatingNewManifest() {
+//    	DialogFixture manifestDialog = prepareManifestDialog();
+//    	manifestDialogEnterText(manifestDialog, STACKS_1, HEIGHT_1, WEIGHT_100);
+//    	testFrame.button(NEW_MANIFEST).requireEnabled();
+//        testFrame.button(LOAD).requireEnabled();
+//        testFrame.button(UNLOAD).requireEnabled();
+//        testFrame.button(FIND).requireEnabled();
+//    }
     
     /**
      * Tests that the canvas displays the correct representation 
@@ -372,37 +372,37 @@ public class ManifestGUITests {
         manifestDialogEnterText(manifestDialog, ZERO, HEIGHT_1, WEIGHT_100);
         if (frameUnderTest instanceof CargoTextFrame) {
         	String expectedString = "";
-            assertEquals(expectedString, frame.textBox(CARGO_TEXT_AREA).text());
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
         }
     }
     
-    /**
-     * Tests that the canvas displays the correct representation 
-     * for a single empty stack.
-     */
-    @Test
-    public void manifestWithOneEmptyStack() {
-    	DialogFixture manifestDialog = prepareManifestDialog();
-        manifestDialogEnterText(manifestDialog, STACKS_1, HEIGHT_1, WEIGHT_100);
-        if (frameUnderTest instanceof CargoTextFrame) {
-        	String expectedString = "||  ||\n";
-            assertEquals(expectedString, frame.textBox(CARGO_TEXT_AREA).text());
-        }
-    }
-    
-    /**
-     * Tests that the canvas displays the correct string representation 
-     * for three empty stacks.
-     */
-    @Test
-    public void manifestWithThreeEmptyStack() {
-    	DialogFixture manifestDialog = prepareManifestDialog();
-        manifestDialogEnterText(manifestDialog, STACKS_3, HEIGHT_1, WEIGHT_100);
-        if (frameUnderTest instanceof CargoTextFrame) {
-        	String expectedString = "||  ||\n||  ||\n||  ||\n";
-            assertEquals(expectedString, frame.textBox(CARGO_TEXT_AREA).text());
-        }
-    }
+//    /**
+//     * Tests that the canvas displays the correct representation 
+//     * for a single empty stack.
+//     */
+//    @Test
+//    public void manifestWithOneEmptyStack() {
+//    	DialogFixture manifestDialog = prepareManifestDialog();
+//        manifestDialogEnterText(manifestDialog, STACKS_1, HEIGHT_1, WEIGHT_100);
+//        if (frameUnderTest instanceof CargoTextFrame) {
+//        	String expectedString = "||  ||\n";
+//            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
+//        }
+//    }
+//    
+//    /**
+//     * Tests that the canvas displays the correct string representation 
+//     * for three empty stacks.
+//     */
+//    @Test
+//    public void manifestWithThreeEmptyStack() {
+//    	DialogFixture manifestDialog = prepareManifestDialog();
+//        manifestDialogEnterText(manifestDialog, STACKS_3, HEIGHT_1, WEIGHT_100);
+//        if (frameUnderTest instanceof CargoTextFrame) {
+//        	String expectedString = "||  ||\n||  ||\n||  ||\n";
+//            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
+//        }
+//    }
     
     /**
      * Tests that the canvas displays the correct representation 
@@ -414,7 +414,7 @@ public class ManifestGUITests {
         manifestDialogEnterText(manifestDialog, STACKS_5, HEIGHT_1, WEIGHT_100);
         if (frameUnderTest instanceof CargoTextFrame) {
         	String expectedString = "||  ||\n||  ||\n||  ||\n||  ||\n||  ||\n";
-            assertEquals(expectedString, frame.textBox(CARGO_TEXT_AREA).text());
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
         }
     }
     
@@ -428,13 +428,13 @@ public class ManifestGUITests {
         manifestDialogEnterText(manifestDialog, STACKS_5, HEIGHT_1, WEIGHT_100);
         if (frameUnderTest instanceof CargoTextFrame) {
         	String expectedString = "||  ||\n||  ||\n||  ||\n||  ||\n||  ||\n";
-            assertEquals(expectedString, frame.textBox(CARGO_TEXT_AREA).text());
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
         }
         manifestDialog = prepareManifestDialog();
         manifestDialogEnterText(manifestDialog, STACKS_3, HEIGHT_1, WEIGHT_100);
         if (frameUnderTest instanceof CargoTextFrame) {
         	String expectedString = "||  ||\n||  ||\n||  ||\n";
-            assertEquals(expectedString, frame.textBox(CARGO_TEXT_AREA).text());
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
         }
     }
     
@@ -448,13 +448,13 @@ public class ManifestGUITests {
         manifestDialogEnterText(manifestDialog, STACKS_5, HEIGHT_1, WEIGHT_100);
         if (frameUnderTest instanceof CargoTextFrame) {
         	String expectedString = "||  ||\n||  ||\n||  ||\n||  ||\n||  ||\n";
-            assertEquals(expectedString, frame.textBox(CARGO_TEXT_AREA).text());
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
         }
         manifestDialog = prepareManifestDialog();
         manifestDialog.button(CANCEL).click();
         if (frameUnderTest instanceof CargoTextFrame) {
         	String expectedString = "||  ||\n||  ||\n||  ||\n||  ||\n||  ||\n";
-            assertEquals(expectedString, frame.textBox(CARGO_TEXT_AREA).text());
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
         }
     }
     
@@ -469,32 +469,32 @@ public class ManifestGUITests {
         manifestDialogEnterText(manifestDialog, STACKS_5, HEIGHT_1, WEIGHT_100);
         if (frameUnderTest instanceof CargoTextFrame) {
         	String expectedString = "||  ||\n||  ||\n||  ||\n||  ||\n||  ||\n";
-            assertEquals(expectedString, frame.textBox(CARGO_TEXT_AREA).text());
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
         }
         manifestDialog = prepareManifestDialog();
         manifestDialogEnterText(manifestDialog, STACKS_3, HEIGHT_1, WEIGHT_100);
         if (frameUnderTest instanceof CargoTextFrame) {
         	String expectedString = "||  ||\n||  ||\n||  ||\n";
-            assertEquals(expectedString, frame.textBox(CARGO_TEXT_AREA).text());
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
         }
     }
     
-    /**
-     * Tests that an error message is displayed if loading a new container
-     * would exceed the maximum weight limit.
-     */
-    @Test
-    public void overload() {
-    	DialogFixture manifestDialog = prepareManifestDialog();
-        manifestDialogEnterText(manifestDialog, STACKS_1, HEIGHT_3, WEIGHT_20);
-        loadContainer(GENERAL_GOODS, CONTAINER_CODE_1, WEIGHT_10, null, null);
-        loadContainer(GENERAL_GOODS, CONTAINER_CODE_2, WEIGHT_20, null, null);
-        frame.optionPane().requireErrorMessage();
-        if (frameUnderTest instanceof CargoTextFrame) {
-            String expectedString = "|| " + CONTAINER_CODE_1 + " ||\n";
-            assertEquals(expectedString, frame.textBox(CARGO_TEXT_AREA).text());
-        }
-    }
+//    /**
+//     * Tests that an error message is displayed if loading a new container
+//     * would exceed the maximum weight limit.
+//     */
+//    @Test
+//    public void overload() {
+//    	DialogFixture manifestDialog = prepareManifestDialog();
+//        manifestDialogEnterText(manifestDialog, STACKS_1, HEIGHT_3, WEIGHT_20);
+//        loadContainer(GENERAL_GOODS, CONTAINER_CODE_1, WEIGHT_10, null, null);
+//        loadContainer(GENERAL_GOODS, CONTAINER_CODE_2, WEIGHT_20, null, null);
+//        testFrame.optionPane().requireErrorMessage();
+//        if (frameUnderTest instanceof CargoTextFrame) {
+//            String expectedString = "|| " + CONTAINER_CODE_1 + " ||\n";
+//            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
+//        }
+//    }
     
     /**
      * Tests that an error message is displayed if there is no space for
@@ -507,11 +507,11 @@ public class ManifestGUITests {
         loadContainer(GENERAL_GOODS, CONTAINER_CODE_1, WEIGHT_10, null, null);
         loadContainer(DANGEROUS_GOODS, CONTAINER_CODE_2, WEIGHT_10, CATEGORY_1, null);
         loadContainer(REFRIGERATED_GOODS, CONTAINER_CODE_3, WEIGHT_10, null, TEMPERATURE_MINUS_5);
-        frame.optionPane().requireErrorMessage();
+        testFrame.optionPane().requireErrorMessage();
         if (frameUnderTest instanceof CargoTextFrame) {
             String expectedString = "|| " + CONTAINER_CODE_1 + " ||\n"
             					  + "|| " + CONTAINER_CODE_2 + " ||\n";
-            assertEquals(expectedString, frame.textBox(CARGO_TEXT_AREA).text());
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
         }
     }
     
@@ -524,10 +524,10 @@ public class ManifestGUITests {
     	DialogFixture manifestDialog = prepareManifestDialog();
         manifestDialogEnterText(manifestDialog, STACKS_1, HEIGHT_1, WEIGHT_20);
         loadContainer(GENERAL_GOODS, CONTAINER_CODE_1, WEIGHT_3, null, null);
-        frame.optionPane().requireErrorMessage();
+        testFrame.optionPane().requireErrorMessage();
         if (frameUnderTest instanceof CargoTextFrame) {
             String expectedString = "|| " + " ||\n";
-            assertEquals(expectedString, frame.textBox(CARGO_TEXT_AREA).text());
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
         }
     }
     
@@ -540,10 +540,10 @@ public class ManifestGUITests {
     	DialogFixture manifestDialog = prepareManifestDialog();
         manifestDialogEnterText(manifestDialog, STACKS_1, HEIGHT_1, WEIGHT_100);
         loadContainer(GENERAL_GOODS, CONTAINER_CODE_1, WEIGHT_31, null, null);
-        frame.optionPane().requireErrorMessage();
+        testFrame.optionPane().requireErrorMessage();
         if (frameUnderTest instanceof CargoTextFrame) {
             String expectedString = "|| " + " ||\n";
-            assertEquals(expectedString, frame.textBox(CARGO_TEXT_AREA).text());
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
         }
     }
     
@@ -557,53 +557,53 @@ public class ManifestGUITests {
         manifestDialogEnterText(manifestDialog, STACKS_1, HEIGHT_3, WEIGHT_100);
         loadContainer(GENERAL_GOODS, CONTAINER_CODE_1, WEIGHT_10, null, null);
         loadContainer(GENERAL_GOODS, CONTAINER_CODE_1, WEIGHT_10, null, null);
-        frame.optionPane().requireErrorMessage();
+        testFrame.optionPane().requireErrorMessage();
     }
     
-    /**
-     * Tests that a valid general goods container is loaded to the manifest
-     * and displayed as expected.
-     */
-    @Test
-    public void loadGeneralGoodsConatiner() {
-    	DialogFixture manifestDialog = prepareManifestDialog();
-        manifestDialogEnterText(manifestDialog, STACKS_1, HEIGHT_1, WEIGHT_20);
-        loadContainer(GENERAL_GOODS, CONTAINER_CODE_1, WEIGHT_10, null, null);
-        if (frameUnderTest instanceof CargoTextFrame) {
-            String expectedString = "|| " + CONTAINER_CODE_1 + " ||\n";
-            assertEquals(expectedString, frame.textBox(CARGO_TEXT_AREA).text());
-        }
-    }
-    
-    /**
-     * Tests that a valid dangerous goods container is loaded to the manifest
-     * and displayed as expected.
-     */
-    @Test
-    public void loadDangerousGoodsConatiner() {
-    	DialogFixture manifestDialog = prepareManifestDialog();
-        manifestDialogEnterText(manifestDialog, STACKS_1, HEIGHT_1, WEIGHT_20);
-        loadContainer(DANGEROUS_GOODS, CONTAINER_CODE_1, WEIGHT_10, CATEGORY_1, null);
-        if (frameUnderTest instanceof CargoTextFrame) {
-            String expectedString = "|| " + CONTAINER_CODE_1 + " ||\n";
-            assertEquals(expectedString, frame.textBox(CARGO_TEXT_AREA).text());
-        }
-    }
-    
-    /**
-     * Tests that a valid refrigerated goods container is loaded to the manifest
-     * and displayed as expected.
-     */
-    @Test
-    public void loadRefrigeratedGoodsConatiner() {
-    	DialogFixture manifestDialog = prepareManifestDialog();
-        manifestDialogEnterText(manifestDialog, STACKS_1, HEIGHT_1, WEIGHT_20);
-        loadContainer(REFRIGERATED_GOODS, CONTAINER_CODE_1, WEIGHT_10, null, TEMPERATURE_MINUS_5);
-        if (frameUnderTest instanceof CargoTextFrame) {
-            String expectedString = "|| " + CONTAINER_CODE_1 + " ||\n";
-            assertEquals(expectedString, frame.textBox(CARGO_TEXT_AREA).text());
-        }
-    }
+//    /**
+//     * Tests that a valid general goods container is loaded to the manifest
+//     * and displayed as expected.
+//     */
+//    @Test
+//    public void loadGeneralGoodsConatiner() {
+//    	DialogFixture manifestDialog = prepareManifestDialog();
+//        manifestDialogEnterText(manifestDialog, STACKS_1, HEIGHT_1, WEIGHT_20);
+//        loadContainer(GENERAL_GOODS, CONTAINER_CODE_1, WEIGHT_10, null, null);
+//        if (frameUnderTest instanceof CargoTextFrame) {
+//            String expectedString = "|| " + CONTAINER_CODE_1 + " ||\n";
+//            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
+//        }
+//    }
+//    
+//    /**
+//     * Tests that a valid dangerous goods container is loaded to the manifest
+//     * and displayed as expected.
+//     */
+//    @Test
+//    public void loadDangerousGoodsConatiner() {
+//    	DialogFixture manifestDialog = prepareManifestDialog();
+//        manifestDialogEnterText(manifestDialog, STACKS_1, HEIGHT_1, WEIGHT_20);
+//        loadContainer(DANGEROUS_GOODS, CONTAINER_CODE_1, WEIGHT_10, CATEGORY_1, null);
+//        if (frameUnderTest instanceof CargoTextFrame) {
+//            String expectedString = "|| " + CONTAINER_CODE_1 + " ||\n";
+//            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
+//        }
+//    }
+//    
+//    /**
+//     * Tests that a valid refrigerated goods container is loaded to the manifest
+//     * and displayed as expected.
+//     */
+//    @Test
+//    public void loadRefrigeratedGoodsConatiner() {
+//    	DialogFixture manifestDialog = prepareManifestDialog();
+//        manifestDialogEnterText(manifestDialog, STACKS_1, HEIGHT_1, WEIGHT_20);
+//        loadContainer(REFRIGERATED_GOODS, CONTAINER_CODE_1, WEIGHT_10, null, TEMPERATURE_MINUS_5);
+//        if (frameUnderTest instanceof CargoTextFrame) {
+//            String expectedString = "|| " + CONTAINER_CODE_1 + " ||\n";
+//            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
+//        }
+//    }
     
     /**
      * Tests that three valid general goods containers are loaded to the maximum
@@ -620,7 +620,7 @@ public class ManifestGUITests {
             String expectedString = "|| " + CONTAINER_CODE_1 + " || "
             							  + CONTAINER_CODE_2 + " || "
             							  + CONTAINER_CODE_3 + " ||\n";
-            assertEquals(expectedString, frame.textBox(CARGO_TEXT_AREA).text());
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
         }
     }
 	
@@ -642,7 +642,7 @@ public class ManifestGUITests {
             							  + CONTAINER_CODE_2 + " || "
             							  + CONTAINER_CODE_3 + " ||\n"
             					  + "|| " + CONTAINER_CODE_4 + " ||\n";
-            assertEquals(expectedString, frame.textBox(CARGO_TEXT_AREA).text());
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
         }
     }
     
@@ -659,7 +659,7 @@ public class ManifestGUITests {
         if (frameUnderTest instanceof CargoTextFrame) {
             String expectedString = "|| " + CONTAINER_CODE_1 + " ||\n"
             					  + "|| " + CONTAINER_CODE_2 + " ||\n";
-            assertEquals(expectedString, frame.textBox(CARGO_TEXT_AREA).text());
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
         }
     }
     
@@ -679,7 +679,7 @@ public class ManifestGUITests {
             String expectedString = "|| " + CONTAINER_CODE_1 + " ||\n"
             					  + "|| " + CONTAINER_CODE_2 + " ||\n"
             					  + "|| " + CONTAINER_CODE_3 + " ||\n";
-            assertEquals(expectedString, frame.textBox(CARGO_TEXT_AREA).text());
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
         }
     }
     
@@ -701,7 +701,7 @@ public class ManifestGUITests {
             String expectedString = "|| " + CONTAINER_CODE_1 + " || " + CONTAINER_CODE_4 + " ||\n"
             					  + "|| " + CONTAINER_CODE_2 + " ||\n"
             					  + "|| " + CONTAINER_CODE_3 + " || " + CONTAINER_CODE_5 + " ||\n";
-            assertEquals(expectedString, frame.textBox(CARGO_TEXT_AREA).text());
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
         }
     }
     
@@ -718,13 +718,13 @@ public class ManifestGUITests {
         loadContainer(GENERAL_GOODS, CONTAINER_CODE_1, WEIGHT_10, null, null);
         if (frameUnderTest instanceof CargoTextFrame) {
         	String expectedString = "|| " + CONTAINER_CODE_1 + " ||\n";
-            assertEquals(expectedString, frame.textBox(CARGO_TEXT_AREA).text());
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
         }
         manifestDialog = prepareManifestDialog();
         manifestDialogEnterText(manifestDialog, STACKS_3, HEIGHT_1, WEIGHT_100);
         if (frameUnderTest instanceof CargoTextFrame) {
         	String expectedString = "||  ||\n||  ||\n||  ||\n";
-            assertEquals(expectedString, frame.textBox(CARGO_TEXT_AREA).text());
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
         }
     }
     
@@ -740,7 +740,7 @@ public class ManifestGUITests {
         loadContainer(GENERAL_GOODS, CONTAINER_CODE_1, WEIGHT_10, null, null);
         if (frameUnderTest instanceof CargoTextFrame) {
         	String expectedString = "|| " + CONTAINER_CODE_1 + " ||\n";
-            assertEquals(expectedString, frame.textBox(CARGO_TEXT_AREA).text());
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
         }
         manifestDialog = prepareManifestDialog();
         manifestDialog.button(CANCEL).click();
@@ -748,7 +748,7 @@ public class ManifestGUITests {
         if (frameUnderTest instanceof CargoTextFrame) {
         	String expectedString = "|| " + CONTAINER_CODE_1 + " || " 
         								  + CONTAINER_CODE_2 + " ||\n";
-            assertEquals(expectedString, frame.textBox(CARGO_TEXT_AREA).text());
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
         }
     }
     
@@ -764,16 +764,16 @@ public class ManifestGUITests {
         loadContainer(GENERAL_GOODS, CONTAINER_CODE_1, WEIGHT_10, null, null);
         if (frameUnderTest instanceof CargoTextFrame) {
         	String expectedString = "|| " + CONTAINER_CODE_1 + " ||\n";
-            assertEquals(expectedString, frame.textBox(CARGO_TEXT_AREA).text());
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
         }
-        frame.button(LOAD).click();
-        DialogFixture containerDialog = frame.dialog(CONTAINER_INFORMATION);
+        testFrame.button(LOAD).click();
+        DialogFixture containerDialog = testFrame.dialog(CONTAINER_INFORMATION);
         containerDialog.button(CANCEL).click();
         loadContainer(GENERAL_GOODS, CONTAINER_CODE_2, WEIGHT_10, null, null);
         if (frameUnderTest instanceof CargoTextFrame) {
         	String expectedString = "|| " + CONTAINER_CODE_1 + " || " 
         								  + CONTAINER_CODE_2 + " ||\n";
-            assertEquals(expectedString, frame.textBox(CARGO_TEXT_AREA).text());
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
         }
     }
     
@@ -788,10 +788,10 @@ public class ManifestGUITests {
         loadContainer(GENERAL_GOODS, CONTAINER_CODE_1, WEIGHT_10, null, null);
         if (frameUnderTest instanceof CargoTextFrame) {
             String expectedString = "|| " + CONTAINER_CODE_1 + " ||\n";
-            assertEquals(expectedString, frame.textBox(CARGO_TEXT_AREA).text());
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
         }
         unloadContainer(CONTAINER_CODE_2);
-        frame.optionPane().requireErrorMessage();
+        testFrame.optionPane().requireErrorMessage();
     }
     
     /**
@@ -807,10 +807,10 @@ public class ManifestGUITests {
         if (frameUnderTest instanceof CargoTextFrame) {
             String expectedString = "|| " + CONTAINER_CODE_1 + " || " 
             							  + CONTAINER_CODE_2 + " ||\n";
-            assertEquals(expectedString, frame.textBox(CARGO_TEXT_AREA).text());
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
         }
         unloadContainer(CONTAINER_CODE_1);
-        frame.optionPane().requireErrorMessage();
+        testFrame.optionPane().requireErrorMessage();
     }
     
     /**
@@ -826,12 +826,12 @@ public class ManifestGUITests {
         if (frameUnderTest instanceof CargoTextFrame) {
             String expectedString = "|| " + CONTAINER_CODE_1 + " || " 
             							  + CONTAINER_CODE_2 + " ||\n";
-            assertEquals(expectedString, frame.textBox(CARGO_TEXT_AREA).text());
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
         }
         unloadContainer(CONTAINER_CODE_2);
         if (frameUnderTest instanceof CargoTextFrame) {
             String expectedString = "|| " + CONTAINER_CODE_1 + " ||\n";
-            assertEquals(expectedString, frame.textBox(CARGO_TEXT_AREA).text());
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
         }
     }
     
@@ -847,17 +847,17 @@ public class ManifestGUITests {
         loadContainer(GENERAL_GOODS, CONTAINER_CODE_1, WEIGHT_10, null, null);
         if (frameUnderTest instanceof CargoTextFrame) {
             String expectedString = "|| " + CONTAINER_CODE_1 + " ||\n";
-            assertEquals(expectedString, frame.textBox(CARGO_TEXT_AREA).text());
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
         }
         unloadContainer(CONTAINER_CODE_1);
         if (frameUnderTest instanceof CargoTextFrame) {
             String expectedString = "|| " + " ||\n";
-            assertEquals(expectedString, frame.textBox(CARGO_TEXT_AREA).text());
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
         }
         loadContainer(GENERAL_GOODS, CONTAINER_CODE_2, WEIGHT_20, null, null);
         if (frameUnderTest instanceof CargoTextFrame) {
             String expectedString = "|| " + CONTAINER_CODE_2 + " ||\n";
-            assertEquals(expectedString, frame.textBox(CARGO_TEXT_AREA).text());
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
         }
     }
     
@@ -870,7 +870,7 @@ public class ManifestGUITests {
     	DialogFixture manifestDialog = prepareManifestDialog();
         manifestDialogEnterText(manifestDialog, STACKS_1, HEIGHT_1, WEIGHT_10);
         findContainer(INVALID_CONTAINER_CODE_1);
-        frame.optionPane().requireErrorMessage();
+        testFrame.optionPane().requireErrorMessage();
     }
     
     /**
@@ -882,7 +882,7 @@ public class ManifestGUITests {
     	DialogFixture manifestDialog = prepareManifestDialog();
         manifestDialogEnterText(manifestDialog, STACKS_1, HEIGHT_1, WEIGHT_10);
         findContainer(INVALID_CONTAINER_CODE_2);
-        frame.optionPane().requireErrorMessage();
+        testFrame.optionPane().requireErrorMessage();
     }
     
     /**
@@ -894,7 +894,7 @@ public class ManifestGUITests {
     	DialogFixture manifestDialog = prepareManifestDialog();
         manifestDialogEnterText(manifestDialog, STACKS_1, HEIGHT_1, WEIGHT_10);
         findContainer(INVALID_CONTAINER_CODE_3);
-        frame.optionPane().requireErrorMessage();
+        testFrame.optionPane().requireErrorMessage();
     }
     
     /**
@@ -906,7 +906,7 @@ public class ManifestGUITests {
     	DialogFixture manifestDialog = prepareManifestDialog();
         manifestDialogEnterText(manifestDialog, STACKS_1, HEIGHT_1, WEIGHT_20);
         findContainer(INVALID_CONTAINER_CODE_4);
-        frame.optionPane().requireErrorMessage();
+        testFrame.optionPane().requireErrorMessage();
     }
     
     /**
@@ -918,7 +918,7 @@ public class ManifestGUITests {
     	DialogFixture manifestDialog = prepareManifestDialog();
         manifestDialogEnterText(manifestDialog, STACKS_1, HEIGHT_1, WEIGHT_20);
         findContainer(INVALID_CONTAINER_CODE_5);
-        frame.optionPane().requireErrorMessage();
+        testFrame.optionPane().requireErrorMessage();
     }
     
     /**
@@ -930,7 +930,7 @@ public class ManifestGUITests {
     	DialogFixture manifestDialog = prepareManifestDialog();
         manifestDialogEnterText(manifestDialog, STACKS_1, HEIGHT_3, WEIGHT_20);
         findContainer(CONTAINER_CODE_1);
-        frame.optionPane().requireErrorMessage();
+        testFrame.optionPane().requireErrorMessage();
     }
     
     /**
@@ -945,13 +945,13 @@ public class ManifestGUITests {
         if (frameUnderTest instanceof CargoTextFrame) {
             String expectedString = "|| " + CONTAINER_CODE_1 + " || " 
             							  + CONTAINER_CODE_2 + " ||\n";
-            assertEquals(expectedString, frame.textBox(CARGO_TEXT_AREA).text());
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
         }
         findContainer(CONTAINER_CODE_1);
         if (frameUnderTest instanceof CargoTextFrame) {
             String expectedString = "||*" + CONTAINER_CODE_1 + "*|| " 
             							  + CONTAINER_CODE_2 + " ||\n";
-            assertEquals(expectedString, frame.textBox(CARGO_TEXT_AREA).text());
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
         }
     }
     
@@ -966,14 +966,14 @@ public class ManifestGUITests {
         loadContainer(GENERAL_GOODS, CONTAINER_CODE_1, WEIGHT_10, null, null);
         if (frameUnderTest instanceof CargoTextFrame) {
         	String expectedString = "|| " + CONTAINER_CODE_1 + " ||\n";
-            assertEquals(expectedString, frame.textBox(CARGO_TEXT_AREA).text());
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
         }
-        frame.button(FIND).click();
-        DialogFixture findDialog = frame.dialog("Container Dialog");
+        testFrame.button(FIND).click();
+        DialogFixture findDialog = testFrame.dialog("Container Dialog");
         findDialog.button(CANCEL).click();
         if (frameUnderTest instanceof CargoTextFrame) {
         	String expectedString = "|| " + CONTAINER_CODE_1 + " ||\n";
-            assertEquals(expectedString, frame.textBox(CARGO_TEXT_AREA).text());
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
         }
     }
     
@@ -989,18 +989,18 @@ public class ManifestGUITests {
         loadContainer(GENERAL_GOODS, CONTAINER_CODE_1, WEIGHT_10, null, null);
         if (frameUnderTest instanceof CargoTextFrame) {
         	String expectedString = "|| " + CONTAINER_CODE_1 + " ||\n";
-            assertEquals(expectedString, frame.textBox(CARGO_TEXT_AREA).text());
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
         }
         findContainer(CONTAINER_CODE_1);
         if (frameUnderTest instanceof CargoTextFrame) {
             String expectedString = "||*" + CONTAINER_CODE_1 + "*||\n";
-            assertEquals(expectedString, frame.textBox(CARGO_TEXT_AREA).text());
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
         }
         loadContainer(GENERAL_GOODS, CONTAINER_CODE_2, WEIGHT_10, null, null);
         if (frameUnderTest instanceof CargoTextFrame) {
         	String expectedString = "|| " + CONTAINER_CODE_1 + " || " 
         								  + CONTAINER_CODE_2 + " ||\n";
-            assertEquals(expectedString, frame.textBox(CARGO_TEXT_AREA).text());
+            assertEquals(expectedString, testFrame.textBox(CARGO_TEXT_AREA).text());
         }
     }
 }

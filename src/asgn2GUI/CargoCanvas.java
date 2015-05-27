@@ -68,11 +68,11 @@ public class CargoCanvas extends JPanel {
     	int xLineSpace = 5;
     	int yLineSpace = 50;
     	int containerSpace = 130;
-    	int stackSpace = 60;
+    	int stackSpace = 60;  	
     	
-    	if (cargo != null) {
+    	if (cargo != null) {   	
     		try {
-    			for (int i = 0; i < cargo.getNumStack(); i++) {
+    			for (int i = 0; i < numStack(); i++) {
         			FreightContainer[] currentStack = cargo.toArray(i);
         			g.setColor(Color.BLACK);
         			g.drawLine(x - xLineSpace, y, x - xLineSpace, y + yLineSpace);
@@ -100,51 +100,81 @@ public class CargoCanvas extends JPanel {
      * @param y The y location for the Rectangle.
      */
     private void drawContainer(Graphics g, FreightContainer container, int x, int y) {
+    	if (container.getClass().equals(DangerousGoodsContainer.class)) {
+    		g.setColor(Color.RED);
+    		drawSingleContainer(g, x, y);
+    		drawContainerCode(g, container, x, y);
+    	} else if (container.getClass().equals(GeneralGoodsContainer.class)) {
+    		g.setColor(Color.GRAY);
+    		drawSingleContainer(g, x, y);
+    		drawContainerCode(g, container, x, y);
+    	} else if (container.getClass().equals(RefrigeratedContainer.class)) {
+    		g.setColor(Color.BLUE);
+    		drawSingleContainer(g, x, y);
+    		drawContainerCode(g, container, x, y);
+    	}
+    }
+    
+    /**
+     * Counts and returns a number of stacks.
+     * 
+     * @return A number of stacks on the manifest
+     */
+    private int numStack() {
+    	int stackNumber = 0;
+    	int stackCount = 0;
+    	boolean stackExists = true;
+    	
+    	while (stackExists) {
+			try {
+    			cargo.toArray(stackNumber);
+    			stackExists = true;
+    		} catch (ManifestException e) {
+    			stackExists = false;
+    		}    		
+    		if (stackExists) {
+    			stackCount++;
+    		}
+    		stackNumber++;
+		}	
+    	return stackCount;
+    }
+    
+    /**
+     * Draws a rectangle which represents a single container.
+     * 
+     * @param g The Graphics context to draw on.
+     * @param x The x location for the Rectangle.
+     * @param y The y location for the Rectangle.
+     */
+    private void drawSingleContainer(Graphics g, int x, int y) {
+    	g.drawRect(x, y, WIDTH, HEIGHT);
+		g.fillRect(x, y, WIDTH, HEIGHT);
+		g.setColor(Color.WHITE);
+    }
+    
+    /**
+     * Draws a string which represents a container code.
+     * 
+     * @param g The Graphics context to draw on.
+     * @param container The container to draw - the type determines the colour and ContainerCode is
+     *            used to identify the drawn Rectangle.
+     * @param x The x location for the Rectangle.
+     * @param y The y location for the Rectangle.
+     */
+    private void drawContainerCode(Graphics g, FreightContainer container, int x, int y) {
     	int xSpace = x + 20;
     	int ySpace = y + 15;
     	int foundSpace = x + 10;
-    	if (container.getClass().equals(DangerousGoodsContainer.class)) {
-    		g.setColor(Color.RED);
-    		g.drawRect(x, y, WIDTH, HEIGHT);
-    		g.fillRect(x, y, WIDTH, HEIGHT);
-    		g.setColor(Color.WHITE);
-    		if (toFind != null) {
-    			if (toFind.equals(container.getCode())) {
-        			g.drawString("|| " + container.getCode().toString() + " ||", foundSpace, ySpace);
-        		} else {
-        			g.drawString(container.getCode().toString(), xSpace, ySpace);
-        		}
+    	
+    	if (toFind != null) {
+			if (toFind.equals(container.getCode())) {
+    			g.drawString("|| " + container.getCode().toString() + " ||", foundSpace, ySpace);
     		} else {
     			g.drawString(container.getCode().toString(), xSpace, ySpace);
     		}
-    	} else if (container.getClass().equals(GeneralGoodsContainer.class)) {
-    		g.setColor(Color.GRAY);
-    		g.drawRect(x, y, WIDTH, HEIGHT);
-    		g.fillRect(x, y, WIDTH, HEIGHT);
-    		g.setColor(Color.WHITE);
-    		if (toFind != null) {
-    			if (toFind.equals(container.getCode())) {
-        			g.drawString("|| " + container.getCode().toString() + " ||", foundSpace, ySpace);
-        		} else {
-        			g.drawString(container.getCode().toString(), xSpace, ySpace);
-        		}
-    		} else {
-    			g.drawString(container.getCode().toString(), xSpace, ySpace);
-    		}
-    	} else if (container.getClass().equals(RefrigeratedContainer.class)) {
-    		g.setColor(Color.BLUE);
-    		g.drawRect(x, y, WIDTH, HEIGHT);
-    		g.fillRect(x, y, WIDTH, HEIGHT);
-    		g.setColor(Color.WHITE);
-    		if (toFind != null) {
-    			if (toFind.equals(container.getCode())) {
-        			g.drawString("|| " + container.getCode().toString() + " ||", foundSpace, ySpace);
-        		} else {
-        			g.drawString(container.getCode().toString(), xSpace, ySpace);
-        		}
-    		} else {
-    			g.drawString(container.getCode().toString(), xSpace, ySpace);
-    		}
-    	}
+		} else {
+			g.drawString(container.getCode().toString(), xSpace, ySpace);
+		}
     }
 }

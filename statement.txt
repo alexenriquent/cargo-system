@@ -33,6 +33,15 @@ Additional test class
 Summary of Contribution (Thanat Chokwijitkul and Month Yean Koh)
 + The implementation of the ManifestGUITests class 
 
+Additional note
+For the GUI (part 2) of the CargoSystem Project, all the works has been 
+cooperated by both group members (it is the reason why there are 2 names as 
+authors at the header comment of each class including the GUI test class). 
+We managed to meet up at least once or twice a week (mostly on Monday and
+Thursday) in order to discuss on the progress of the assignment. All the
+details of the working progress can be found in the repo.log file attached 
+within the directory of this project.
+
 STATEMENT OF AGREEMENT ON THE PROJECT CONTRIBUTION
 As specified in the assignment 2's specifications, when developing 
 the project, each of the team members needs to act as two different 

@@ -28,6 +28,12 @@ import asgn2GUI.CargoTextFrame;
  * Defines FEST Swing tests for use cases of the Cargo Manifest system.
  *
  * @author Malcolm Corney. Created 7 May 2015.
+ * 
+ * More tests have been added to this class using the existing test methods 
+ * created by Malcolm as a template. 
+ * 
+ * @author Thanat Chokwijitkul n9234900
+ * @author Month Yean Koh n9070095
  */
 public class CargoFrameTests {
 
@@ -53,24 +59,45 @@ public class CargoFrameTests {
     private static final String GENERAL_GOODS = "General Goods";
     private static final String REFRIGERATED_GOODS = "Refrigerated Goods";
     private static final String DANGEROUS_GOODS = "Dangerous Goods";
+    private static final String CATEGORY_1 = "1";
     private static final String CATEGORY_2 = "2";
     private static final String TEMPERATURE_MINUS_4 = "-4";
+    private static final String TEMPERATURE_MINUS_5 = "-5";
     private static final String CODE_1 = "ABCU1234564";
     private static final String CODE_2 = "ZZZU6549874";
     private static final String CODE_3 = "JHGU1716760";
+    private static final String ZERO = "0";
     private static final String NEGATIVE = "-20";
     private static final String NOT_NUMERIC = "A";
     private static final String STACKS_1 = "1";
+    private static final String STACKS_2 = "2";
     private static final String STACKS_3 = "3";
     private static final String STACKS_5 = "5";
+    private static final String WEIGHT_3 = "3";
+    private static final String WEIGHT_10 = "10";
     private static final String WEIGHT_20 = "20";
     private static final String WEIGHT_30 = "30";
+    private static final String WEIGHT_31 = "31";
     private static final String WEIGHT_80 = "80";
     private static final String WEIGHT_100 = "100";
     private static final String HEIGHT_1 = "1";
+    private static final String HEIGHT_3 = "3";
     private static final String HEIGHT_5 = "5";
+    
+    private static final String OK = "OK";
+	private static final String CANCEL = "Cancel";
+    private static final String CONTAINER_CODE_1 = "INKU2633836";
+	private static final String CONTAINER_CODE_2 = "KOCU8090115";
+	private static final String CONTAINER_CODE_3 = "MSCU6639871";
+	private static final String CONTAINER_CODE_4 = "CSQU3054389";
+	private static final String CONTAINER_CODE_5 = "QUTU7200318";
+    private static final String INVALID_CONTAINER_CODE_1 = "IBMU48823511"; // Invalid length
+	private static final String INVALID_CONTAINER_CODE_2 = "1BMU4882351"; // Numeric owner code ("I")
+	private static final String INVALID_CONTAINER_CODE_3 = "ABCJ1234564"; // Identifier is not "U"
+    private static final String INVALID_CONTAINER_CODE_4 = "ZZZU65A9874"; // Serial number is not numeric ("4")
+    private static final String INVALID_CONTAINER_CODE_5 = "JHGU1716761"; // Incorrect check digit ("0")
 
-    private static final boolean USE_TEXT_VERSION = true;
+    private static final boolean USE_TEXT_VERSION = false;
     private static final int NO_PAUSE = 0;
     private static final int SHORT_PAUSE = 1500;
     private static final int LONG_PAUSE = 3000;
