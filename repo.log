@@ -1,3 +1,7 @@
+* aabdbeb : Tested all unit test cases in CargoFrameTests
+* 25ab600 : Moved tests from ManifestGUITests to CargoFrameTests
+* 56586e5 : Refactored some methods in CargoCanvas
+* d931263 : Updated repo.log
 *   cc04c12 : Merge branch 'master' of https://bitbucket.org/alexenriquent/cargo-system
 |\  
 | * 23bf025 : Replace Variable Name
@@ -112,7 +116,31 @@
 * | c3d7b10 : Implementation of an exception class hierarchy
 * | 89a7304 : README.md edited online with Bitbucket
 |/  
-* 3ba2cdd : Initial commit of release codecommit cc04c12aa481eaa9b1c9b703094fff7ea682e67b
+* 3ba2cdd : Initial commit of release codecommit aabdbeb841801d6d58f17785fa925439959c3d92
+Author: Thanat Chokwijitkul <alexenriquent@gmail.com>
+Date:   Wed May 27 14:31:58 2015 +1000
+
+    Tested all unit test cases in CargoFrameTests
+
+commit 25ab6008c7fdb94d3261eb764bf277b8559a1168
+Author: Thanat Chokwijitkul <alexenriquent@gmail.com>
+Date:   Wed May 27 14:21:56 2015 +1000
+
+    Moved tests from ManifestGUITests to CargoFrameTests
+
+commit 56586e50bf6373b7dcd600be54666bf3fe88833e
+Author: Thanat Chokwijitkul <alexenriquent@gmail.com>
+Date:   Wed May 27 14:11:45 2015 +1000
+
+    Refactored some methods in CargoCanvas
+
+commit d93126311f283a3dc72faa03a8a2f27f3184ef05
+Author: Thanat Chokwijitkul <alexenriquent@gmail.com>
+Date:   Sat May 23 19:24:25 2015 +1000
+
+    Updated repo.log
+
+commit cc04c12aa481eaa9b1c9b703094fff7ea682e67b
 Merge: e5bc1c5 23bf025
 Author: Thanat Chokwijitkul <alexenriquent@gmail.com>
 Date:   Sat May 23 19:21:23 2015 +1000

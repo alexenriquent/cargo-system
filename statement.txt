@@ -59,8 +59,8 @@ completed with no known problem so far.
 
 GUI TESTS
 For the CargoSystem project, automated GUI tests have been used to
-test all the functionalities of the system. Another unit test class
-named "ManifestGUITests" has been created using the automated GUI tests, 
-which has been supplied as code drop for the assignment 2 part 2, as 
-a template in order to provide an evidence showing that the graphical 
-interface of the system functions and has been tested successfully.
+test all the functionalities of the system. Several unit test cases
+has been added into the CargoFrameTests class, which has been supplied 
+as code drop for the assignment 2 part 2, in order to provide an evidence 
+showing that the graphical interface of the system functions and has been 
+tested successfully.
