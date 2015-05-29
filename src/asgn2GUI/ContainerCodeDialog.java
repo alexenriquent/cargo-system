@@ -47,6 +47,7 @@ public class ContainerCodeDialog extends AbstractDialog {
         super(parent, "Container Code", WIDTH, HEIGHT);
         setName("Container Dialog");
         setResizable(true);
+        disableSubmit();
     }
 
     /**
@@ -92,15 +93,21 @@ public class ContainerCodeDialog extends AbstractDialog {
             private void validate() {
             	ContainerCode codeValidation;
             	boolean validated = false;
+            	String errorMsg = "";
+            	int exceptionMgs = 38;
             	lblErrorInfo.setText("");
+            	
             	try {
             		codeValidation = new ContainerCode(txtCode.getText());
             		validated = true;
+            		enableSubmit();
             	} catch (InvalidCodeException e) {
             		validated = false;
+            		disableSubmit();
+            		errorMsg = e.getMessage().substring(exceptionMgs);
             	}
             	if (!validated) {
-            		lblErrorInfo.setText("Invalid Container Code");
+            		lblErrorInfo.setText(errorMsg);
             	}
             }
         });
@@ -128,7 +135,7 @@ public class ContainerCodeDialog extends AbstractDialog {
     		dialogDone = true;
     		return dialogDone;
     	} catch (InvalidCodeException e) {
-    		JOptionPane.showMessageDialog(null, e.getMessage(),
+    		JOptionPane.showMessageDialog(this, e.getMessage(),
     				    				  "Error", JOptionPane.ERROR_MESSAGE);
     		return dialogDone;
     	}

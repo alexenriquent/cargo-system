@@ -33,7 +33,7 @@ Additional test class
 Summary of Contribution (Thanat Chokwijitkul and Month Yean Koh)
 + The implementation of the ManifestGUITests class 
 
-Additional note
+Additional note (project contribution)
 For the GUI (part 2) of the CargoSystem Project, all the works has been 
 cooperated by both group members (it is the reason why there are 2 names as 
 authors at the header comment of each class including the GUI test class). 

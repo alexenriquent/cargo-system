@@ -84,6 +84,7 @@ public class CargoFrameTests {
     private static final String HEIGHT_3 = "3";
     private static final String HEIGHT_5 = "5";
     
+    private static final String OK = "OK";
 	private static final String CANCEL = "Cancel";
     private static final String CONTAINER_CODE_1 = "INKU2633836";
 	private static final String CONTAINER_CODE_2 = "KOCU8090115";
@@ -897,63 +898,73 @@ public class CargoFrameTests {
     }
     
     /**
-     * Tests that an error message appears if the specified container code
+     * Tests that the OK button is disabled if the specified container code
      * is not 11 characters long.
      */
     @Test
     public void containerCodeWithInvalidLength() {
     	DialogFixture manifestDialog = prepareManifestDialog();
         manifestDialogEnterText(manifestDialog, STACKS_1, HEIGHT_1, WEIGHT_10);
-        findContainer(INVALID_CONTAINER_CODE_1);
-        testFrame.optionPane().requireErrorMessage();
+        testFrame.button(FIND).click();
+        DialogFixture containerDialog = testFrame.dialog("Container Dialog");
+        containerDialog.textBox(CONTAINER_CODE).enterText(INVALID_CONTAINER_CODE_1);
+        testFrame.button(OK).requireDisabled();
     }
     
     /**
-     * Tests that an error message appears if the specified container code
+     * Tests that the OK button is disabled if the specified container code
      * contains invalid owner code.
      */
     @Test
     public void containerCodeWithInvalidOwnerCode() {
     	DialogFixture manifestDialog = prepareManifestDialog();
         manifestDialogEnterText(manifestDialog, STACKS_1, HEIGHT_1, WEIGHT_10);
-        findContainer(INVALID_CONTAINER_CODE_2);
-        testFrame.optionPane().requireErrorMessage();
+        testFrame.button(FIND).click();
+        DialogFixture containerDialog = testFrame.dialog("Container Dialog");
+        containerDialog.textBox(CONTAINER_CODE).enterText(INVALID_CONTAINER_CODE_2);
+        testFrame.button(OK).requireDisabled();
     }
     
     /**
-     * Tests that an error message appears if the specified container code
+     * Tests that the OK button is disabled if the specified container code
      * contains invalid identifier.
      */
     @Test
     public void containerCodeWithInvalidIdentifier() {
     	DialogFixture manifestDialog = prepareManifestDialog();
         manifestDialogEnterText(manifestDialog, STACKS_1, HEIGHT_1, WEIGHT_10);
-        findContainer(INVALID_CONTAINER_CODE_3);
-        testFrame.optionPane().requireErrorMessage();
+        testFrame.button(FIND).click();
+        DialogFixture containerDialog = testFrame.dialog("Container Dialog");
+        containerDialog.textBox(CONTAINER_CODE).enterText(INVALID_CONTAINER_CODE_3);
+        testFrame.button(OK).requireDisabled();
     }
     
     /**
-     * Tests that an error message appears if the specified container code
+     * Tests that the OK button is disabled if the specified container code
      * contains invalid serialNumber.
      */
     @Test
     public void containerCodeWithInvalidSerialNumber() {
     	DialogFixture manifestDialog = prepareManifestDialog();
         manifestDialogEnterText(manifestDialog, STACKS_1, HEIGHT_1, WEIGHT_20);
-        findContainer(INVALID_CONTAINER_CODE_4);
-        testFrame.optionPane().requireErrorMessage();
+        testFrame.button(FIND).click();
+        DialogFixture containerDialog = testFrame.dialog("Container Dialog");
+        containerDialog.textBox(CONTAINER_CODE).enterText(INVALID_CONTAINER_CODE_4);
+        testFrame.button(OK).requireDisabled();
     }
     
     /**
-     * Tests that an error message appears if the specified container code
+     * Tests that the OK button is disabled if the specified container code
      * contains incorrect check digit.
      */
     @Test
     public void containerCodeWithIncorrectCheckDigit() {
     	DialogFixture manifestDialog = prepareManifestDialog();
         manifestDialogEnterText(manifestDialog, STACKS_1, HEIGHT_1, WEIGHT_20);
-        findContainer(INVALID_CONTAINER_CODE_5);
-        testFrame.optionPane().requireErrorMessage();
+        testFrame.button(FIND).click();
+        DialogFixture containerDialog = testFrame.dialog("Container Dialog");
+        containerDialog.textBox(CONTAINER_CODE).enterText(INVALID_CONTAINER_CODE_5);
+        testFrame.button(OK).requireDisabled();
     }
     
     /**

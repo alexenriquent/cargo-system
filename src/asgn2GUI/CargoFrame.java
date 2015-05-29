@@ -222,7 +222,7 @@ public class CargoFrame extends JFrame {
     		try {
     			cargo.loadContainer(container);
     		} catch (ManifestException e) {
-    			JOptionPane.showMessageDialog(null, e.getMessage(),
+    			JOptionPane.showMessageDialog(this, e.getMessage(),
     										  "Error", JOptionPane.ERROR_MESSAGE);
     		}
         	redraw();
@@ -235,7 +235,7 @@ public class CargoFrame extends JFrame {
     		try {
     			cargo.unloadContainer(code);
     		} catch (ManifestException e) {
-    			JOptionPane.showMessageDialog(null, e.getMessage(),
+    			JOptionPane.showMessageDialog(this, e.getMessage(),
     										  "Error", JOptionPane.ERROR_MESSAGE);
     		}
         	redraw();
@@ -246,7 +246,7 @@ public class CargoFrame extends JFrame {
     	ContainerCode code = ContainerCodeDialog.showDialog(this);
     	if (code != null) {
     		if (cargo.whichStack(code) == null) {
-    			JOptionPane.showMessageDialog(null, "The specified container is not on board.",
+    			JOptionPane.showMessageDialog(this, "The specified container is not on board.",
 						  "Error", JOptionPane.ERROR_MESSAGE);
     		} else {
     			canvas.setToFind(code);

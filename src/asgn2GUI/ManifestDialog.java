@@ -106,7 +106,7 @@ public class ManifestDialog extends AbstractDialog {
     		maxHeight  = Integer.parseInt(txtMaxHeight.getText());
     		maxWeight  = Integer.parseInt(txtMaxWeight.getText());
     	} catch (NumberFormatException e) {
-    		JOptionPane.showMessageDialog(null, "Please ensure that all input fields are not blank\n"
+    		JOptionPane.showMessageDialog(this, "Please ensure that all input fields are not blank\n"
     									  + "and each input is a positive integer.",
 						  				  "Error", JOptionPane.ERROR_MESSAGE);   		
     		return dialogDone;
@@ -116,7 +116,7 @@ public class ManifestDialog extends AbstractDialog {
 			dialogDone = true;
 			return dialogDone;
 		} catch (ManifestException e) {
-			JOptionPane.showMessageDialog(null, e.getMessage(),
+			JOptionPane.showMessageDialog(this, e.getMessage(),
 										  "Error", JOptionPane.ERROR_MESSAGE);
 			return dialogDone;
 		}

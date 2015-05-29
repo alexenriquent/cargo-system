@@ -104,19 +104,19 @@ public class ContainerCode {
 	 */
 	public ContainerCode(String code) throws InvalidCodeException {
 		if (invalidLength(code)) {
-			throw new InvalidCodeException("The container code is not eleven characters long.");
+			throw new InvalidCodeException("Code is not 11-character long.");
 		}
 		if (invalidOwnerCode(code)) {
-			throw new InvalidCodeException("The Owner Code does not consist of three upper-case letters.");
+			throw new InvalidCodeException("Owner Code must be 3 uppercase letters.");
 		}
 		if (invalidCategoryIdentifier(code)) {
-			throw new InvalidCodeException("The Category Identifier is not 'U'.");
+			throw new InvalidCodeException("Category Identifier is not 'U'.");
 		}
 		if (invalidSerialNumber(code)) {
-			throw new InvalidCodeException("The Serial Number does not consist of six digits.");
+			throw new InvalidCodeException("Serial Number must consist of 6 digits.");
 		}
 		if (invalidCheckDigit(code)) {
-			throw new InvalidCodeException("The Check Digit is incorrect.");
+			throw new InvalidCodeException("Check Digit is incorrect.");
 		}
 		this.code = code;
 	}

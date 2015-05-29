@@ -84,7 +84,7 @@ public class CargoCanvas extends JPanel {
         			y += stackSpace;
         		}
     		} catch (ManifestException e) {
-    			JOptionPane.showConfirmDialog(null, "Cannot display a container object.", 
+    			JOptionPane.showConfirmDialog(this, "Cannot display a container object.", 
     										  "Error", JOptionPane.ERROR_MESSAGE);
     		}
     	}
